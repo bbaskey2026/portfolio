@@ -225,65 +225,6 @@ const Home = () => {
                       objectFit: 'cover',
                     }}
                   />
-
-                  {/* Floating badges */}
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      top: -10,
-                      right: -10,
-                      backgroundColor: '#FFFFFF',
-                      border: '1px solid #E5E5E5',
-                      borderRadius: '12px',
-                      p: 1.5,
-                      px: 2,
-                      animation: 'float 3s ease-in-out infinite',
-                      '@keyframes float': {
-                        '0%, 100%': { transform: 'translateY(0px)' },
-                        '50%': { transform: 'translateY(-10px)' },
-                      },
-                    }}
-                  >
-                    <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                      ⚛️ React
-                    </Typography>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      bottom: 30,
-                      left: -15,
-                      backgroundColor: '#FFFFFF',
-                      border: '1px solid #E5E5E5',
-                      borderRadius: '12px',
-                      p: 1.5,
-                      px: 2,
-                      animation: 'float 3s ease-in-out infinite 1s',
-                    }}
-                  >
-                    <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                      🟢 Node.js
-                    </Typography>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      top: '40%',
-                      right: -20,
-                      backgroundColor: '#FFFFFF',
-                      border: '1px solid #E5E5E5',
-                      borderRadius: '12px',
-                      p: 1.5,
-                      px: 2,
-                      animation: 'float 3s ease-in-out infinite 0.5s',
-                    }}
-                  >
-                    <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                      🐍 Python
-                    </Typography>
-                  </Box>
                 </Box>
               </Box>
             </Grid>
