@@ -105,7 +105,7 @@ const Home = () => {
                 }}
               >
                 <Chip
-                  label="✨ Available for freelance work"
+                  label="✨ Open to internships and entry-level opportunities"
                   sx={{
                     mb: 3,
                     borderRadius: '20px',

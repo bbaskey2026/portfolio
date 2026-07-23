@@ -133,7 +133,7 @@ const Footer = () => {
           }}
         >
           <Typography variant="body2" sx={{ color: '#999999' }}>
-            © {new Date().getFullYear()} Alex Morgan. All rights reserved.
+            © {new Date().getFullYear()} Bhima Baskey. All rights reserved.
           </Typography>
           <Typography variant="body2" sx={{ color: '#999999' }}>
             Built with React & Material-UI

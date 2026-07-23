@@ -1,19 +1,19 @@
 export const SITE_CONFIG = {
-  name: 'Alex Morgan',
-  title: 'Full-Stack Developer',
-  email: 'alex@example.com',
-  phone: '+1 (555) 123-4567',
-  location: 'San Francisco, CA',
+  name: 'Bhima Baskey',
+  title: 'Aspiring Software Engineer',
+  email: 'bhima.dev26@gmail.com',
+  phone: '+91-8810692291',
+  location: 'Bhubaneswar, Odisha',
   description:
-    'I build exceptional digital experiences that are fast, accessible, and visually appealing.',
+    'Motivated beginner-level Software Engineering student with foundational knowledge of Java, Spring Boot, JavaScript, and MERN stack. Actively learning backend and full-stack development by building academic and personal projects.',
   resumeUrl: '/resume.pdf',
 };
 
 export const SOCIAL_LINKS = {
-  github: 'https://github.com',
-  linkedin: 'https://linkedin.com',
-  twitter: 'https://twitter.com',
-  dribbble: 'https://dribbble.com',
+  github: 'https://github.com/',
+  linkedin: 'https://www.linkedin.com/',
+  twitter: 'https://twitter.com/',
+  dribbble: 'https://dribbble.com/',
 };
 
 export const NAV_ITEMS = [

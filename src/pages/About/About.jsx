@@ -85,38 +85,28 @@ const About = () => {
               variant="h3"
               sx={{ mb: 3, color: '#000000' }}
             >
-              A passionate developer with an eye for design
+              A motivated student building a career in software engineering
             </Typography>
 
             <Typography
               variant="body1"
               sx={{ mb: 2, lineHeight: 1.8 }}
             >
-              I'm a full-stack developer based in {SITE_CONFIG.location} with
-              over 6 years of experience building web applications. I
-              specialize in creating fast, accessible, and visually
-              appealing digital experiences.
+              I am Bhima Baskey, a beginner-level Software Engineering student based in {SITE_CONFIG.location}. I am currently pursuing B.Tech in Electrical and Electronics Engineering at VSSUT while actively learning Java, Spring Boot, JavaScript, and the MERN stack.
             </Typography>
 
             <Typography
               variant="body1"
               sx={{ mb: 2, lineHeight: 1.8 }}
             >
-              My journey in software development started during my time at
-              UC Berkeley, where I discovered my passion for creating
-              things that live on the internet. Since then, I've had the
-              privilege of working with startups, agencies, and larger
-              corporations.
+              My focus is on strengthening my backend and full-stack development skills by building academic and personal projects. I enjoy turning ideas into practical web applications and growing through hands-on learning.
             </Typography>
 
             <Typography
               variant="body1"
               sx={{ mb: 4, lineHeight: 1.8 }}
             >
-              When I'm not coding, you can find me hiking in the Bay Area,
-              experimenting with new recipes, or contributing to
-              open-source projects. I believe in continuous learning and
-              enjoy staying up-to-date with the latest web technologies.
+              I am currently looking for an entry-level role or internship where I can gain real-world experience, contribute under guidance, and continue improving as a developer.
             </Typography>
 
             <Button
@@ -239,40 +229,58 @@ const About = () => {
             subtitle="My academic background."
           />
 
-          {education.map((edu, index) => (
-            <Box
-              key={index}
-              sx={{
-                p: 4,
-                border: '1px solid #E5E5E5',
-                borderRadius: 2,
-                '&:hover': { borderColor: '#000000' },
-                transition: 'border-color 0.2s ease',
-              }}
-            >
-              <Typography
-                variant="h5"
-                sx={{ color: '#000000', mb: 0.5 }}
-              >
-                {edu.degree}
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: '#666666', mb: 0.5, fontWeight: 500 }}
-              >
-                {edu.school}
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: '#999999', mb: 1.5 }}
-              >
-                {edu.period}
-              </Typography>
-              <Typography variant="body2" sx={{ color: '#444444' }}>
-                {edu.details}
-              </Typography>
-            </Box>
-          ))}
+          <Grid container spacing={4}>
+            {education.map((edu, index) => (
+              <Grid item xs={12} md={6} key={index}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: { xs: 'column', sm: index % 2 === 0 ? 'row' : 'row-reverse' },
+                    alignItems: 'stretch',
+                    gap: 2,
+                    p: 0,
+                    borderRadius: 0,
+                    overflow: 'hidden',
+                    boxShadow: '0 20px 45px rgba(15, 70, 30, 0.08)',
+                    backgroundColor: '#ffffff',
+                    border: '1px solid rgba(47,125,59,0.12)',
+                    transition: 'transform 0.25s ease, border-color 0.25s ease',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                      borderColor: '#2f7d3b',
+                    },
+                  }}
+                >
+                  <Box
+                    component="img"
+                    src={edu.image}
+                    alt={edu.school}
+                    sx={{
+                      width: { xs: '100%', sm: 220 },
+                      minHeight: 220,
+                      objectFit: 'cover',
+                      backgroundColor: '#f4faf4',
+                    }}
+                  />
+
+                  <Box sx={{ p: 4, background: 'linear-gradient(180deg, #f5f9f5 0%, #e8f5e9 100%)' }}>
+                    <Typography variant="subtitle2" sx={{ color: '#2f7d3b', mb: 1, fontWeight: 700 }}>
+                      {edu.period}
+                    </Typography>
+                    <Typography variant="h6" sx={{ mb: 1, color: '#102f17', fontWeight: 700 }}>
+                      {edu.degree}
+                    </Typography>
+                    <Typography variant="body2" sx={{ mb: 2, color: '#375b32', fontWeight: 600 }}>
+                      {edu.school}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: '#375b32', lineHeight: 1.8 }}>
+                      {edu.details}
+                    </Typography>
+                  </Box>
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
         </Box>
       </Container>
     </Box>

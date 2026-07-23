@@ -34,7 +34,7 @@ const Logo = () => {
           letterSpacing: '-0.02em',
         }}
       >
-        Alex Morgan
+        Bhima Baskey
       </Typography>
     </Box>
   );
