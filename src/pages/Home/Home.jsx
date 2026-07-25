@@ -14,28 +14,21 @@ import { useNavigate } from 'react-router-dom';
 import SocialLinks from '../../components/ui/SocialLinks';
 import ProjectCard from '../../components/ui/ProjectCard';
 import SectionTitle from '../../components/common/SectionTitle';
-import { projects, skills, testimonials } from '../../store/portfolioData';
+import { projects, skills } from '../../store/portfolioData';
 import { SITE_CONFIG } from '../../config/constants';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import profileImg from '../../assets/images/profileImage.jpeg';
 
 const Home = () => {
   const navigate = useNavigate();
-  const [statsRef, statsVisible] = useIntersectionObserver();
-  const [testimonialRef, testimonialVisible] = useIntersectionObserver();
+  const [skillsRef, skillsVisible] = useIntersectionObserver();
+  const [projectsRef, projectsVisible] = useIntersectionObserver();
 
   const featuredProjects = projects.filter((p) => p.featured);
 
-  const stats = [
-    { label: 'Years Experience', value: '6+' },
-    { label: 'Projects Completed', value: '50+' },
-    { label: 'Happy Clients', value: '30+' },
-    { label: 'Technologies', value: '20+' },
-  ];
-
   return (
     <Box>
-      {/* Hero Section */}
+      {/* ── Hero Section ── */}
       <Box
         sx={{
           minHeight: '90vh',
@@ -43,69 +36,57 @@ const Home = () => {
           alignItems: 'center',
           position: 'relative',
           overflow: 'hidden',
+          backgroundColor: '#ffffff',
+          backgroundImage: [
+            'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1600 900\' preserveAspectRatio=\'none\'%3E%3Crect width=\'1600\' height=\'900\' fill=\'%23ffffff\'/%3E%3Cpath d=\'M0 620 C280 560 520 700 780 660 C1040 620 1240 520 1600 580 L1600 900 L0 900 Z\' fill=\'%23e8f4e8\' opacity=\'0.7\'/%3E%3Cpath d=\'M0 720 C300 660 560 800 840 760 C1100 720 1300 620 1600 680 L1600 900 L0 900 Z\' fill=\'%23c8e6c8\' opacity=\'0.6\'/%3E%3Cpath d=\'M0 820 C320 760 580 880 880 840 C1140 805 1340 720 1600 780 L1600 900 L0 900 Z\' fill=\'%23a5d6a5\' opacity=\'0.5\'/%3E%3C/svg%3E")',
+            'linear-gradient(180deg, #ffffff 0%, #f9fdf9 100%)',
+          ].join(', '),
+          backgroundRepeat: 'no-repeat, no-repeat',
+          backgroundSize: 'cover, cover',
+          backgroundPosition: 'center, center',
         }}
       >
+        {/* Decorative circles */}
         <Box
           sx={{
             position: 'absolute',
-            inset: 0,
-            pointerEvents: 'none',
-            opacity: 0.18,
-            backgroundImage: [
-              'linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px)',
-              'linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)',
-              'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 800 200\'%3E%3Cpath d=\'M0 40 C120 80 240 0 360 40 S600 80 720 40 S840 0 960 40\' stroke=\'rgba(255,255,255,0.12)\' stroke-width=\'1.5\' fill=\'none\'/%3E%3C/svg%3E")',
-            ].join(', '),
-            backgroundSize: '40px 40px, 40px 40px, 800px 200px',
-            backgroundPosition: '0 0, 0 0, 0 50px',
-          }}
-        />
-        {/* Subtle background decoration */}
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '10%',
-            right: '5%',
-            width: 400,
-            height: 400,
+            top: '8%',
+            right: '4%',
+            width: 420,
+            height: 420,
             borderRadius: '50%',
-            border: '1px solid #F0F0F0',
+            border: '1px solid rgba(0,0,0,0.05)',
             display: { xs: 'none', lg: 'block' },
           }}
         />
         <Box
           sx={{
             position: 'absolute',
-            top: '20%',
-            right: '10%',
-            width: 250,
-            height: 250,
+            top: '18%',
+            right: '9%',
+            width: 260,
+            height: 260,
             borderRadius: '50%',
-            border: '1px solid #F0F0F0',
+            border: '1px solid rgba(0,0,0,0.05)',
             display: { xs: 'none', lg: 'block' },
           }}
         />
 
         <Container maxWidth="lg">
           <Grid container spacing={4} alignItems="center">
+            {/* Left — Text */}
             <Grid size={{ xs: 12, md: 7 }}>
               <Box
                 sx={{
                   animation: 'fadeInUp 0.8s ease',
                   '@keyframes fadeInUp': {
-                    from: {
-                      opacity: 0,
-                      transform: 'translateY(40px)',
-                    },
-                    to: {
-                      opacity: 1,
-                      transform: 'translateY(0)',
-                    },
+                    from: { opacity: 0, transform: 'translateY(40px)' },
+                    to: { opacity: 1, transform: 'translateY(0)' },
                   },
                 }}
               >
                 <Chip
-                  label="✨ Open to internships and entry-level opportunities"
+                  label="✨ Open to internships & entry-level opportunities"
                   sx={{
                     mb: 3,
                     borderRadius: '20px',
@@ -122,6 +103,7 @@ const Home = () => {
                     fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4rem' },
                     mb: 3,
                     color: '#000000',
+                    lineHeight: 1.15,
                   }}
                 >
                   Hi, I'm{' '}
@@ -136,7 +118,7 @@ const Home = () => {
                         left: 0,
                         width: '100%',
                         height: 8,
-                        backgroundColor: 'rgba(0,0,0,0.08)',
+                        backgroundColor: 'rgba(0,0,0,0.07)',
                         borderRadius: 4,
                       },
                     }}
@@ -144,7 +126,8 @@ const Home = () => {
                     {SITE_CONFIG.name.split(' ')[0]}
                   </Box>
                   .
-                  <br />I build things for
+                  <br />
+                  I build things for
                   <br />
                   the web.
                 </Typography>
@@ -152,14 +135,31 @@ const Home = () => {
                 <Typography
                   variant="body1"
                   sx={{
-                    mb: 4,
-                    maxWidth: 500,
-                    fontSize: '1.15rem',
-                    color: '#666666',
-                    lineHeight: 1.8,
+                    mb: 2,
+                    maxWidth: 520,
+                    fontSize: '1.1rem',
+                    color: '#555555',
+                    lineHeight: 1.85,
                   }}
                 >
-                  {SITE_CONFIG.description}
+                  A passionate B.Tech student specializing in{' '}
+                  <strong>Java, Spring Boot</strong> and the{' '}
+                  <strong>MERN stack</strong>. I love turning ideas into
+                  clean, functional web applications.
+                </Typography>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    mb: 4,
+                    maxWidth: 520,
+                    fontSize: '1.05rem',
+                    color: '#777777',
+                    lineHeight: 1.85,
+                  }}
+                >
+                  Currently seeking an internship or entry-level role where
+                  I can contribute, learn, and grow as a developer.
                 </Typography>
 
                 <Stack direction="row" spacing={2} sx={{ mb: 4 }}>
@@ -187,6 +187,7 @@ const Home = () => {
               </Box>
             </Grid>
 
+            {/* Right — Profile Image */}
             <Grid
               size={{ xs: 12, md: 5 }}
               sx={{ display: { xs: 'none', md: 'block' } }}
@@ -199,11 +200,10 @@ const Home = () => {
                   animation: 'fadeInUp 0.8s ease 0.2s both',
                 }}
               >
-                {/* Profile image placeholder */}
                 <Box
                   sx={{
                     width: '80%',
-                    height: '80%',
+                    height: '85%',
                     mx: 'auto',
                     backgroundColor: '#F5F5F5',
                     borderRadius: '24px',
@@ -213,6 +213,7 @@ const Home = () => {
                     justifyContent: 'center',
                     position: 'relative',
                     overflow: 'hidden',
+                    boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
                   }}
                 >
                   <Box
@@ -226,61 +227,14 @@ const Home = () => {
                     }}
                   />
                 </Box>
+
               </Box>
             </Grid>
           </Grid>
         </Container>
       </Box>
 
-      {/* Stats Section */}
-      <Box sx={{ py: 8, borderTop: '1px solid #E5E5E5' }}>
-        <Container maxWidth="lg">
-          <Grid
-            container
-            spacing={4}
-            ref={statsRef}
-            sx={{
-              opacity: statsVisible ? 1 : 0,
-              transform: statsVisible
-                ? 'translateY(0)'
-                : 'translateY(30px)',
-              transition: 'all 0.6s ease',
-            }}
-          >
-            {stats.map((stat, index) => (
-              <Grid size={{ xs: 6, md: 3 }} key={stat.label}>
-                <Box
-                  sx={{
-                    textAlign: 'center',
-                    p: 3,
-                    borderRight:
-                      index < stats.length - 1
-                        ? { md: '1px solid #E5E5E5' }
-                        : 'none',
-                  }}
-                >
-                  <Typography
-                    variant="h2"
-                    sx={{
-                      fontSize: '2.5rem',
-                      fontWeight: 700,
-                      color: '#000000',
-                      mb: 0.5,
-                    }}
-                  >
-                    {stat.value}
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: '#999999' }}>
-                    {stat.label}
-                  </Typography>
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </Box>
-
-      {/* Featured Projects */}
+      {/* ── Featured Projects ── */}
       <Box
         sx={{
           py: 10,
@@ -289,6 +243,7 @@ const Home = () => {
           backgroundColor: '#f4eed7',
         }}
       >
+        {/* Wavy background overlay */}
         <Box
           sx={{
             position: 'absolute',
@@ -305,224 +260,10 @@ const Home = () => {
             backgroundRepeat: 'repeat, repeat, no-repeat',
           }}
         />
-        <Container maxWidth="lg">
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-end',
-              mb: 6,
-            }}
-          >
-            <SectionTitle
-              title="Featured Projects"
-              subtitle="A selection of my recent work and side projects."
-            />
-            <Button
-              variant="outlined"
-              endIcon={<ArrowForwardIcon />}
-              onClick={() => navigate('/projects')}
-              sx={{
-                display: { xs: 'none', sm: 'flex' },
-                mb: 8,
-              }}
-            >
-              View All
-            </Button>
-          </Box>
 
-          <Grid container spacing={3}>
-            {featuredProjects.map((project, index) => (
-              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={project.id}>
-                <ProjectCard project={project} index={index} />
-              </Grid>
-            ))}
-          </Grid>
-
-          <Box
-            sx={{
-              display: { xs: 'flex', sm: 'none' },
-              justifyContent: 'center',
-              mt: 4,
-            }}
-          >
-            <Button
-              variant="outlined"
-              endIcon={<ArrowForwardIcon />}
-              onClick={() => navigate('/projects')}
-            >
-              View All Projects
-            </Button>
-          </Box>
-        </Container>
+       
       </Box>
-
-      {/* Skills Overview */}
-      <Box
-        sx={{
-          py: 10,
-          backgroundColor: '#FAFAFA',
-          borderTop: '1px solid #E5E5E5',
-          borderBottom: '1px solid #E5E5E5',
-        }}
-      >
-        <Container maxWidth="lg">
-          <SectionTitle
-            title="Skills & Technologies"
-            subtitle="Technologies I've been working with recently."
-            align="center"
-          />
-
-          <Box sx={{ textAlign: 'center' }}>
-            {Object.values(skills)
-              .flat()
-              .map((skill) => (
-                <Chip
-                  key={skill.name}
-                  label={skill.name}
-                  sx={{
-                    m: 0.5,
-                    px: 1,
-                    py: 2.5,
-                    fontSize: '0.9rem',
-                    borderRadius: '8px',
-                    border: '1px solid #E5E5E5',
-                    backgroundColor: '#FFFFFF',
-                    color: '#333333',
-                    fontWeight: 500,
-                    '&:hover': {
-                      borderColor: '#000000',
-                      backgroundColor: '#000000',
-                      color: '#FFFFFF',
-                    },
-                    transition: 'all 0.2s ease',
-                    cursor: 'default',
-                  }}
-                />
-              ))}
-          </Box>
-        </Container>
-      </Box>
-
-      {/* Testimonials */}
-      <Box sx={{ py: 10 }}>
-        <Container maxWidth="lg">
-          <SectionTitle
-            title="What People Say"
-            subtitle="Testimonials from colleagues and clients I've worked with."
-            align="center"
-          />
-
-          <Grid container spacing={3} ref={testimonialRef}>
-            {testimonials.map((testimonial, index) => (
-              <Grid
-                size={{ xs: 12, md: 4 }}
-                key={testimonial.id}
-                sx={{
-                  opacity: testimonialVisible ? 1 : 0,
-                  transform: testimonialVisible
-                    ? 'translateY(0)'
-                    : 'translateY(30px)',
-                  transition: `all 0.6s ease ${index * 0.15}s`,
-                }}
-              >
-                <Box
-                  sx={{
-                    p: 4,
-                    height: '100%',
-                    border: '1px solid #E5E5E5',
-                    borderRadius: 2,
-                    '&:hover': { borderColor: '#000000' },
-                    transition: 'border-color 0.2s ease',
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontSize: '2rem',
-                      color: '#E0E0E0',
-                      mb: 2,
-                      lineHeight: 1,
-                    }}
-                  >
-                    "
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{ mb: 3, fontStyle: 'italic', color: '#444444' }}
-                  >
-                    {testimonial.text}
-                  </Typography>
-                  <Box>
-                    <Typography
-                      variant="body2"
-                      sx={{ fontWeight: 600, color: '#000000' }}
-                    >
-                      {testimonial.name}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{ color: '#999999', fontSize: '0.8rem' }}
-                    >
-                      {testimonial.role}
-                    </Typography>
-                  </Box>
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </Box>
-
-      {/* CTA Section */}
-      <Box
-        sx={{
-          py: 10,
-          backgroundColor: '#000000',
-          color: '#FFFFFF',
-        }}
-      >
-        <Container maxWidth="md" sx={{ textAlign: 'center' }}>
-          <Typography
-            variant="h2"
-            sx={{
-              color: '#FFFFFF',
-              mb: 2,
-            }}
-          >
-            Let's work together
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{
-              color: '#999999',
-              mb: 4,
-              maxWidth: 500,
-              mx: 'auto',
-              fontSize: '1.1rem',
-            }}
-          >
-            I'm always open to new opportunities and interesting projects.
-            Let's create something amazing together.
-          </Typography>
-          <Button
-            variant="contained"
-            size="large"
-            endIcon={<ArrowForwardIcon />}
-            onClick={() => navigate('/contact')}
-            sx={{
-              backgroundColor: '#FFFFFF',
-              color: '#000000',
-              py: 1.5,
-              px: 4,
-              '&:hover': {
-                backgroundColor: '#F0F0F0',
-              },
-            }}
-          >
-            Get in Touch
-          </Button>
-        </Container>
-      </Box>
+      
     </Box>
   );
 };
