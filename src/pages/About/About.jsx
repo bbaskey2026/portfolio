@@ -23,102 +23,139 @@ const About = () => {
   return (
     <Box sx={{ py: 8 }}>
       <Container maxWidth="lg">
-        <SectionTitle
-          title="About Me"
-          subtitle="Learn more about my background, skills, and what drives me."
-        />
-
-        {/* Bio Section */}
-          <Grid
-          container
-          spacing={8}
-          ref={bioRef}
+        {/* Bio Section with Wavy Background */}
+        <Box
           sx={{
             mb: 10,
-            opacity: bioVisible ? 1 : 0,
-            transform: bioVisible ? 'translateY(0)' : 'translateY(30px)',
-            transition: 'all 0.6s ease',
+            position: 'relative',
+            overflow: 'hidden',
+            borderRadius: 4,
+            p: { xs: 3, md: 6 },
+            backgroundColor: '#eaf4fb',
           }}
         >
-          <Grid item xs={12} md={5}>
-            <Box
-              component="img"
-              src={profileImg || '/profile.jpg'}
-              alt="Profile"
-              sx={{
-                width: '100%',
-                height: 400,
-                objectFit: 'cover',
-                borderRadius: 3,
-                border: '1px solid',
-                borderColor: 'divider',
-                display: imgError ? 'none' : 'block',
-              }}
-              onError={() => {
-                setImgError(true)
-              }}
+          {/* Wavy Background */}
+          <Box
+            sx={{
+              position: 'absolute',
+              inset: 0,
+              pointerEvents: 'none',
+              opacity: 0.3,
+              backgroundImage: [
+                'linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px)',
+                'linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)',
+                'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1200 600\' preserveAspectRatio=\'none\'%3E%3Crect width=\'1200\' height=\'600\' fill=\'%23eaf4fb\'/%3E%3Cpath d=\'M0,200 C300,150 400,300 600,250 C800,200 900,100 1200,180 L1200,600 L0,600 Z\' fill=\'%23b3d9f2\' opacity=\'0.6\'/%3E%3Cpath d=\'M0,300 C200,250 400,400 600,350 C800,300 1000,200 1200,280 L1200,600 L0,600 Z\' fill=\'%237ab8e8\' opacity=\'0.5\'/%3E%3Cpath d=\'M0,400 C300,350 500,500 700,450 C900,400 1100,300 1200,380 L1200,600 L0,600 Z\' fill=\'%234a9bd6\' opacity=\'0.4\'/%3E%3C/svg%3E")',
+              ].join(', '),
+              backgroundSize: '40px 40px, 40px 40px, cover',
+              backgroundPosition: '0 0, 0 0, 0 0',
+              backgroundRepeat: 'repeat, repeat, no-repeat',
+            }}
+          />
+
+          <Box sx={{ position: 'relative', zIndex: 1 }}>
+            <SectionTitle
+              title="About Me"
+              subtitle="Learn more about my background, skills, and what drives me."
             />
 
-            {/* Fallback if image fails to load */}
-            <Box
+            <Grid
+              container
+              spacing={8}
+              ref={bioRef}
               sx={{
-                width: '100%',
-                height: 400,
-                backgroundColor: 'background.paper',
-                borderRadius: 3,
-                border: '1px solid',
-                borderColor: 'divider',
-                display: imgError ? 'flex' : 'none',
-                alignItems: 'center',
-                justifyContent: 'center',
+                opacity: bioVisible ? 1 : 0,
+                transform: bioVisible ? 'translateY(0)' : 'translateY(30px)',
+                transition: 'all 0.6s ease',
               }}
-              id="profile-fallback"
             >
-              <Typography sx={{ fontSize: '5rem', color: 'text.secondary' }}>
-                👨‍💻
-              </Typography>
-            </Box>
-          </Grid>
+              <Grid item xs={12} md={5}>
+                <Box
+                  component="img"
+                  src={profileImg || '/profile.jpg'}
+                  alt="Profile"
+                  sx={{
+                    width: '100%',
+                    height: 400,
+                    objectFit: 'cover',
+                    borderRadius: 3,
+                    border: '1px solid',
+                    borderColor: 'divider',
+                    display: imgError ? 'none' : 'block',
+                  }}
+                  onError={() => {
+                    setImgError(true);
+                  }}
+                />
 
-          <Grid item xs={12} md={7}>
-            <Typography
-              variant="h3"
-              sx={{ mb: 3, color: '#000000' }}
-            >
-              A motivated student building a career in software engineering
-            </Typography>
+                {/* Fallback if image fails to load */}
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: 400,
+                    backgroundColor: 'background.paper',
+                    borderRadius: 3,
+                    border: '1px solid',
+                    borderColor: 'divider',
+                    display: imgError ? 'flex' : 'none',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  id="profile-fallback"
+                >
+                  <Typography sx={{ fontSize: '5rem', color: 'text.secondary' }}>
+                    👨‍💻
+                  </Typography>
+                </Box>
+              </Grid>
 
-            <Typography
-              variant="body1"
-              sx={{ mb: 2, lineHeight: 1.8 }}
-            >
-              I am Bhima Baskey, a beginner-level Software Engineering student based in {SITE_CONFIG.location}. I am currently pursuing B.Tech in Electrical and Electronics Engineering at VSSUT while actively learning Java, Spring Boot, JavaScript, and the MERN stack.
-            </Typography>
+              <Grid item xs={12} md={7}>
+                <Typography
+                  variant="h3"
+                  sx={{ mb: 3, color: '#000000' }}
+                >
+                  A motivated student building a career in software engineering
+                </Typography>
 
-            <Typography
-              variant="body1"
-              sx={{ mb: 2, lineHeight: 1.8 }}
-            >
-              My focus is on strengthening my backend and full-stack development skills by building academic and personal projects. I enjoy turning ideas into practical web applications and growing through hands-on learning.
-            </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ mb: 2, lineHeight: 1.8 }}
+                >
+                  I am Bhima Baskey, a beginner-level Software Engineering student based in{' '}
+                  {SITE_CONFIG.location}. I am currently pursuing B.Tech in Electrical and
+                  Electronics Engineering at VSSUT while actively learning Java, Spring Boot,
+                  JavaScript, and the MERN stack.
+                </Typography>
 
-            <Typography
-              variant="body1"
-              sx={{ mb: 4, lineHeight: 1.8 }}
-            >
-              I am currently looking for an entry-level role or internship where I can gain real-world experience, contribute under guidance, and continue improving as a developer.
-            </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ mb: 2, lineHeight: 1.8 }}
+                >
+                  My focus is on strengthening my backend and full-stack development skills by
+                  building academic and personal projects. I enjoy turning ideas into practical
+                  web applications and growing through hands-on learning.
+                </Typography>
 
-            <Button
-              variant="contained"
-              startIcon={<DownloadIcon />}
-              href={SITE_CONFIG.resumeUrl}
-              size="large"
-            >
-              Download Resume
-            </Button>
-          </Grid>
-        </Grid>
+                <Typography
+                  variant="body1"
+                  sx={{ mb: 4, lineHeight: 1.8 }}
+                >
+                  I am currently looking for an entry-level role or internship where I can gain
+                  real-world experience, contribute under guidance, and continue improving as a
+                  developer.
+                </Typography>
+
+                <Button
+                  variant="contained"
+                  startIcon={<DownloadIcon />}
+                  href={SITE_CONFIG.resumeUrl}
+                  size="large"
+                >
+                  Download Resume
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
 
         {/* Skills Section */}
         <Box
@@ -155,132 +192,213 @@ const About = () => {
             />
 
             <Grid container spacing={6}>
-            <Grid item xs={12} md={4}>
-              <Typography
-                variant="h5"
-                sx={{
-                  mb: 3,
-                  pb: 2,
-                  borderBottom: '2px solid',
-                  display: 'inline-block',
-                }}
-              >
-                Frontend
-              </Typography>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 2 }}>
-                {skills.frontend.map((skill) => (
-                  <SkillChart key={skill.name} name={skill.name} level={skill.level} />
-                ))}
-              </Box>
-            </Grid>
+              <Grid item xs={12} md={4}>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    mb: 3,
+                    pb: 2,
+                    borderBottom: '2px solid',
+                    display: 'inline-block',
+                  }}
+                >
+                  Frontend
+                </Typography>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 2 }}>
+                  {skills.frontend.map((skill) => (
+                    <SkillChart key={skill.name} name={skill.name} level={skill.level} />
+                  ))}
+                </Box>
+              </Grid>
 
-            <Grid item xs={12} md={4}>
-              <Typography
-                variant="h5"
-                sx={{
-                  mb: 3,
-                  pb: 2,
-                  borderBottom: '2px solid',
-                  display: 'inline-block',
-                }}
-              >
-                Backend
-              </Typography>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 2 }}>
-                {skills.backend.map((skill) => (
-                  <SkillChart key={skill.name} name={skill.name} level={skill.level} />
-                ))}
-              </Box>
-            </Grid>
+              <Grid item xs={12} md={4}>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    mb: 3,
+                    pb: 2,
+                    borderBottom: '2px solid',
+                    display: 'inline-block',
+                  }}
+                >
+                  Backend
+                </Typography>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 2 }}>
+                  {skills.backend.map((skill) => (
+                    <SkillChart key={skill.name} name={skill.name} level={skill.level} />
+                  ))}
+                </Box>
+              </Grid>
 
-            <Grid item xs={12} md={4}>
-              <Typography
-                variant="h5"
-                sx={{
-                  mb: 3,
-                  pb: 2,
-                  borderBottom: '2px solid',
-                  display: 'inline-block',
-                }}
-              >
-                Tools & Others
-              </Typography>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 2 }}>
-                {skills.tools.map((skill) => (
-                  <SkillChart key={skill.name} name={skill.name} level={skill.level} />
-                ))}
-              </Box>
+              <Grid item xs={12} md={4}>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    mb: 3,
+                    pb: 2,
+                    borderBottom: '2px solid',
+                    display: 'inline-block',
+                  }}
+                >
+                  Tools & Others
+                </Typography>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 2 }}>
+                  {skills.tools.map((skill) => (
+                    <SkillChart key={skill.name} name={skill.name} level={skill.level} />
+                  ))}
+                </Box>
+              </Grid>
             </Grid>
-          </Grid>
+          </Box>
         </Box>
-      </Box>
 
         {/* Education Section */}
-        <Box
-          ref={eduRef}
-          sx={{
-            opacity: eduVisible ? 1 : 0,
-            transform: eduVisible ? 'translateY(0)' : 'translateY(30px)',
-            transition: 'all 0.6s ease',
-          }}
-        >
+        <Box ref={eduRef}>
           <SectionTitle
             title="Education"
             subtitle="My academic background."
           />
 
-          <Grid container spacing={4}>
+          <Box sx={{ mt: 6 }}>
             {education.map((edu, index) => (
-              <Grid item xs={12} md={6} key={index}>
+              <Box
+                key={index}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  mb: 6,
+                  position: 'relative',
+                }}
+              >
+                {/* Timeline */}
                 <Box
                   sx={{
+                    width: 80,
                     display: 'flex',
-                    flexDirection: { xs: 'column', sm: index % 2 === 0 ? 'row' : 'row-reverse' },
-                    alignItems: 'stretch',
-                    gap: 2,
-                    p: 0,
-                    borderRadius: 0,
-                    overflow: 'hidden',
-                    boxShadow: '0 20px 45px rgba(15, 70, 30, 0.08)',
-                    backgroundColor: '#ffffff',
-                    border: '1px solid rgba(47,125,59,0.12)',
-                    transition: 'transform 0.25s ease, border-color 0.25s ease',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
-                      borderColor: '#2f7d3b',
-                    },
+                    justifyContent: 'center',
+                    position: 'relative',
+                    flexShrink: 0,
                   }}
                 >
                   <Box
-                    component="img"
-                    src={edu.image}
-                    alt={edu.school}
                     sx={{
-                      width: { xs: '100%', sm: 220 },
-                      minHeight: 220,
-                      objectFit: 'cover',
-                      backgroundColor: '#f4faf4',
+                      position: 'absolute',
+                      top: 18,
+                      bottom: -60,
+                      width: 4,
+                      bgcolor: '#d9d9d9',
                     }}
                   />
+                  <Box
+                    sx={{
+                      width: 18,
+                      height: 18,
+                      borderRadius: '50%',
+                      bgcolor: '#fff',
+                      border: '3px solid #111',
+                      zIndex: 2,
+                    }}
+                  />
+                </Box>
 
-                  <Box sx={{ p: 4, background: 'linear-gradient(180deg, #f5f9f5 0%, #e8f5e9 100%)' }}>
-                    <Typography variant="subtitle2" sx={{ color: '#2f7d3b', mb: 1, fontWeight: 700 }}>
-                      {edu.period}
-                    </Typography>
-                    <Typography variant="h6" sx={{ mb: 1, color: '#102f17', fontWeight: 700 }}>
-                      {edu.degree}
-                    </Typography>
-                    <Typography variant="body2" sx={{ mb: 2, color: '#375b32', fontWeight: 600 }}>
-                      {edu.school}
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: '#375b32', lineHeight: 1.8 }}>
-                      {edu.details}
-                    </Typography>
+                {/* Card */}
+                <Box
+                  sx={{
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: { xs: 'column', md: 'row' },
+                    bgcolor: '#fff',
+                    borderRadius: 4,
+                    overflow: 'hidden',
+                    border: '1px solid #e5e5e5',
+                    transition: '.3s',
+                    '&:hover': {
+                      transform: 'translateY(-5px)',
+                      boxShadow: '0 20px 40px rgba(0,0,0,.08)',
+                    },
+                  }}
+                >
+                  {/* Image Wrapper — no cropping */}
+                  <Box
+                    sx={{
+                      width: { xs: '100%', md: 240 },
+                      flexShrink: 0,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      bgcolor: '#f9f9f9',
+                      borderRight: { xs: 'none', md: '1px solid #eee' },
+                      borderBottom: { xs: '1px solid #eee', md: 'none' },
+                      p: 3,
+                    }}
+                  >
+                    <Box
+                      component="img"
+                      src={edu.image}
+                      alt={edu.school}
+                      sx={{
+                        width: '100%',
+                        height: 'auto',
+                        maxHeight: { xs: 200, md: '100%' },
+                        objectFit: 'contain',
+                        display: 'block',
+                      }}
+                    />
+                  </Box>
+
+                  {/* Content */}
+                  <Box sx={{ flex: 1, p: 4 }}>
+                    <Box
+                      display="flex"
+                      justifyContent="space-between"
+                      alignItems="flex-start"
+                      flexWrap="wrap"
+                      gap={1}
+                    >
+                      <Box>
+                        <Typography variant="h5" fontWeight={700}>
+                          {edu.degree}
+                        </Typography>
+                        <Typography color="text.secondary" sx={{ mt: 0.5 }}>
+                          {edu.school}
+                        </Typography>
+                      </Box>
+
+                      <Typography color="text.secondary">{edu.period}</Typography>
+                    </Box>
+
+                    <Box
+                      component="ul"
+                      sx={{
+                        mt: 3,
+                        pl: 3,
+                        lineHeight: 2,
+                      }}
+                    >
+                      {edu.points?.map((point, i) => (
+                        <li key={i}>
+                          <Typography>{point}</Typography>
+                        </li>
+                      ))}
+                    </Box>
+
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        gap: 1,
+                        flexWrap: 'wrap',
+                        mt: 3,
+                      }}
+                    >
+                      {edu.skills?.map((skill) => (
+                        <SkillChip key={skill} label={skill} />
+                      ))}
+                    </Box>
                   </Box>
                 </Box>
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Box>
         </Box>
       </Container>
     </Box>

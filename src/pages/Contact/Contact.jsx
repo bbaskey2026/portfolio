@@ -36,7 +36,23 @@ const contactInfo = [
 
 const Contact = () => {
   return (
-    <Box sx={{ py: 8 }}>
+    <Box
+      sx={{
+        py: 8,
+        position: 'relative',
+        overflow: 'hidden',
+        backgroundColor: '#ffffff',
+        backgroundImage: `
+          radial-gradient(circle at 8% 15%, rgba(66, 133, 244, 0.13) 0%, transparent 28%),
+          radial-gradient(circle at 92% 12%, rgba(234, 67, 53, 0.11) 0%, transparent 24%),
+          radial-gradient(circle at 88% 88%, rgba(251, 188, 5, 0.13) 0%, transparent 26%),
+          radial-gradient(circle at 12% 88%, rgba(52, 168, 83, 0.11) 0%, transparent 24%),
+          radial-gradient(circle at 50% 50%, rgba(66, 133, 244, 0.05) 0%, transparent 60%),
+          linear-gradient(180deg, #ffffff 0%, #f8fbff 100%)
+        `,
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
       <Container maxWidth="lg">
         <SectionTitle
           title="Get in Touch"

@@ -21,6 +21,15 @@ const Footer = () => {
         pt: 8,
         pb: 4,
         mt: 12,
+        backgroundColor: '#ffffff',
+        backgroundImage: `
+          radial-gradient(circle at 10% 20%, rgba(66, 133, 244, 0.12) 0%, transparent 25%),
+          radial-gradient(circle at 90% 20%, rgba(234, 67, 53, 0.10) 0%, transparent 22%),
+          radial-gradient(circle at 85% 85%, rgba(251, 188, 5, 0.12) 0%, transparent 24%),
+          radial-gradient(circle at 15% 85%, rgba(52, 168, 83, 0.10) 0%, transparent 22%),
+          linear-gradient(180deg, #ffffff 0%, #f8fbff 100%)
+        `,
+        backgroundRepeat: 'no-repeat',
       }}
     >
       <Container maxWidth="lg">

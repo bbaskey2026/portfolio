@@ -126,22 +126,51 @@ export const experiences = [
     technologies: ['JavaScript', 'React', 'Express', 'MongoDB', 'Git'],
   },
 ];
-
 export const education = [
   {
     degree: 'Bachelor of Technology – Electrical and Electronics Engineering',
-    school: 'Veer Surendra Sai University of Technology (VSSUT)',
+    school: 'Veer Surendra Sai University of Technology (VSSUT), Burla, Odisha',
     period: '2022 — 2026',
-    details: 'Currently pursuing a degree while building a strong foundation in software engineering and web development.',
-    image: vssutImage,
+
+    points: [
+      'Currently pursuing B.Tech in Electrical & Electronics Engineering.',
+      'CGPA: 8.xx / 10 (replace with your CGPA).',
+      'Built projects using React, Node.js, Java, Spring Boot and Golang.',
+      'Actively learning Data Structures, System Design and Backend Engineering.'
+    ],
+
+    skills: [
+      'React',
+      'Node.js',
+      'Java',
+      'Spring Boot',
+      'Go',
+      'SQL',
+      'Git'
+    ],
+
+    image: vssutImage
   },
+
   {
     degree: 'Higher Secondary Education',
     school: 'Fakir Mohan Higher Secondary School',
-    period: '2018 — 2020',
-    details: 'Completed secondary education and developed an interest in problem-solving and technology.',
-    image: fakirMohanImage,
-  },
+    period: '2020 — 2022',
+
+    points: [
+      'Completed Higher Secondary in Science.',
+      'Developed interest in programming and software development.',
+      'Built a strong foundation in Mathematics and Physics.'
+    ],
+
+    skills: [
+      'Mathematics',
+      'Physics',
+      'Chemistry'
+    ],
+
+    image: fakirMohanImage
+  }
 ];
 
 export const testimonials = [
