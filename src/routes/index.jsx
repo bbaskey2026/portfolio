@@ -7,6 +7,7 @@ import Projects from '../pages/Projects/Projects';
 import Experience from '../pages/Experience/Experience';
 import Contact from '../pages/Contact/Contact';
 import NotFound from '../pages/NotFound/NotFound';
+import ProjectDetail from '../pages/ProjectDetail/index';
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/experience" element={<Experience />} />
+         <Route path="/projects/:repoName" element={<ProjectDetail />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Route>
