@@ -1,7 +1,6 @@
 import React from 'react';
 import { Typography, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { FaGem } from 'react-icons/fa';
 
 const Logo = () => {
   return (
@@ -12,26 +11,36 @@ const Logo = () => {
         textDecoration: 'none',
         display: 'flex',
         alignItems: 'center',
-        gap: 1,
+        gap: 1.5,
       }}
     >
+      {/* Vercel-style geometric triangle glyph */}
       <Box
         sx={{
-          width: 40,
-          height: 40,
+          width: 24,
+          height: 24,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
         }}
       >
-        <FaGem style={{ color: 'white', width: 28, height: 28 }} />
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 75 65"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M37.5 0L75 65H0L37.5 0Z" fill="#FFFFFF" />
+        </svg>
       </Box>
       <Typography
         variant="h6"
         sx={{
-          color: 'text.primary',
+          color: '#ffffff',
           fontWeight: 700,
-          letterSpacing: '-0.02em',
+          letterSpacing: '-0.03em',
+          fontSize: '1rem',
         }}
       >
         Bhima Baskey

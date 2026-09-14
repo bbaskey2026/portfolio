@@ -11,7 +11,8 @@ const MainLayout = () => {
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#000000',
+        color: '#ededed',
       }}
     >
       <Navbar />

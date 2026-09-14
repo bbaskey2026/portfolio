@@ -3,15 +3,15 @@ import { IconButton, Stack } from '@mui/material';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { SOCIAL_LINKS } from '../../config/constants';
 
-const SocialLinks = ({ size = 'medium', color = '#000000' }) => {
+const SocialLinks = ({ size = 'medium', color = '#ededed' }) => {
   const links = [
-    { icon: <FaGithub />, url: SOCIAL_LINKS.github, label: 'GitHub' },
-    { icon: <FaLinkedin />, url: SOCIAL_LINKS.linkedin, label: 'LinkedIn' },
-    { icon: <FaTwitter />, url: SOCIAL_LINKS.twitter, label: 'Twitter' },
+    { icon: <FaGithub size={18} />, url: SOCIAL_LINKS.github, label: 'GitHub' },
+    { icon: <FaLinkedin size={18} />, url: SOCIAL_LINKS.linkedin, label: 'LinkedIn' },
+    { icon: <FaTwitter size={18} />, url: SOCIAL_LINKS.twitter, label: 'Twitter' },
   ];
 
   return (
-    <Stack direction="row" spacing={1}>
+    <Stack direction="row" spacing={1.2}>
       {links.map((link) => (
         <IconButton
           key={link.label}
@@ -22,14 +22,16 @@ const SocialLinks = ({ size = 'medium', color = '#000000' }) => {
           size={size}
           sx={{
             color: color,
-            border: '1px solid #E5E5E5',
+            border: '1px solid #222222',
+            backgroundColor: '#0a0a0a',
             borderRadius: '8px',
+            p: 1,
             '&:hover': {
-              borderColor: '#000000',
-              backgroundColor: '#000000',
-              color: '#FFFFFF',
+              borderColor: '#444444',
+              backgroundColor: '#171717',
+              color: '#ffffff',
             },
-            transition: 'all 0.2s ease',
+            transition: 'all 0.15s ease',
           }}
         >
           {link.icon}

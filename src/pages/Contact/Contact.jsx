@@ -15,19 +15,19 @@ import { SITE_CONFIG } from '../../config/constants';
 
 const contactInfo = [
   {
-    icon: <EmailIcon />,
+    icon: <EmailIcon sx={{ fontSize: 20 }} />,
     label: 'Email',
     value: SITE_CONFIG.email,
     href: `mailto:${SITE_CONFIG.email}`,
   },
   {
-    icon: <PhoneIcon />,
+    icon: <PhoneIcon sx={{ fontSize: 20 }} />,
     label: 'Phone',
     value: SITE_CONFIG.phone,
     href: `tel:${SITE_CONFIG.phone}`,
   },
   {
-    icon: <LocationOnIcon />,
+    icon: <LocationOnIcon sx={{ fontSize: 20 }} />,
     label: 'Location',
     value: SITE_CONFIG.location,
     href: null,
@@ -39,42 +39,33 @@ const Contact = () => {
     <Box
       sx={{
         py: 8,
-        position: 'relative',
-        overflow: 'hidden',
-        backgroundColor: '#ffffff',
-        backgroundImage: `
-          radial-gradient(circle at 8% 15%, rgba(66, 133, 244, 0.13) 0%, transparent 28%),
-          radial-gradient(circle at 92% 12%, rgba(234, 67, 53, 0.11) 0%, transparent 24%),
-          radial-gradient(circle at 88% 88%, rgba(251, 188, 5, 0.13) 0%, transparent 26%),
-          radial-gradient(circle at 12% 88%, rgba(52, 168, 83, 0.11) 0%, transparent 24%),
-          radial-gradient(circle at 50% 50%, rgba(66, 133, 244, 0.05) 0%, transparent 60%),
-          linear-gradient(180deg, #ffffff 0%, #f8fbff 100%)
-        `,
-        backgroundRepeat: 'no-repeat',
+        minHeight: '80vh',
+        backgroundColor: '#000000',
+        color: '#ededed',
       }}
     >
       <Container maxWidth="lg">
         <SectionTitle
           title="Get in Touch"
-          subtitle="Have a question or want to work together? Drop me a message."
+          subtitle="Have a question, opportunity, or want to collaborate? Send me a message."
         />
 
-        <Grid container spacing={8}>
+        <Grid container spacing={6}>
           <Grid size={{ xs: 12, md: 5 }}>
             <Typography
               variant="h4"
-              sx={{ mb: 3, color: '#000000' }}
+              sx={{ mb: 2.5, color: '#ffffff', fontWeight: 700, letterSpacing: '-0.02em' }}
             >
-              Let's talk about your project
+              Let's build something together
             </Typography>
 
             <Typography
               variant="body1"
-              sx={{ mb: 4, color: '#666666', lineHeight: 1.8 }}
+              sx={{ mb: 4, color: '#a1a1a1', lineHeight: 1.8 }}
             >
-              I'm interested in freelance opportunities, especially
-              ambitious or large projects. However, if you have other
-              requests or questions, don't hesitate to reach out.
+              I'm actively seeking internship and entry-level software engineering roles.
+              If you have any open opportunities, project inquiries, or questions,
+              I'd love to connect.
             </Typography>
 
             {/* Contact Info */}
@@ -88,29 +79,32 @@ const Contact = () => {
                     display: 'flex',
                     alignItems: 'center',
                     gap: 2,
-                    mb: 2.5,
+                    mb: 2,
                     p: 2,
-                    border: '1px solid #E5E5E5',
-                    borderRadius: 2,
+                    border: '1px solid #1f1f1f',
+                    borderRadius: '10px',
+                    backgroundColor: '#0a0a0a',
                     textDecoration: 'none',
                     color: 'inherit',
+                    transition: 'all 0.15s ease',
                     '&:hover': {
-                      borderColor: info.href ? '#000000' : '#E5E5E5',
+                      borderColor: info.href ? '#444444' : '#1f1f1f',
+                      backgroundColor: info.href ? '#121212' : '#0a0a0a',
                     },
-                    transition: 'border-color 0.2s ease',
                     cursor: info.href ? 'pointer' : 'default',
                   }}
                 >
                   <Box
                     sx={{
-                      width: 44,
-                      height: 44,
+                      width: 40,
+                      height: 40,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      backgroundColor: '#F5F5F5',
-                      borderRadius: '10px',
-                      color: '#000000',
+                      backgroundColor: '#171717',
+                      border: '1px solid #262626',
+                      borderRadius: '8px',
+                      color: '#ffffff',
                     }}
                   >
                     {info.icon}
@@ -118,13 +112,13 @@ const Contact = () => {
                   <Box>
                     <Typography
                       variant="body2"
-                      sx={{ color: '#999999', fontSize: '0.8rem' }}
+                      sx={{ color: '#888888', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}
                     >
                       {info.label}
                     </Typography>
                     <Typography
                       variant="body2"
-                      sx={{ fontWeight: 500, color: '#000000' }}
+                      sx={{ fontWeight: 500, color: '#ededed', fontSize: '0.9rem' }}
                     >
                       {info.value}
                     </Typography>
@@ -136,7 +130,7 @@ const Contact = () => {
             <Box>
               <Typography
                 variant="body2"
-                sx={{ mb: 1.5, color: '#999999' }}
+                sx={{ mb: 1.5, color: '#888888', fontSize: '0.85rem' }}
               >
                 Find me on
               </Typography>
@@ -148,8 +142,9 @@ const Contact = () => {
             <Box
               sx={{
                 p: { xs: 3, md: 5 },
-                border: '1px solid #E5E5E5',
-                borderRadius: 3,
+                border: '1px solid #222222',
+                borderRadius: '16px',
+                backgroundColor: '#0a0a0a',
               }}
             >
               <ContactForm />
