@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 
-const headingFont = '"Megora", "Syne", "Geist", "Plus Jakarta Sans", -apple-system, sans-serif';
+const headingFont = '"Mallo", "Mallo Bold", "Outfit", "Plus Jakarta Sans", "Syne", "Geist", -apple-system, sans-serif';
 
 const theme = createTheme({
   palette: {
