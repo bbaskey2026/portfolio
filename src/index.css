@@ -1,4 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&family=Syne:wght@700;800&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@font-face {
+  font-family: 'Mallo';
+  src: url('/fonts/Mallo-Bold.woff2') format('woff2'),
+       url('/fonts/Mallo-Bold.woff') format('woff'),
+       url('/fonts/Mallo-Bold.ttf') format('truetype'),
+       url('/fonts/Mallo.ttf') format('truetype'),
+       local('Mallo Bold'),
+       local('Mallo');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mallo Bold';
+  src: url('/fonts/Mallo-Bold.woff2') format('woff2'),
+       url('/fonts/Mallo-Bold.woff') format('woff'),
+       url('/fonts/Mallo-Bold.ttf') format('truetype'),
+       url('/fonts/Mallo.ttf') format('truetype'),
+       local('Mallo Bold'),
+       local('Mallo');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: 'Megora';
