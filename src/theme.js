@@ -1,5 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 
+const headingFont = '"Megora", "Syne", "Geist", "Plus Jakarta Sans", -apple-system, sans-serif';
+
 const theme = createTheme({
   palette: {
     mode: 'dark',
@@ -45,6 +47,7 @@ const theme = createTheme({
   typography: {
     fontFamily: '"Geist", "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     h1: {
+      fontFamily: headingFont,
       fontSize: '3.5rem',
       fontWeight: 800,
       letterSpacing: '-0.04em',
@@ -52,34 +55,39 @@ const theme = createTheme({
       color: '#ffffff',
     },
     h2: {
+      fontFamily: headingFont,
       fontSize: '2.25rem',
-      fontWeight: 700,
+      fontWeight: 800,
       letterSpacing: '-0.035em',
       lineHeight: 1.15,
       color: '#ffffff',
     },
     h3: {
+      fontFamily: headingFont,
       fontSize: '1.75rem',
-      fontWeight: 700,
+      fontWeight: 800,
       letterSpacing: '-0.03em',
       lineHeight: 1.2,
       color: '#ffffff',
     },
     h4: {
+      fontFamily: headingFont,
       fontSize: '1.25rem',
-      fontWeight: 600,
+      fontWeight: 700,
       letterSpacing: '-0.025em',
       color: '#ffffff',
     },
     h5: {
+      fontFamily: headingFont,
       fontSize: '1.1rem',
-      fontWeight: 600,
+      fontWeight: 700,
       letterSpacing: '-0.02em',
       color: '#ffffff',
     },
     h6: {
+      fontFamily: headingFont,
       fontSize: '1rem',
-      fontWeight: 600,
+      fontWeight: 700,
       letterSpacing: '-0.015em',
       color: '#ffffff',
     },

@@ -1,4 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@font-face {
+  font-family: 'Megora';
+  src: url('/fonts/Megora-Bold.woff2') format('woff2'),
+       url('/fonts/Megora-Bold.woff') format('woff'),
+       url('/fonts/Megora-Bold.ttf') format('truetype'),
+       url('/fonts/Megora.ttf') format('truetype'),
+       local('Megora Bold'),
+       local('Megora');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 * {
   margin: 0;
