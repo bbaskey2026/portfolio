@@ -128,49 +128,57 @@ export const experiences = [
 ];
 export const education = [
   {
-    degree: 'Bachelor of Technology – Electrical and Electronics Engineering',
-    school: 'Veer Surendra Sai University of Technology (VSSUT), Burla, Odisha',
+    id: 1,
+    type: 'University / College',
+    degree: 'Bachelor of Technology (B.Tech)',
+    field: 'Electrical and Electronics Engineering',
+    institution: 'Veer Surendra Sai University of Technology (VSSUT)',
+    location: 'Burla, Sambalpur, Odisha',
     period: '2022 — 2026',
-
+    description:
+      'Currently pursuing B.Tech while actively focusing on software engineering, backend architecture in Java & Spring Boot, and full-stack development with the MERN stack.',
     points: [
-      'Currently pursuing B.Tech in Electrical & Electronics Engineering.',
-      'CGPA: 8.xx / 10 (replace with your CGPA).',
-      'Built projects using React, Node.js, Java, Spring Boot and Golang.',
-      'Actively learning Data Structures, System Design and Backend Engineering.'
+      'Specializing in Electrical & Electronics Engineering with software systems focus.',
+      'Hands-on development of scalable web applications, REST APIs, and database design.',
+      'Core studies: Data Structures & Algorithms, OOPs, DBMS, Operating Systems, Computer Networks.',
     ],
-
-    skills: [
-      'React',
-      'Node.js',
-      'Java',
-      'Spring Boot',
-      'Go',
-      'SQL',
-      'Git'
-    ],
-
-    image: vssutImage
+    skills: ['Java', 'Spring Boot', 'React', 'Node.js', 'MySQL', 'MongoDB', 'Git'],
+    image: vssutImage,
   },
-
   {
-    degree: 'Higher Secondary Education',
-    school: 'Fakir Mohan Higher Secondary School',
+    id: 2,
+    type: 'Higher Secondary (+2 College)',
+    degree: 'Higher Secondary Education (12th / +2 Science)',
+    field: 'Science Stream (PCM)',
+    institution: 'Fakir Mohan Higher Secondary School',
+    location: 'Balasore, Odisha',
     period: '2020 — 2022',
-
+    description:
+      'Completed Higher Secondary education (+2 Science) with focus on Mathematics, Physics, and Chemistry, laying a strong foundation for analytical thinking and engineering.',
     points: [
-      'Completed Higher Secondary in Science.',
-      'Developed interest in programming and software development.',
-      'Built a strong foundation in Mathematics and Physics.'
+      'Completed Higher Secondary Certificate in Science with high academic standing.',
+      'Developed strong problem-solving and mathematical aptitude.',
+      'Explored initial interests in computer science and technology.',
     ],
-
-    skills: [
-      'Mathematics',
-      'Physics',
-      'Chemistry'
+    skills: ['Mathematics', 'Physics', 'Chemistry', 'Problem Solving'],
+    image: fakirMohanImage,
+  },
+  {
+    id: 3,
+    type: 'Secondary School (10th)',
+    degree: 'Secondary School Examination (10th Standard / Matriculation)',
+    field: 'General Academics & Science',
+    institution: 'High School',
+    location: 'Odisha, India',
+    period: '2019 — 2020',
+    description:
+      'Completed 10th Standard Board Education with strong academic foundation in Mathematics, Science, Computer Fundamentals, and English.',
+    points: [
+      'Completed Matriculation Board examination with excellent academic record.',
+      'Active participation in mathematics, science olympiads, and school events.',
     ],
-
-    image: fakirMohanImage
-  }
+    skills: ['Mathematics', 'General Science', 'Computer Fundamentals', 'English'],
+  },
 ];
 
 export const testimonials = [

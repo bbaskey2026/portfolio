@@ -57,19 +57,7 @@ const Home = () => {
                   },
                 }}
               >
-                <Chip
-                  label="✨ Open to internships & entry-level opportunities"
-                  sx={{
-                    mb: 3,
-                    borderRadius: '20px',
-                    border: '1px solid #262626',
-                    backgroundColor: '#111111',
-                    color: '#ededed',
-                    fontSize: '0.85rem',
-                    fontWeight: 500,
-                    px: 0.5,
-                  }}
-                />
+
 
                 <Typography
                   variant="h1"
@@ -130,21 +118,23 @@ const Home = () => {
                   I can contribute, learn, and grow as a developer.
                 </Typography>
 
-                <Stack direction="row" spacing={2} sx={{ mb: 4, flexWrap: 'wrap', gap: 1.5 }}>
+                <Stack direction="row" spacing={2.5} sx={{ mb: 4, flexWrap: 'wrap', gap: 2 }}>
                   <Button
                     variant="contained"
                     size="large"
                     endIcon={<ArrowForwardIcon sx={{ fontSize: 18 }} />}
                     onClick={() => navigate('/projects')}
                     sx={{
-                      py: 1.4,
-                      px: 3.5,
+                      py: 1.5,
+                      px: 4,
                       backgroundColor: '#ffffff',
                       color: '#000000',
                       fontWeight: 600,
-                      borderRadius: '8px',
+                      borderRadius: '9999px',
+                      border: '1px solid #ffffff',
                       '&:hover': {
                         backgroundColor: '#eaeaea',
+                        borderColor: '#eaeaea',
                       },
                     }}
                   >
@@ -156,14 +146,16 @@ const Home = () => {
                     startIcon={<DownloadIcon sx={{ fontSize: 18 }} />}
                     href={SITE_CONFIG.resumeUrl}
                     sx={{
-                      py: 1.4,
-                      px: 3.5,
+                      py: 1.5,
+                      px: 4,
                       borderColor: '#333333',
+                      backgroundColor: '#0a0a0a',
                       color: '#ededed',
-                      borderRadius: '8px',
+                      borderRadius: '9999px',
                       '&:hover': {
-                        borderColor: '#ffffff',
-                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                        borderColor: '#666666',
+                        backgroundColor: '#171717',
+                        color: '#ffffff',
                       },
                     }}
                   >
@@ -247,10 +239,13 @@ const Home = () => {
                 borderColor: '#262626',
                 color: '#ededed',
                 fontSize: '0.875rem',
-                borderRadius: '6px',
+                borderRadius: '9999px',
+                px: 2.5,
+                py: 0.8,
+                backgroundColor: '#0a0a0a',
                 '&:hover': {
-                  borderColor: '#ffffff',
-                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                  borderColor: '#666666',
+                  backgroundColor: '#171717',
                 },
               }}
             >

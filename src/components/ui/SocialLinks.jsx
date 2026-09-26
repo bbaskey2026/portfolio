@@ -11,7 +11,7 @@ const SocialLinks = ({ size = 'medium', color = '#ededed' }) => {
   ];
 
   return (
-    <Stack direction="row" spacing={1.2}>
+    <Stack direction="row" spacing={2} sx={{ gap: 1.8 }}>
       {links.map((link) => (
         <IconButton
           key={link.label}
@@ -24,12 +24,13 @@ const SocialLinks = ({ size = 'medium', color = '#ededed' }) => {
             color: color,
             border: '1px solid #222222',
             backgroundColor: '#0a0a0a',
-            borderRadius: '8px',
-            p: 1,
+            borderRadius: '50%',
+            p: 1.2,
             '&:hover': {
-              borderColor: '#444444',
+              borderColor: '#666666',
               backgroundColor: '#171717',
               color: '#ffffff',
+              transform: 'translateY(-2px)',
             },
             transition: 'all 0.15s ease',
           }}

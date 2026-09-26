@@ -152,7 +152,7 @@ const Projects = () => {
           <Stack
             direction="row"
             flexWrap="wrap"
-            gap={1}
+            gap={1.8}
             sx={{ mb: 6 }}
           >
             {allTechnologies.map((tech) => {
@@ -163,11 +163,11 @@ const Projects = () => {
                   label={tech}
                   onClick={() => setFilter(tech)}
                   sx={{
-                    borderRadius: '6px',
-                    px: 1,
-                    py: 0.5,
-                    fontSize: '0.8rem',
-                    fontWeight: isSelected ? 600 : 400,
+                    borderRadius: '9999px',
+                    px: 2.2,
+                    py: 1.1,
+                    fontSize: '0.85rem',
+                    fontWeight: isSelected ? 600 : 500,
                     border: '1px solid',
                     borderColor: isSelected ? '#ffffff' : '#262626',
                     backgroundColor: isSelected ? '#ffffff' : '#0e0e0e',
@@ -177,6 +177,8 @@ const Projects = () => {
                     '&:hover': {
                       backgroundColor: isSelected ? '#eaeaea' : '#1a1a1a',
                       color: isSelected ? '#000000' : '#ffffff',
+                      borderColor: isSelected ? '#ffffff' : '#444444',
+                      transform: 'translateY(-1px)',
                     },
                   }}
                 />

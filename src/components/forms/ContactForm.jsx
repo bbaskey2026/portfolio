@@ -149,9 +149,11 @@ const ContactForm = () => {
           backgroundColor: '#ffffff',
           color: '#000000',
           fontWeight: 600,
-          borderRadius: '8px',
+          borderRadius: '9999px',
+          border: '1px solid #ffffff',
           '&:hover': {
             backgroundColor: '#eaeaea',
+            borderColor: '#eaeaea',
           },
         }}
       >

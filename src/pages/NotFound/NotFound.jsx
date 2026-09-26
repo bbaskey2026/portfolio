@@ -56,9 +56,11 @@ const NotFound = () => {
             fontWeight: 600,
             py: 1.2,
             px: 3.5,
-            borderRadius: '8px',
+            borderRadius: '9999px',
+            border: '1px solid #ffffff',
             '&:hover': {
               backgroundColor: '#eaeaea',
+              borderColor: '#eaeaea',
             },
           }}
         >

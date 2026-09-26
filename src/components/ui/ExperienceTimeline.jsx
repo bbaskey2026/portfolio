@@ -49,13 +49,13 @@ const ExperienceItem = ({ experience, index }) => {
         />
       </Box>
 
-      <Box sx={{ flex: 1 }}>
+      <Box sx={{ flex: 1, minWidth: 0 }}>
         <Box
           sx={{
-            p: 3.5,
+            p: { xs: 2.5, md: 3.5 },
             backgroundColor: '#0a0a0a',
             border: '1px solid #222222',
-            borderRadius: '12px',
+            borderRadius: '16px',
             transition: 'all 0.2s ease',
             '&:hover': {
               borderColor: '#444444',
@@ -74,16 +74,21 @@ const ExperienceItem = ({ experience, index }) => {
           >
             <Typography
               variant="h5"
-              sx={{ color: '#ffffff', fontWeight: 600, fontSize: '1.2rem', letterSpacing: '-0.02em' }}
+              sx={{ color: '#ffffff', fontWeight: 600, fontSize: { xs: '1.1rem', md: '1.2rem' }, letterSpacing: '-0.02em' }}
             >
               {experience.role}
             </Typography>
             <Typography
               variant="body2"
               sx={{
-                color: '#888888',
-                fontSize: '0.85rem',
+                color: '#a1a1a1',
+                fontSize: '0.8rem',
                 fontFamily: 'monospace',
+                backgroundColor: '#141414',
+                border: '1px solid #262626',
+                borderRadius: '9999px',
+                px: 1.2,
+                py: 0.3,
                 whiteSpace: 'nowrap',
               }}
             >
@@ -120,15 +125,17 @@ const ExperienceItem = ({ experience, index }) => {
             ))}
           </Box>
 
-          <Stack direction="row" flexWrap="wrap" gap={0.8}>
+          <Stack direction="row" flexWrap="wrap" gap={1}>
             {experience.technologies.map((tech) => (
               <Chip
                 key={tech}
                 label={tech}
                 size="small"
                 sx={{
-                  fontSize: '0.72rem',
-                  height: 24,
+                  fontSize: '0.75rem',
+                  borderRadius: '9999px',
+                  px: 1,
+                  py: 0.4,
                   backgroundColor: '#141414',
                   color: '#a1a1a1',
                   border: '1px solid #262626',

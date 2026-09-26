@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Canvas Graphs</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .chart-container {
+            background: white;
+            margin: 30px auto;
+            padding: 20px;
+            max-width: 900px;
+            border-radius: 10px;
+        }
+
+        canvas {
+            border: 1px solid #ddd;
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Canvas Graph Examples</h1>
+
+
+<!-- =====================================================
+     1. LINE CHART
+===================================================== -->
+
+<div class="chart-container">
+    <h2>1. Line Chart</h2>
+
+    <canvas id="lineChart" width="800" height="400"></canvas>
+</div>
+
+
+<!-- =====================================================
+     2. BAR CHART
+===================================================== -->
+
+<div class="chart-container">
+    <h2>2. Bar Chart</h2>
+
+    <canvas id="barChart" width="800" height="400"></canvas>
+</div>
+
+
+<!-- =====================================================
+     3. HORIZONTAL BAR CHART
+===================================================== -->
+
+<div class="chart-container">
+    <h2>3. Horizontal Bar Chart</h2>
+
+    <canvas id="horizontalBarChart" width="800" height="400"></canvas>
+</div>
+
+
+<!-- =====================================================
+     4. PIE CHART
+===================================================== -->
+
+<div class="chart-container">
+    <h2>4. Pie Chart</h2>
+
+    <canvas id="pieChart" width="500" height="400"></canvas>
+</div>
+
+
+<!-- =====================================================
+     5. DOUGHNUT CHART
+===================================================== -->
+
+<div class="chart-container">
+    <h2>5. Doughnut Chart</h2>
+
+    <canvas id="doughnutChart" width="500" height="400"></canvas>
+</div>
+
+
+<!-- =====================================================
+     6. AREA CHART
+===================================================== -->
+
+<div class="chart-container">
+    <h2>6. Area Chart</h2>
+
+    <canvas id="areaChart" width="800" height="400"></canvas>
+</div>
+
+
+<!-- =====================================================
+     7. SCATTER PLOT
+===================================================== -->
+
+<div class="chart-container">
+    <h2>7. Scatter Plot</h2>
+
+    <canvas id="scatterChart" width="800" height="400"></canvas>
+</div>
+
+
+<!-- =====================================================
+     8. HISTOGRAM
+===================================================== -->
+
+<div class="chart-container">
+    <h2>8. Histogram</h2>
+
+    <canvas id="histogram" width="800" height="400"></canvas>
+</div>
+
+
+<!-- =====================================================
+     9. HEATMAP
+===================================================== -->
+
+<div class="chart-container">
+    <h2>9. Heatmap</h2>
+
+    <canvas id="heatmap" width="800" height="400"></canvas>
+</div>
+
+
+<!-- =====================================================
+     10. RADAR CHART
+===================================================== -->
+
+<div class="chart-container">
+    <h2>10. Radar Chart</h2>
+
+    <canvas id="radarChart" width="600" height="500"></canvas>
+</div>
+
+
+<!-- =====================================================
+     11. CANDLESTICK CHART
+===================================================== -->
+
+<div class="chart-container">
+    <h2>11. Candlestick Chart</h2>
+
+    <canvas id="candlestick" width="800" height="400"></canvas>
+</div>
+
+
+<script>
+
+/* =====================================================
+   COMMON FUNCTIONS
+===================================================== */
+
+function drawAxes(ctx, width, height, padding = 50) {
+
+    ctx.beginPath();
+
+    ctx.moveTo(padding, padding);
+
+    ctx.lineTo(
+        padding,
+        height - padding
+    );
+
+    ctx.lineTo(
+        width - padding,
+        height - padding
+    );
+
+    ctx.strokeStyle = "#333";
+
+    ctx.lineWidth = 2;
+
+    ctx.stroke();
+}
+
+
+function drawText(
+    ctx,
+    text,
+    x,
+    y,
+    size = 14
+) {
+
+    ctx.fillStyle = "#333";
+
+    ctx.font = `${size}px Arial`;
+
+    ctx.fillText(text, x, y);
+}
+
+
+/* =====================================================
+   1. LINE CHART
+===================================================== */
+
+const lineCanvas =
+    document.getElementById("lineChart");
+
+const lineCtx =
+    lineCanvas.getContext("2d");
+
+
+const lineData = [
+    100,
+    150,
+    120,
+    200,
+    180,
+    250
+];
+
+const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun"
+];
+
+
+const padding = 60;
+
+const graphWidth =
+    lineCanvas.width - padding * 2;
+
+const graphHeight =
+    lineCanvas.height - padding * 2;
+
+const maxValue =
+    Math.max(...lineData);
+
+
+/* Axes */
+
+drawAxes(
+    lineCtx,
+    lineCanvas.width,
+    lineCanvas.height,
+    padding
+);
+
+
+/* Line */
+
+lineCtx.beginPath();
+
+lineData.forEach((value, index) => {
+
+    const x =
+        padding +
+        index *
+        (graphWidth / (lineData.length - 1));
+
+    const y =
+        lineCanvas.height -
+        padding -
+        (value / maxValue) *
+        graphHeight;
+
+
+    if (index === 0) {
+
+        lineCtx.moveTo(x, y);
+
+    } else {
+
+        lineCtx.lineTo(x, y);
+
+    }
+
+});
+
+
+lineCtx.strokeStyle = "blue";
+
+lineCtx.lineWidth = 3;
+
+lineCtx.stroke();
+
+
+/* Points */
+
+lineData.forEach((value, index) => {
+
+    const x =
+        padding +
+        index *
+        (graphWidth / (lineData.length - 1));
+
+    const y =
+        lineCanvas.height -
+        padding -
+        (value / maxValue) *
+        graphHeight;
+
+
+    lineCtx.beginPath();
+
+    lineCtx.arc(
+        x,
+        y,
+        5,
+        0,
+        Math.PI * 2
+    );
+
+    lineCtx.fillStyle = "red";
+
+    lineCtx.fill();
+
+
+    drawText(
+        lineCtx,
+        value,
+        x - 10,
+        y - 10
+    );
+
+
+    drawText(
+        lineCtx,
+        months[index],
+        x - 10,
+        lineCanvas.height - 30
+    );
+
+});
+
+
+/* =====================================================
+   2. BAR CHART
+===================================================== */
+
+const barCanvas =
+    document.getElementById("barChart");
+
+const barCtx =
+    barCanvas.getContext("2d");
+
+
+const barData = [
+    120,
+    200,
+    150,
+    250,
+    180
+];
+
+const products = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+];
+
+
+drawAxes(
+    barCtx,
+    barCanvas.width,
+    barCanvas.height
+);
+
+
+const barMax =
+    Math.max(...barData);
+
+
+const barWidth = 80;
+
+const barGap = 50;
+
+
+barData.forEach((value, index) => {
+
+    const x =
+        80 +
+        index *
+        (barWidth + barGap);
+
+
+    const height =
+        (value / barMax) * 280;
+
+
+    const y =
+        barCanvas.height -
+        50 -
+        height;
+
+
+    barCtx.fillStyle = "steelblue";
+
+    barCtx.fillRect(
+        x,
+        y,
+        barWidth,
+        height
+    );
+
+
+    drawText(
+        barCtx,
+        value,
+        x + 25,
+        y - 10
+    );
+
+
+    drawText(
+        barCtx,
+        products[index],
+        x + 30,
+        barCanvas.height - 25
+    );
+
+});
+
+
+/* =====================================================
+   3. HORIZONTAL BAR CHART
+===================================================== */
+
+const horizontalCanvas =
+    document.getElementById(
+        "horizontalBarChart"
+    );
+
+const horizontalCtx =
+    horizontalCanvas.getContext("2d");
+
+
+const horizontalData = [
+    ["JavaScript", 90],
+    ["React", 80],
+    ["Node.js", 75],
+    ["Go", 60],
+    ["SQL", 70]
+];
+
+
+horizontalData.forEach(
+    ([name, value], index) => {
+
+        const y =
+            40 + index * 60;
+
+
+        const width =
+            value * 6;
+
+
+        horizontalCtx.fillStyle =
+            "teal";
+
+
+        horizontalCtx.fillRect(
+            150,
+            y,
+            width,
+            35
+        );
+
+
+        drawText(
+            horizontalCtx,
+            name,
+            20,
+            y + 23
+        );
+
+
+        drawText(
+            horizontalCtx,
+            value,
+            160 + width,
+            y + 23
+        );
+
+    }
+);
+
+
+/* =====================================================
+   4. PIE CHART
+===================================================== */
+
+const pieCanvas =
+    document.getElementById("pieChart");
+
+const pieCtx =
+    pieCanvas.getContext("2d");
+
+
+const pieData = [
+    {
+        name: "JavaScript",
+        value: 40
+    },
+
+    {
+        name: "Python",
+        value: 25
+    },
+
+    {
+        name: "Java",
+        value: 20
+    },
+
+    {
+        name: "Go",
+        value: 15
+    }
+];
+
+
+const pieColors = [
+    "red",
+    "blue",
+    "green",
+    "orange"
+];
+
+
+const total =
+    pieData.reduce(
+        (sum, item) =>
+            sum + item.value,
+        0
+    );
+
+
+let startAngle = 0;
+
+
+pieData.forEach(
+    (item, index) => {
+
+        const sliceAngle =
+            (item.value / total) *
+            Math.PI * 2;
+
+
+        pieCtx.beginPath();
+
+
+        pieCtx.moveTo(
+            250,
+            200
+        );
+
+
+        pieCtx.arc(
+            250,
+            200,
+            150,
+            startAngle,
+            startAngle + sliceAngle
+        );
+
+
+        pieCtx.closePath();
+
+
+        pieCtx.fillStyle =
+            pieColors[index];
+
+
+        pieCtx.fill();
+
+
+        startAngle += sliceAngle;
+
+    }
+);
+
+
+/* =====================================================
+   5. DOUGHNUT CHART
+===================================================== */
+
+const doughnutCanvas =
+    document.getElementById(
+        "doughnutChart"
+    );
+
+const doughnutCtx =
+    doughnutCanvas.getContext("2d");
+
+
+const doughnutData = [
+    40,
+    30,
+    20,
+    10
+];
+
+
+const doughnutColors = [
+    "red",
+    "blue",
+    "green",
+    "orange"
+];
+
+
+let doughnutAngle = 0;
+
+
+doughnutData.forEach(
+    (value, index) => {
+
+        const angle =
+            (value / 100) *
+            Math.PI * 2;
+
+
+        doughnutCtx.beginPath();
+
+
+        doughnutCtx.arc(
+            250,
+            200,
+            150,
+            doughnutAngle,
+            doughnutAngle + angle
+        );
+
+
+        doughnutCtx.arc(
+            250,
+            200,
+            80,
+            doughnutAngle + angle,
+            doughnutAngle,
+            true
+        );
+
+
+        doughnutCtx.closePath();
+
+
+        doughnutCtx.fillStyle =
+            doughnutColors[index];
+
+
+        doughnutCtx.fill();
+
+
+        doughnutAngle += angle;
+
+    }
+);
+
+
+/* =====================================================
+   6. AREA CHART
+===================================================== */
+
+const areaCanvas =
+    document.getElementById(
+        "areaChart"
+    );
+
+const areaCtx =
+    areaCanvas.getContext("2d");
+
+
+const areaData = [
+    80,
+    120,
+    100,
+    180,
+    150,
+    220
+];
+
+
+const areaPadding = 60;
+
+const areaWidth =
+    areaCanvas.width -
+    areaPadding * 2;
+
+const areaHeight =
+    areaCanvas.height -
+    areaPadding * 2;
+
+
+drawAxes(
+    areaCtx,
+    areaCanvas.width,
+    areaCanvas.height,
+    areaPadding
+);
+
+
+areaCtx.beginPath();
+
+
+areaData.forEach(
+    (value, index) => {
+
+        const x =
+            areaPadding +
+            index *
+            (
+                areaWidth /
+                (areaData.length - 1)
+            );
+
+
+        const y =
+            areaCanvas.height -
+            areaPadding -
+            (value / 220) *
+            areaHeight;
+
+
+        if (index === 0) {
+
+            areaCtx.moveTo(x, y);
+
+        } else {
+
+            areaCtx.lineTo(x, y);
+
+        }
+
+    }
+);
+
+
+/* Go to bottom */
+
+areaCtx.lineTo(
+    areaCanvas.width - areaPadding,
+    areaCanvas.height - areaPadding
+);
+
+areaCtx.lineTo(
+    areaPadding,
+    areaCanvas.height - areaPadding
+);
+
+areaCtx.closePath();
+
+
+areaCtx.fillStyle =
+    "rgba(0, 100, 255, 0.2)";
+
+areaCtx.fill();
+
+
+/* Draw line again */
+
+areaCtx.beginPath();
+
+
+areaData.forEach(
+    (value, index) => {
+
+        const x =
+            areaPadding +
+            index *
+            (
+                areaWidth /
+                (areaData.length - 1)
+            );
+
+
+        const y =
+            areaCanvas.height -
+            areaPadding -
+            (value / 220) *
+            areaHeight;
+
+
+        if (index === 0) {
+
+            areaCtx.moveTo(x, y);
+
+        } else {
+
+            areaCtx.lineTo(x, y);
+
+        }
+
+    }
+);
+
+
+areaCtx.strokeStyle =
+    "blue";
+
+areaCtx.lineWidth = 3;
+
+areaCtx.stroke();
+
+
+/* =====================================================
+   7. SCATTER PLOT
+===================================================== */
+
+const scatterCanvas =
+    document.getElementById(
+        "scatterChart"
+    );
+
+const scatterCtx =
+    scatterCanvas.getContext("2d");
+
+
+drawAxes(
+    scatterCtx,
+    scatterCanvas.width,
+    scatterCanvas.height
+);
+
+
+const scatterData = [
+    [50, 80],
+    [100, 120],
+    [150, 100],
+    [200, 180],
+    [250, 200],
+    [300, 150],
+    [350, 250],
+    [400, 220]
+];
+
+
+scatterData.forEach(
+    ([xValue, yValue]) => {
+
+        const x =
+            50 + xValue * 1.5;
+
+
+        const y =
+            350 - yValue;
+
+
+        scatterCtx.beginPath();
+
+
+        scatterCtx.arc(
+            x,
+            y,
+            6,
+            0,
+            Math.PI * 2
+        );
+
+
+        scatterCtx.fillStyle =
+            "purple";
+
+
+        scatterCtx.fill();
+
+    }
+);
+
+
+/* =====================================================
+   8. HISTOGRAM
+===================================================== */
+
+const histogramCanvas =
+    document.getElementById(
+        "histogram"
+    );
+
+const histogramCtx =
+    histogramCanvas.getContext("2d");
+
+
+const histogramData = [
+    5,
+    10,
+    20,
+    35,
+    50,
+    40,
+    25,
+    15,
+    8
+];
+
+
+histogramData.forEach(
+    (value, index) => {
+
+        const barWidth = 60;
+
+        const x =
+            50 + index * 75;
+
+        const height =
+            value * 5;
+
+        const y =
+            350 - height;
+
+
+        histogramCtx.fillStyle =
+            "orange";
+
+
+        histogramCtx.fillRect(
+            x,
+            y,
+            barWidth,
+            height
+        );
+
+    }
+);
+
+
+/* =====================================================
+   9. HEATMAP
+===================================================== */
+
+const heatCanvas =
+    document.getElementById(
+        "heatmap"
+    );
+
+const heatCtx =
+    heatCanvas.getContext("2d");
+
+
+const heatData = [
+    [1, 2, 3, 4, 5, 3],
+    [2, 4, 5, 2, 1, 4],
+    [3, 5, 1, 4, 2, 5],
+    [4, 2, 4, 5, 3, 1],
+    [5, 3, 2, 1, 5, 4]
+];
+
+
+const cellSize = 60;
+
+
+heatData.forEach(
+    (row, rowIndex) => {
+
+        row.forEach(
+            (value, colIndex) => {
+
+                const intensity =
+                    value * 45;
+
+
+                heatCtx.fillStyle =
+                    `rgb(
+                        ${intensity},
+                        ${100},
+                        ${255 - intensity}
+                    )`;
+
+
+                heatCtx.fillRect(
+                    colIndex * cellSize,
+                    rowIndex * cellSize,
+                    cellSize - 2,
+                    cellSize - 2
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+   10. RADAR CHART
+===================================================== */
+
+const radarCanvas =
+    document.getElementById(
+        "radarChart"
+    );
+
+const radarCtx =
+    radarCanvas.getContext("2d");
+
+
+const radarData = [
+    90,
+    80,
+    70,
+    60,
+    85
+];
+
+
+const radarLabels = [
+    "JavaScript",
+    "React",
+    "Node",
+    "Go",
+    "SQL"
+];
+
+
+const centerX = 300;
+
+const centerY = 250;
+
+const radius = 180;
+
+const radarCount =
+    radarData.length;
+
+
+/* Outer polygon */
+
+radarCtx.beginPath();
+
+
+radarData.forEach(
+    (_, index) => {
+
+        const angle =
+            index *
+            (Math.PI * 2 / radarCount)
+            -
+            Math.PI / 2;
+
+
+        const x =
+            centerX +
+            Math.cos(angle) *
+            radius;
+
+
+        const y =
+            centerY +
+            Math.sin(angle) *
+            radius;
+
+
+        if (index === 0) {
+
+            radarCtx.moveTo(x, y);
+
+        } else {
+
+            radarCtx.lineTo(x, y);
+
+        }
+
+    }
+);
+
+
+radarCtx.closePath();
+
+
+radarCtx.stroke();
+
+
+/* Data polygon */
+
+radarCtx.beginPath();
+
+
+radarData.forEach(
+    (value, index) => {
+
+        const angle =
+            index *
+            (Math.PI * 2 / radarCount)
+            -
+            Math.PI / 2;
+
+
+        const r =
+            radius * value / 100;
+
+
+        const x =
+            centerX +
+            Math.cos(angle) * r;
+
+
+        const y =
+            centerY +
+            Math.sin(angle) * r;
+
+
+        if (index === 0) {
+
+            radarCtx.moveTo(x, y);
+
+        } else {
+
+            radarCtx.lineTo(x, y);
+
+        }
+
+    }
+);
+
+
+radarCtx.closePath();
+
+
+radarCtx.fillStyle =
+    "rgba(0, 100, 255, 0.3)";
+
+radarCtx.fill();
+
+
+radarCtx.strokeStyle =
+    "blue";
+
+radarCtx.stroke();
+
+
+/* Labels */
+
+radarLabels.forEach(
+    (label, index) => {
+
+        const angle =
+            index *
+            (Math.PI * 2 / radarCount)
+            -
+            Math.PI / 2;
+
+
+        const x =
+            centerX +
+            Math.cos(angle) *
+            (radius + 25);
+
+
+        const y =
+            centerY +
+            Math.sin(angle) *
+            (radius + 25);
+
+
+        drawText(
+            radarCtx,
+            label,
+            x - 30,
+            y
+        );
+
+    }
+);
+
+
+/* =====================================================
+   11. CANDLESTICK CHART
+===================================================== */
+
+const candleCanvas =
+    document.getElementById(
+        "candlestick"
+    );
+
+const candleCtx =
+    candleCanvas.getContext("2d");
+
+
+const candles = [
+    {
+        open: 100,
+        high: 140,
+        low: 80,
+        close: 120
+    },
+
+    {
+        open: 120,
+        high: 150,
+        low: 100,
+        close: 110
+    },
+
+    {
+        open: 110,
+        high: 160,
+        low: 105,
+        close: 150
+    },
+
+    {
+        open: 150,
+        high: 180,
+        low: 130,
+        close: 170
+    },
+
+    {
+        open: 170,
+        high: 190,
+        low: 150,
+        close: 160
+    }
+];
+
+
+candles.forEach(
+    (candle, index) => {
+
+        const x =
+            100 + index * 120;
+
+
+        const scale = 2;
+
+
+        const high =
+            350 -
+            candle.high * scale;
+
+
+        const low =
+            350 -
+            candle.low * scale;
+
+
+        const open =
+            350 -
+            candle.open * scale;
+
+
+        const close =
+            350 -
+            candle.close * scale;
+
+
+        /* Wick */
+
+        candleCtx.beginPath();
+
+        candleCtx.moveTo(
+            x,
+            high
+        );
+
+        candleCtx.lineTo(
+            x,
+            low
+        );
+
+        candleCtx.strokeStyle =
+            "black";
+
+        candleCtx.stroke();
+
+
+        /* Body */
+
+        const bodyTop =
+            Math.min(open, close);
+
+
+        const bodyHeight =
+            Math.abs(
+                close - open
+            );
+
+
+        candleCtx.fillStyle =
+            close >= open
+                ? "green"
+                : "red";
+
+
+        candleCtx.fillRect(
+            x - 25,
+            bodyTop,
+            50,
+            Math.max(bodyHeight, 2)
+        );
+
+    }
+);
+
+</script>
+
+</body>
+</html>

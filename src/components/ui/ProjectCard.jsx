@@ -101,7 +101,7 @@ const ProjectCard = ({ project, index }) => {
             top: 12,
             right: 12,
             display: 'flex',
-            gap: 0.8,
+            gap: 1.2,
           }}
           onClick={handleIconClick}
         >
@@ -262,19 +262,22 @@ const ProjectCard = ({ project, index }) => {
         </Typography>
 
         {/* Tech Chips */}
-        <Stack direction="row" flexWrap="wrap" gap={0.8}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.8, width: '100%', maxWidth: '100%' }}>
           {project.technologies.slice(0, 5).map((tech) => (
             <Chip
               key={tech}
               label={tech}
               size="small"
               sx={{
-                fontSize: '0.72rem',
-                height: 24,
+                fontSize: '0.74rem',
+                borderRadius: '9999px',
+                px: 0.8,
+                py: 0.3,
                 borderColor: '#262626',
                 color: '#a1a1a1',
                 backgroundColor: '#141414',
                 border: '1px solid #262626',
+                maxWidth: '100%',
               }}
             />
           ))}
@@ -283,16 +286,19 @@ const ProjectCard = ({ project, index }) => {
               label={`+${project.technologies.length - 5}`}
               size="small"
               sx={{
-                fontSize: '0.72rem',
-                height: 24,
+                fontSize: '0.74rem',
+                borderRadius: '9999px',
+                px: 0.8,
+                py: 0.3,
                 borderColor: '#262626',
                 color: '#666666',
                 backgroundColor: '#111111',
                 border: '1px solid #222222',
+                maxWidth: '100%',
               }}
             />
           )}
-        </Stack>
+        </Box>
 
         {/* View Details hint */}
         <Typography

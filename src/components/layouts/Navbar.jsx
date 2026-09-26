@@ -60,7 +60,7 @@ const Navbar = () => {
 
             {/* Desktop Navigation */}
             {!isMobile && (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
                 {NAV_ITEMS.map((item) => {
                   const isActive = location.pathname === item.path;
                   return (
@@ -71,9 +71,9 @@ const Navbar = () => {
                         color: isActive ? '#ffffff' : '#888888',
                         fontWeight: isActive ? 600 : 400,
                         fontSize: '0.875rem',
-                        px: 1.8,
-                        py: 0.8,
-                        borderRadius: '6px',
+                        px: 2.2,
+                        py: 0.9,
+                        borderRadius: '9999px',
                         backgroundColor: isActive
                           ? 'rgba(255, 255, 255, 0.08)'
                           : 'transparent',
@@ -91,16 +91,18 @@ const Navbar = () => {
                   variant="contained"
                   onClick={() => handleNavClick('/contact')}
                   sx={{
-                    ml: 1.5,
+                    ml: 2.5,
                     backgroundColor: '#ffffff',
                     color: '#000000',
                     fontWeight: 600,
                     fontSize: '0.875rem',
-                    px: 2.2,
-                    py: 0.8,
-                    borderRadius: '6px',
+                    px: 3,
+                    py: 0.9,
+                    borderRadius: '9999px',
+                    border: '1px solid #ffffff',
                     '&:hover': {
-                      backgroundColor: '#e5e5e5',
+                      backgroundColor: '#eaeaea',
+                      borderColor: '#eaeaea',
                     },
                   }}
                 >
@@ -115,7 +117,7 @@ const Navbar = () => {
                 onClick={() => setDrawerOpen(true)}
                 sx={{
                   border: '1px solid #222222',
-                  borderRadius: '6px',
+                  borderRadius: '50%',
                   color: '#ffffff',
                 }}
               >
@@ -154,7 +156,7 @@ const Navbar = () => {
             onClick={() => setDrawerOpen(false)}
             sx={{
               border: '1px solid #222222',
-              borderRadius: '6px',
+              borderRadius: '50%',
               color: '#ffffff',
             }}
           >
@@ -169,7 +171,7 @@ const Navbar = () => {
                 <ListItemButton
                   onClick={() => handleNavClick(item.path)}
                   sx={{
-                    borderRadius: '6px',
+                    borderRadius: '9999px',
                     backgroundColor: isActive
                       ? 'rgba(255, 255, 255, 0.08)'
                       : 'transparent',
@@ -201,6 +203,12 @@ const Navbar = () => {
             color: '#000000',
             fontWeight: 600,
             py: 1.2,
+            borderRadius: '9999px',
+            border: '1px solid #ffffff',
+            '&:hover': {
+              backgroundColor: '#eaeaea',
+              borderColor: '#eaeaea',
+            },
           }}
         >
           Get in Touch

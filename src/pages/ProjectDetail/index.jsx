@@ -83,19 +83,29 @@ const StatCard = ({ icon, label, value }) => (
     elevation={0}
     sx={{
       border: '1px solid #222222',
-      borderRadius: '10px',
+      borderRadius: '14px',
       p: 2.5,
       textAlign: 'center',
-      flex: 1,
-      minWidth: 100,
+      height: '100%',
       backgroundColor: '#0a0a0a',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 0.8,
+      transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+      '&:hover': {
+        borderColor: '#444444',
+        backgroundColor: '#111111',
+        transform: 'translateY(-2px)',
+      },
     }}
   >
-    <Box sx={{ color: '#ffffff', mb: 0.5, display: 'flex', justifyContent: 'center' }}>{icon}</Box>
+    <Box sx={{ color: '#ffffff', display: 'flex', justifyContent: 'center' }}>{icon}</Box>
     <Typography variant="h5" sx={{ fontWeight: 700, color: '#ffffff', lineHeight: 1.2 }}>
       {value ?? '—'}
     </Typography>
-    <Typography variant="caption" sx={{ color: '#888888', fontSize: '0.72rem' }}>
+    <Typography variant="caption" sx={{ color: '#888888', fontSize: '0.78rem', fontWeight: 500 }}>
       {label}
     </Typography>
   </Paper>
@@ -803,19 +813,19 @@ const ProjectDetail = () => {
           </Typography>
 
           {repo.topics?.length > 0 && (
-            <Stack direction="row" flexWrap="wrap" gap={1} sx={{ mb: 3 }}>
+            <Stack direction="row" flexWrap="wrap" gap={1.5} sx={{ mb: 3.5 }}>
               {repo.topics.map((topic) => (
                 <Chip
                   key={topic}
                   label={topic}
                   size="small"
-                  sx={{ backgroundColor: '#141414', color: '#a1a1a1', border: '1px solid #262626', fontWeight: 500, borderRadius: '6px', fontSize: '0.75rem' }}
+                  sx={{ backgroundColor: '#141414', color: '#a1a1a1', border: '1px solid #262626', fontWeight: 500, borderRadius: '9999px', fontSize: '0.8rem', px: 1, py: 0.5 }}
                 />
               ))}
             </Stack>
           )}
 
-          <Stack direction="row" gap={2} flexWrap="wrap">
+          <Stack direction="row" gap={2.5} flexWrap="wrap">
             <Button
               variant="contained"
               startIcon={<GitHubIcon />}
@@ -823,9 +833,10 @@ const ProjectDetail = () => {
               target="_blank"
               rel="noopener noreferrer"
               sx={{
-                backgroundColor: '#ffffff', color: '#000000', borderRadius: '8px',
-                px: 3, py: 1.2, fontWeight: 600, textTransform: 'none',
-                '&:hover': { backgroundColor: '#eaeaea' },
+                backgroundColor: '#ffffff', color: '#000000', borderRadius: '9999px',
+                border: '1px solid #ffffff',
+                px: 3.5, py: 1.3, fontWeight: 600, textTransform: 'none',
+                '&:hover': { backgroundColor: '#eaeaea', borderColor: '#eaeaea' },
               }}
             >
               View on GitHub
@@ -838,9 +849,10 @@ const ProjectDetail = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{
-                  borderColor: '#333333', color: '#ededed', borderRadius: '8px',
-                  px: 3, py: 1.2, fontWeight: 600, textTransform: 'none',
-                  '&:hover': { borderColor: '#ffffff', backgroundColor: 'rgba(255,255,255,0.05)' },
+                  borderColor: '#333333', color: '#ededed', borderRadius: '9999px',
+                  backgroundColor: '#0a0a0a',
+                  px: 3.5, py: 1.3, fontWeight: 600, textTransform: 'none',
+                  '&:hover': { borderColor: '#666666', backgroundColor: '#171717' },
                 }}
               >
                 Live Demo
@@ -850,13 +862,23 @@ const ProjectDetail = () => {
         </Box>
 
         {/* Stats Row */}
-        <Stack direction="row" flexWrap="wrap" gap={2} sx={{ mb: 5 }}>
-          <StatCard icon={<StarIcon fontSize="small" sx={{ color: '#F5A623' }} />} label="Stars" value={repo.stargazers_count} />
-          <StatCard icon={<ForkRightIcon fontSize="small" />} label="Forks" value={repo.forks_count} />
-          <StatCard icon={<VisibilityIcon fontSize="small" />} label="Watchers" value={repo.watchers_count} />
-          <StatCard icon={<BugReportIcon fontSize="small" />} label="Open Issues" value={repo.open_issues_count} />
-          <StatCard icon={<AccountTreeIcon fontSize="small" />} label="Branches" value={branches.length} />
-        </Stack>
+        <Grid container spacing={2.5} sx={{ mb: 5 }}>
+          <Grid size={{ xs: 6, sm: 4, md: 2.4 }}>
+            <StatCard icon={<StarIcon fontSize="small" sx={{ color: '#F5A623' }} />} label="Stars" value={repo.stargazers_count} />
+          </Grid>
+          <Grid size={{ xs: 6, sm: 4, md: 2.4 }}>
+            <StatCard icon={<ForkRightIcon fontSize="small" sx={{ color: '#a1a1a1' }} />} label="Forks" value={repo.forks_count} />
+          </Grid>
+          <Grid size={{ xs: 6, sm: 4, md: 2.4 }}>
+            <StatCard icon={<VisibilityIcon fontSize="small" sx={{ color: '#60a5fa' }} />} label="Watchers" value={repo.watchers_count} />
+          </Grid>
+          <Grid size={{ xs: 6, sm: 4, md: 2.4 }}>
+            <StatCard icon={<BugReportIcon fontSize="small" sx={{ color: '#f87171' }} />} label="Open Issues" value={repo.open_issues_count} />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 4, md: 2.4 }}>
+            <StatCard icon={<AccountTreeIcon fontSize="small" sx={{ color: '#34d399' }} />} label="Branches" value={branches.length} />
+          </Grid>
+        </Grid>
 
         {/* ── File Browser ── */}
         <FileBrowser repoName={repo.name} branch={repo.default_branch} />
