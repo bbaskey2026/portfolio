@@ -125,7 +125,7 @@ const ExperienceItem = ({ experience, index }) => {
             ))}
           </Box>
 
-          <Stack direction="row" flexWrap="wrap" gap={1}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, width: '100%', maxWidth: '100%' }}>
             {experience.technologies.map((tech) => (
               <Chip
                 key={tech}
@@ -139,10 +139,11 @@ const ExperienceItem = ({ experience, index }) => {
                   backgroundColor: '#141414',
                   color: '#a1a1a1',
                   border: '1px solid #262626',
+                  maxWidth: '100%',
                 }}
               />
             ))}
-          </Stack>
+          </Box>
         </Box>
       </Box>
     </Box>
