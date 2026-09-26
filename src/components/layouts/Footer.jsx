@@ -17,19 +17,11 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        borderTop: '1px solid #E5E5E5',
+        borderTop: '1px solid #1f1f1f',
         pt: 8,
-        pb: 4,
+        pb: 5,
         mt: 12,
-        backgroundColor: '#ffffff',
-        backgroundImage: `
-          radial-gradient(circle at 10% 20%, rgba(66, 133, 244, 0.12) 0%, transparent 25%),
-          radial-gradient(circle at 90% 20%, rgba(234, 67, 53, 0.10) 0%, transparent 22%),
-          radial-gradient(circle at 85% 85%, rgba(251, 188, 5, 0.12) 0%, transparent 24%),
-          radial-gradient(circle at 15% 85%, rgba(52, 168, 83, 0.10) 0%, transparent 22%),
-          linear-gradient(180deg, #ffffff 0%, #f8fbff 100%)
-        `,
-        backgroundRepeat: 'no-repeat',
+        backgroundColor: '#000000',
       }}
     >
       <Container maxWidth="lg">
@@ -38,7 +30,7 @@ const Footer = () => {
             <Logo />
             <Typography
               variant="body2"
-              sx={{ mt: 2, mb: 3, maxWidth: 300, color: '#666666' }}
+              sx={{ mt: 2, mb: 3, maxWidth: 300, color: '#888888' }}
             >
               {SITE_CONFIG.description}
             </Typography>
@@ -48,7 +40,7 @@ const Footer = () => {
           <Grid size={{ xs: 6, md: 2 }}>
             <Typography
               variant="h6"
-              sx={{ mb: 2, fontSize: '0.9rem', color: '#000000' }}
+              sx={{ mb: 2, fontSize: '0.85rem', color: '#ffffff', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}
             >
               Navigation
             </Typography>
@@ -60,11 +52,12 @@ const Footer = () => {
                 sx={{
                   display: 'block',
                   mb: 1.5,
-                  color: '#666666',
+                  color: '#888888',
                   textDecoration: 'none',
-                  fontSize: '0.9rem',
+                  fontSize: '0.875rem',
+                  transition: 'color 0.15s ease',
                   '&:hover': {
-                    color: '#000000',
+                    color: '#ffffff',
                   },
                 }}
               >
@@ -76,23 +69,23 @@ const Footer = () => {
           <Grid size={{ xs: 6, md: 3 }}>
             <Typography
               variant="h6"
-              sx={{ mb: 2, fontSize: '0.9rem', color: '#000000' }}
+              sx={{ mb: 2, fontSize: '0.85rem', color: '#ffffff', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}
             >
               Contact
             </Typography>
             <Typography
               variant="body2"
-              sx={{ mb: 1.5, color: '#666666' }}
+              sx={{ mb: 1.5, color: '#888888' }}
             >
               {SITE_CONFIG.email}
             </Typography>
             <Typography
               variant="body2"
-              sx={{ mb: 1.5, color: '#666666' }}
+              sx={{ mb: 1.5, color: '#888888' }}
             >
               {SITE_CONFIG.phone}
             </Typography>
-            <Typography variant="body2" sx={{ color: '#666666' }}>
+            <Typography variant="body2" sx={{ color: '#888888' }}>
               {SITE_CONFIG.location}
             </Typography>
           </Grid>
@@ -100,7 +93,7 @@ const Footer = () => {
           <Grid size={{ xs: 12, md: 3 }}>
             <Typography
               variant="h6"
-              sx={{ mb: 2, fontSize: '0.9rem', color: '#000000' }}
+              sx={{ mb: 2, fontSize: '0.85rem', color: '#ffffff', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}
             >
               Availability
             </Typography>
@@ -108,11 +101,12 @@ const Footer = () => {
               sx={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: 1,
+                gap: 1.2,
                 px: 2,
-                py: 1,
+                py: 0.8,
                 borderRadius: '20px',
-                border: '1px solid #E5E5E5',
+                border: '1px solid #222222',
+                backgroundColor: '#0a0a0a',
               }}
             >
               <Box
@@ -120,17 +114,18 @@ const Footer = () => {
                   width: 8,
                   height: 8,
                   borderRadius: '50%',
-                  backgroundColor: '#22C55E',
+                  backgroundColor: '#22c55e',
+                  boxShadow: '0 0 8px rgba(34, 197, 94, 0.6)',
                 }}
               />
-              <Typography variant="body2" sx={{ color: '#666666' }}>
+              <Typography variant="body2" sx={{ color: '#ededed', fontSize: '0.85rem' }}>
                 Open to opportunities
               </Typography>
             </Box>
           </Grid>
         </Grid>
 
-        <Divider sx={{ my: 4, borderColor: '#E5E5E5' }} />
+        <Divider sx={{ my: 4, borderColor: '#1f1f1f' }} />
 
         <Box
           sx={{
@@ -141,11 +136,11 @@ const Footer = () => {
             gap: 2,
           }}
         >
-          <Typography variant="body2" sx={{ color: '#999999' }}>
+          <Typography variant="body2" sx={{ color: '#555555', fontSize: '0.8rem' }}>
             © {new Date().getFullYear()} Bhima Baskey. All rights reserved.
           </Typography>
-          <Typography variant="body2" sx={{ color: '#999999' }}>
-            Built with React & Material-UI
+          <Typography variant="body2" sx={{ color: '#555555', fontSize: '0.8rem' }}>
+            Built with React & Vercel Aesthetic
           </Typography>
         </Box>
       </Container>

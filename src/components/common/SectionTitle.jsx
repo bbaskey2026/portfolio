@@ -9,19 +9,21 @@ const SectionTitle = ({ title, subtitle, align = 'left' }) => {
     <Box
       ref={ref}
       sx={{
-        mb: 8,
+        mb: 6,
         textAlign: align,
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-        transition: 'all 0.6s ease',
+        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+        transition: 'all 0.5s ease',
       }}
     >
       <Typography
         variant="h2"
         component="h2"
         sx={{
-          mb: 2,
-          color: '#000000',
+          mb: 1.5,
+          color: '#ffffff',
+          letterSpacing: '-0.03em',
+          fontWeight: 700,
         }}
       >
         {title}
@@ -32,8 +34,9 @@ const SectionTitle = ({ title, subtitle, align = 'left' }) => {
           sx={{
             maxWidth: 600,
             mx: align === 'center' ? 'auto' : 0,
-            color: '#666666',
-            fontSize: '1.1rem',
+            color: '#888888',
+            fontSize: '1.05rem',
+            lineHeight: 1.6,
           }}
         >
           {subtitle}

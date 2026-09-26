@@ -9,13 +9,17 @@ const MainLayout = () => {
     <Box
       sx={{
         minHeight: '100vh',
+        width: '100%',
+        maxWidth: '100vw',
+        overflowX: 'hidden',
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#000000',
+        color: '#ededed',
       }}
     >
       <Navbar />
-      <Box component="main" sx={{ flexGrow: 1 }}>
+      <Box component="main" sx={{ flexGrow: 1, width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
         <Outlet />
       </Box>
       <Footer />

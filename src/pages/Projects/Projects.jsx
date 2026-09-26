@@ -38,23 +38,24 @@ const transformRepoToProject = (repo, index) => ({
 const ProjectCardSkeleton = () => (
   <Box
     sx={{
-      border: '1px solid #E5E5E5',
+      border: '1px solid #222222',
       borderRadius: '12px',
+      backgroundColor: '#0a0a0a',
       p: 3,
       height: 280,
     }}
   >
-    <Skeleton variant="rectangular" height={20} width="60%" sx={{ mb: 2, borderRadius: 1 }} />
-    <Skeleton variant="rectangular" height={14} sx={{ mb: 1, borderRadius: 1 }} />
-    <Skeleton variant="rectangular" height={14} width="80%" sx={{ mb: 3, borderRadius: 1 }} />
+    <Skeleton variant="rectangular" height={20} width="60%" sx={{ mb: 2, borderRadius: 1, backgroundColor: '#171717' }} />
+    <Skeleton variant="rectangular" height={14} sx={{ mb: 1, borderRadius: 1, backgroundColor: '#171717' }} />
+    <Skeleton variant="rectangular" height={14} width="80%" sx={{ mb: 3, borderRadius: 1, backgroundColor: '#171717' }} />
     <Stack direction="row" gap={1} sx={{ mb: 3 }}>
-      <Skeleton variant="rectangular" height={28} width={70} sx={{ borderRadius: 2 }} />
-      <Skeleton variant="rectangular" height={28} width={70} sx={{ borderRadius: 2 }} />
-      <Skeleton variant="rectangular" height={28} width={70} sx={{ borderRadius: 2 }} />
+      <Skeleton variant="rectangular" height={24} width={60} sx={{ borderRadius: 1, backgroundColor: '#171717' }} />
+      <Skeleton variant="rectangular" height={24} width={60} sx={{ borderRadius: 1, backgroundColor: '#171717' }} />
+      <Skeleton variant="rectangular" height={24} width={60} sx={{ borderRadius: 1, backgroundColor: '#171717' }} />
     </Stack>
     <Stack direction="row" gap={2}>
-      <Skeleton variant="rectangular" height={36} width={100} sx={{ borderRadius: 1 }} />
-      <Skeleton variant="rectangular" height={36} width={100} sx={{ borderRadius: 1 }} />
+      <Skeleton variant="rectangular" height={32} width={90} sx={{ borderRadius: 1, backgroundColor: '#171717' }} />
+      <Skeleton variant="rectangular" height={32} width={90} sx={{ borderRadius: 1, backgroundColor: '#171717' }} />
     </Stack>
   </Box>
 );
@@ -106,30 +107,40 @@ const Projects = () => {
 
   const allTechnologies = [
     'All',
-    ...new Set(projects.flatMap((p) => p.technologies)),
-  ].filter(Boolean);
+    ...new Set(
+      projects
+        .flatMap((p) => p.technologies)
+        .filter(Boolean)
+    ),
+  ];
 
   const filteredProjects =
     filter === 'All'
       ? projects
-      : projects.filter((p) => p.technologies.includes(filter));
+      : projects.filter((p) =>
+          p.technologies.some(
+            (t) => t.toLowerCase() === filter.toLowerCase()
+          )
+        );
 
   return (
-    <Box sx={{ py: 8 }}>
+    <Box sx={{ py: 8, backgroundColor: '#000000', color: '#ededed', minHeight: '80vh' }}>
       <Container maxWidth="lg">
         <SectionTitle
-          title="All Projects"
-          subtitle={`A comprehensive collection of my work fetched live from GitHub (@${GITHUB_USERNAME}).`}
+          title="Projects"
+          subtitle="All my repositories and projects directly synced from GitHub."
         />
 
-        {/* Error State */}
+        {/* Error Alert */}
         {error && (
           <Alert
             severity="error"
             sx={{
               mb: 4,
               borderRadius: '8px',
-              border: '1px solid #FFCDD2',
+              backgroundColor: '#2d0607',
+              color: '#f87171',
+              border: '1px solid #991b1b',
             }}
           >
             {error}
@@ -137,87 +148,89 @@ const Projects = () => {
         )}
 
         {/* Filter Chips */}
-        {!loading && !error && (
+        {!loading && allTechnologies.length > 1 && (
           <Stack
             direction="row"
             flexWrap="wrap"
-            gap={1}
+            gap={1.8}
             sx={{ mb: 6 }}
           >
-            {allTechnologies.map((tech) => (
-              <Chip
-                key={tech}
-                label={tech}
-                onClick={() => setFilter(tech)}
-                sx={{
-                  borderRadius: '8px',
-                  border: '1px solid',
-                  borderColor:
-                    filter === tech ? '#000000' : '#E5E5E5',
-                  backgroundColor:
-                    filter === tech ? '#000000' : '#FFFFFF',
-                  color: filter === tech ? '#FFFFFF' : '#666666',
-                  fontWeight: filter === tech ? 600 : 400,
-                  '&:hover': {
-                    backgroundColor:
-                      filter === tech ? '#333333' : '#F5F5F5',
-                  },
-                  transition: 'all 0.2s ease',
-                }}
-              />
-            ))}
+            {allTechnologies.map((tech) => {
+              const isSelected = filter === tech;
+              return (
+                <Chip
+                  key={tech}
+                  label={tech}
+                  onClick={() => setFilter(tech)}
+                  sx={{
+                    borderRadius: '9999px',
+                    px: 2.2,
+                    py: 1.1,
+                    fontSize: '0.85rem',
+                    fontWeight: isSelected ? 600 : 500,
+                    border: '1px solid',
+                    borderColor: isSelected ? '#ffffff' : '#262626',
+                    backgroundColor: isSelected ? '#ffffff' : '#0e0e0e',
+                    color: isSelected ? '#000000' : '#a1a1a1',
+                    transition: 'all 0.15s ease',
+                    cursor: 'pointer',
+                    '&:hover': {
+                      backgroundColor: isSelected ? '#eaeaea' : '#1a1a1a',
+                      color: isSelected ? '#000000' : '#ffffff',
+                      borderColor: isSelected ? '#ffffff' : '#444444',
+                      transform: 'translateY(-1px)',
+                    },
+                  }}
+                />
+              );
+            })}
           </Stack>
         )}
 
-        {/* Projects Count */}
-        {!loading && !error && (
+        {/* Results Counter */}
+        {!loading && (
           <Typography
             variant="body2"
-            sx={{ color: '#666666', mb: 3 }}
+            sx={{ color: '#666666', mb: 4, fontSize: '0.875rem' }}
           >
-            Showing {filteredProjects.length} of {projects.length} projects
+            Showing {filteredProjects.length}{' '}
+            {filteredProjects.length === 1 ? 'project' : 'projects'}
           </Typography>
         )}
 
-        {/* Projects Grid — Loading Skeletons */}
-        {loading && (
-          <Grid container spacing={3}>
-            {Array.from({ length: 6 }).map((_, index) => (
-              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
-                <ProjectCardSkeleton />
-              </Grid>
-            ))}
-          </Grid>
-        )}
-
-        {/* Projects Grid — Actual Data */}
-        {!loading && !error && (
-          <Grid container spacing={3}>
-            {filteredProjects.length > 0 ? (
-              filteredProjects.map((project, index) => (
-                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={project.id}>
-                  <ProjectCard project={project} index={index} />
+        {/* Projects Grid */}
+        <Grid container spacing={4}>
+          {loading
+            ? Array.from({ length: 6 }).map((_, i) => (
+                <Grid size={{ xs: 12, md: 4 }} key={i}>
+                  <ProjectCardSkeleton />
                 </Grid>
               ))
-            ) : (
-              <Grid size={{ xs: 12 }}>
-                <Box
-                  sx={{
-                    textAlign: 'center',
-                    py: 8,
-                    color: '#666666',
-                  }}
-                >
-                  <Typography variant="h6" sx={{ mb: 1 }}>
-                    No projects found
-                  </Typography>
-                  <Typography variant="body2">
-                    No projects match the selected filter "{filter}".
-                  </Typography>
-                </Box>
-              </Grid>
-            )}
-          </Grid>
+            : filteredProjects.map((project, index) => (
+                <Grid size={{ xs: 12, md: 4 }} key={project.id}>
+                  <ProjectCard project={project} index={index} />
+                </Grid>
+              ))}
+        </Grid>
+
+        {/* Empty State */}
+        {!loading && filteredProjects.length === 0 && !error && (
+          <Box
+            sx={{
+              textAlign: 'center',
+              py: 12,
+              border: '1px solid #1f1f1f',
+              borderRadius: '12px',
+              backgroundColor: '#0a0a0a',
+            }}
+          >
+            <Typography variant="h5" sx={{ mb: 1, color: '#ffffff' }}>
+              No projects found
+            </Typography>
+            <Typography variant="body2" sx={{ color: '#888888' }}>
+              No projects matched the selected filter "{filter}".
+            </Typography>
+          </Box>
         )}
       </Container>
     </Box>

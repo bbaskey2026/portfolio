@@ -13,11 +13,11 @@ const SkillChip = ({ name, level }) => {
       >
         <Typography
           variant="body2"
-          sx={{ fontWeight: 500, color: '#000000' }}
+          sx={{ fontWeight: 500, color: '#ededed', fontSize: '0.9rem' }}
         >
           {name}
         </Typography>
-        <Typography variant="body2" sx={{ color: '#999999' }}>
+        <Typography variant="body2" sx={{ color: '#888888', fontSize: '0.85rem' }}>
           {level}%
         </Typography>
       </Box>
@@ -27,9 +27,9 @@ const SkillChip = ({ name, level }) => {
         sx={{
           height: 4,
           borderRadius: 2,
-          backgroundColor: '#F0F0F0',
+          backgroundColor: '#1a1a1a',
           '& .MuiLinearProgress-bar': {
-            backgroundColor: '#000000',
+            backgroundColor: '#ffffff',
             borderRadius: 2,
           },
         }}

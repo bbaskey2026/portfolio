@@ -40,11 +40,12 @@ const Navbar = () => {
         position="fixed"
         sx={{
           backgroundColor: isScrolled
-            ? 'rgba(255, 255, 255, 0.9)'
-            : '#FFFFFF',
-          backdropFilter: isScrolled ? 'blur(20px)' : 'none',
-          borderBottom: '1px solid #E5E5E5',
-          transition: 'all 0.3s ease',
+            ? 'rgba(0, 0, 0, 0.85)'
+            : 'rgba(0, 0, 0, 0.75)',
+          backdropFilter: 'blur(16px)',
+          borderBottom: '1px solid #222222',
+          transition: 'all 0.2s ease',
+          boxShadow: 'none',
         }}
       >
         <Container maxWidth="lg">
@@ -59,38 +60,51 @@ const Navbar = () => {
 
             {/* Desktop Navigation */}
             {!isMobile && (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                {NAV_ITEMS.map((item) => (
-                  <Button
-                    key={item.path}
-                    onClick={() => handleNavClick(item.path)}
-                    sx={{
-                      color:
-                        location.pathname === item.path
-                          ? '#000000'
-                          : '#666666',
-                      fontWeight:
-                        location.pathname === item.path ? 600 : 400,
-                      fontSize: '0.9rem',
-                      px: 2,
-                      borderRadius: '8px',
-                      backgroundColor:
-                        location.pathname === item.path
-                          ? '#F5F5F5'
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
+                {NAV_ITEMS.map((item) => {
+                  const isActive = location.pathname === item.path;
+                  return (
+                    <Button
+                      key={item.path}
+                      onClick={() => handleNavClick(item.path)}
+                      sx={{
+                        color: isActive ? '#ffffff' : '#888888',
+                        fontWeight: isActive ? 600 : 400,
+                        fontSize: '0.875rem',
+                        px: 2.2,
+                        py: 0.9,
+                        borderRadius: '9999px',
+                        backgroundColor: isActive
+                          ? 'rgba(255, 255, 255, 0.08)'
                           : 'transparent',
-                      '&:hover': {
-                        backgroundColor: '#F5F5F5',
-                        color: '#000000',
-                      },
-                    }}
-                  >
-                    {item.label}
-                  </Button>
-                ))}
+                        '&:hover': {
+                          backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                          color: '#ffffff',
+                        },
+                      }}
+                    >
+                      {item.label}
+                    </Button>
+                  );
+                })}
                 <Button
                   variant="contained"
                   onClick={() => handleNavClick('/contact')}
-                  sx={{ ml: 1 }}
+                  sx={{
+                    ml: 2.5,
+                    backgroundColor: '#ffffff',
+                    color: '#000000',
+                    fontWeight: 600,
+                    fontSize: '0.875rem',
+                    px: 3,
+                    py: 0.9,
+                    borderRadius: '9999px',
+                    border: '1px solid #ffffff',
+                    '&:hover': {
+                      backgroundColor: '#eaeaea',
+                      borderColor: '#eaeaea',
+                    },
+                  }}
                 >
                   Get in Touch
                 </Button>
@@ -102,8 +116,9 @@ const Navbar = () => {
               <IconButton
                 onClick={() => setDrawerOpen(true)}
                 sx={{
-                  border: '1px solid #E5E5E5',
-                  borderRadius: '8px',
+                  border: '1px solid #222222',
+                  borderRadius: '50%',
+                  color: '#ffffff',
                 }}
               >
                 <MenuIcon />
@@ -121,59 +136,80 @@ const Navbar = () => {
         PaperProps={{
           sx: {
             width: '100%',
-            maxWidth: 360,
-            p: 2,
+            maxWidth: 320,
+            p: 2.5,
+            backgroundColor: '#0a0a0a',
+            borderLeft: '1px solid #222222',
           },
         }}
       >
         <Box
           sx={{
             display: 'flex',
-            justifyContent: 'flex-end',
-            mb: 2,
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            mb: 3,
           }}
         >
+          <Logo />
           <IconButton
             onClick={() => setDrawerOpen(false)}
             sx={{
-              border: '1px solid #E5E5E5',
-              borderRadius: '8px',
+              border: '1px solid #222222',
+              borderRadius: '50%',
+              color: '#ffffff',
             }}
           >
             <CloseIcon />
           </IconButton>
         </Box>
-        <List>
-          {NAV_ITEMS.map((item) => (
-            <ListItem key={item.path} disablePadding>
-              <ListItemButton
-                onClick={() => handleNavClick(item.path)}
-                sx={{
-                  borderRadius: '8px',
-                  mb: 0.5,
-                  backgroundColor:
-                    location.pathname === item.path
-                      ? '#F5F5F5'
+        <List sx={{ px: 0 }}>
+          {NAV_ITEMS.map((item) => {
+            const isActive = location.pathname === item.path;
+            return (
+              <ListItem key={item.path} disablePadding sx={{ mb: 0.5 }}>
+                <ListItemButton
+                  onClick={() => handleNavClick(item.path)}
+                  sx={{
+                    borderRadius: '9999px',
+                    backgroundColor: isActive
+                      ? 'rgba(255, 255, 255, 0.08)'
                       : 'transparent',
-                }}
-              >
-                <ListItemText
-                  primary={item.label}
-                  primaryTypographyProps={{
-                    fontWeight:
-                      location.pathname === item.path ? 600 : 400,
-                    color: '#000000',
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                    },
                   }}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
+                >
+                  <ListItemText
+                    primary={item.label}
+                    primaryTypographyProps={{
+                      fontWeight: isActive ? 600 : 400,
+                      color: isActive ? '#ffffff' : '#a1a1a1',
+                      fontSize: '0.95rem',
+                    }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
         </List>
         <Button
           variant="contained"
           fullWidth
           onClick={() => handleNavClick('/contact')}
-          sx={{ mt: 2 }}
+          sx={{
+            mt: 3,
+            backgroundColor: '#ffffff',
+            color: '#000000',
+            fontWeight: 600,
+            py: 1.2,
+            borderRadius: '9999px',
+            border: '1px solid #ffffff',
+            '&:hover': {
+              backgroundColor: '#eaeaea',
+              borderColor: '#eaeaea',
+            },
+          }}
         >
           Get in Touch
         </Button>

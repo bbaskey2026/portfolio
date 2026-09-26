@@ -14,113 +14,69 @@ import { useNavigate } from 'react-router-dom';
 import SocialLinks from '../../components/ui/SocialLinks';
 import ProjectCard from '../../components/ui/ProjectCard';
 import SectionTitle from '../../components/common/SectionTitle';
-import { projects, skills } from '../../store/portfolioData';
+import { projects } from '../../store/portfolioData';
 import { SITE_CONFIG } from '../../config/constants';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import profileImg from '../../assets/images/profileImage.jpeg';
 
 const Home = () => {
   const navigate = useNavigate();
-  const [skillsRef, skillsVisible] = useIntersectionObserver();
   const [projectsRef, projectsVisible] = useIntersectionObserver();
 
   const featuredProjects = projects.filter((p) => p.featured);
 
   return (
-    <Box>
+    <Box sx={{ backgroundColor: '#000000', color: '#ededed' }}>
       {/* ── Hero Section ── */}
       <Box
         sx={{
-          minHeight: '90vh',
+          minHeight: '88vh',
           display: 'flex',
           alignItems: 'center',
           position: 'relative',
           overflow: 'hidden',
-          backgroundColor: '#ffffff',
-          backgroundImage: [
-            'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1600 900\' preserveAspectRatio=\'none\'%3E%3Crect width=\'1600\' height=\'900\' fill=\'%23ffffff\'/%3E%3Cpath d=\'M0 620 C280 560 520 700 780 660 C1040 620 1240 520 1600 580 L1600 900 L0 900 Z\' fill=\'%23e8f4e8\' opacity=\'0.7\'/%3E%3Cpath d=\'M0 720 C300 660 560 800 840 760 C1100 720 1300 620 1600 680 L1600 900 L0 900 Z\' fill=\'%23c8e6c8\' opacity=\'0.6\'/%3E%3Cpath d=\'M0 820 C320 760 580 880 880 840 C1140 805 1340 720 1600 780 L1600 900 L0 900 Z\' fill=\'%23a5d6a5\' opacity=\'0.5\'/%3E%3C/svg%3E")',
-            'linear-gradient(180deg, #ffffff 0%, #f9fdf9 100%)',
-          ].join(', '),
-          backgroundRepeat: 'no-repeat, no-repeat',
-          backgroundSize: 'cover, cover',
-          backgroundPosition: 'center, center',
+          backgroundColor: '#000000',
+          backgroundImage: `
+            radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.15), transparent 70%),
+            linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px)
+          `,
+          backgroundSize: '100% 100%, 40px 40px, 40px 40px',
         }}
       >
-        {/* Decorative circles */}
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '8%',
-            right: '4%',
-            width: 420,
-            height: 420,
-            borderRadius: '50%',
-            border: '1px solid rgba(0,0,0,0.05)',
-            display: { xs: 'none', lg: 'block' },
-          }}
-        />
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '18%',
-            right: '9%',
-            width: 260,
-            height: 260,
-            borderRadius: '50%',
-            border: '1px solid rgba(0,0,0,0.05)',
-            display: { xs: 'none', lg: 'block' },
-          }}
-        />
-
-        <Container maxWidth="lg">
-          <Grid container spacing={4} alignItems="center">
+        <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
+          <Grid container spacing={6} alignItems="center">
             {/* Left — Text */}
             <Grid size={{ xs: 12, md: 7 }}>
               <Box
                 sx={{
-                  animation: 'fadeInUp 0.8s ease',
+                  animation: 'fadeInUp 0.6s ease',
                   '@keyframes fadeInUp': {
-                    from: { opacity: 0, transform: 'translateY(40px)' },
+                    from: { opacity: 0, transform: 'translateY(24px)' },
                     to: { opacity: 1, transform: 'translateY(0)' },
                   },
                 }}
               >
-                <Chip
-                  label="✨ Open to internships & entry-level opportunities"
-                  sx={{
-                    mb: 3,
-                    borderRadius: '20px',
-                    border: '1px solid #E5E5E5',
-                    backgroundColor: '#FAFAFA',
-                    fontSize: '0.85rem',
-                    fontWeight: 400,
-                  }}
-                />
+
 
                 <Typography
                   variant="h1"
                   sx={{
                     fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4rem' },
                     mb: 3,
-                    color: '#000000',
-                    lineHeight: 1.15,
+                    color: '#ffffff',
+                    fontWeight: 800,
+                    letterSpacing: '-0.03em',
+                    lineHeight: 1.12,
                   }}
                 >
                   Hi, I'm{' '}
                   <Box
                     component="span"
                     sx={{
-                      position: 'relative',
-                      '&::after': {
-                        content: '""',
-                        position: 'absolute',
-                        bottom: 4,
-                        left: 0,
-                        width: '100%',
-                        height: 8,
-                        backgroundColor: 'rgba(0,0,0,0.07)',
-                        borderRadius: 4,
-                      },
+                      background: 'linear-gradient(180deg, #FFFFFF 0%, #A1A1A1 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
                     }}
                   >
                     {SITE_CONFIG.name.split(' ')[0]}
@@ -136,48 +92,72 @@ const Home = () => {
                   variant="body1"
                   sx={{
                     mb: 2,
-                    maxWidth: 520,
+                    maxWidth: 540,
                     fontSize: '1.1rem',
-                    color: '#555555',
-                    lineHeight: 1.85,
+                    color: '#a1a1a1',
+                    lineHeight: 1.8,
                   }}
                 >
-                  A passionate B.Tech student specializing in{' '}
-                  <strong>Java, Spring Boot</strong> and the{' '}
-                  <strong>MERN stack</strong>. I love turning ideas into
-                  clean, functional web applications.
+                  A passionate Software Engineering student specializing in{' '}
+                  <strong style={{ color: '#ffffff' }}>Java, Spring Boot</strong> and the{' '}
+                  <strong style={{ color: '#ffffff' }}>MERN stack</strong>. I love turning ideas into
+                  clean, high-performance web applications.
                 </Typography>
 
                 <Typography
                   variant="body1"
                   sx={{
                     mb: 4,
-                    maxWidth: 520,
-                    fontSize: '1.05rem',
+                    maxWidth: 540,
+                    fontSize: '1rem',
                     color: '#777777',
-                    lineHeight: 1.85,
+                    lineHeight: 1.8,
                   }}
                 >
                   Currently seeking an internship or entry-level role where
                   I can contribute, learn, and grow as a developer.
                 </Typography>
 
-                <Stack direction="row" spacing={2} sx={{ mb: 4 }}>
+                <Stack direction="row" spacing={2.5} sx={{ mb: 4, flexWrap: 'wrap', gap: 2 }}>
                   <Button
                     variant="contained"
                     size="large"
-                    endIcon={<ArrowForwardIcon />}
+                    endIcon={<ArrowForwardIcon sx={{ fontSize: 18 }} />}
                     onClick={() => navigate('/projects')}
-                    sx={{ py: 1.5, px: 4 }}
+                    sx={{
+                      py: 1.5,
+                      px: 4,
+                      backgroundColor: '#ffffff',
+                      color: '#000000',
+                      fontWeight: 600,
+                      borderRadius: '9999px',
+                      border: '1px solid #ffffff',
+                      '&:hover': {
+                        backgroundColor: '#eaeaea',
+                        borderColor: '#eaeaea',
+                      },
+                    }}
                   >
                     View My Work
                   </Button>
                   <Button
                     variant="outlined"
                     size="large"
-                    startIcon={<DownloadIcon />}
+                    startIcon={<DownloadIcon sx={{ fontSize: 18 }} />}
                     href={SITE_CONFIG.resumeUrl}
-                    sx={{ py: 1.5, px: 4 }}
+                    sx={{
+                      py: 1.5,
+                      px: 4,
+                      borderColor: '#333333',
+                      backgroundColor: '#0a0a0a',
+                      color: '#ededed',
+                      borderRadius: '9999px',
+                      '&:hover': {
+                        borderColor: '#666666',
+                        backgroundColor: '#171717',
+                        color: '#ffffff',
+                      },
+                    }}
                   >
                     Resume
                   </Button>
@@ -187,47 +167,40 @@ const Home = () => {
               </Box>
             </Grid>
 
-            {/* Right — Profile Image */}
+            {/* Right — Profile Image (Full Color & Scaled) */}
             <Grid
               size={{ xs: 12, md: 5 }}
-              sx={{ display: { xs: 'none', md: 'block' } }}
+              sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'center', alignItems: 'center' }}
             >
               <Box
                 sx={{
                   width: '100%',
-                  height: 500,
+                  maxWidth: 480,
                   position: 'relative',
-                  animation: 'fadeInUp 0.8s ease 0.2s both',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  animation: 'fadeInUp 0.6s ease 0.15s both',
                 }}
               >
                 <Box
+                  component="img"
+                  src={profileImg}
+                  alt="Profile"
                   sx={{
-                    width: '80%',
-                    height: '85%',
-                    mx: 'auto',
-                    backgroundColor: '#F5F5F5',
-                    borderRadius: '24px',
-                    border: '1px solid #E5E5E5',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
+                    width: '100%',
+                    maxHeight: 580,
+                    objectFit: 'cover',
+                    filter: 'drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8))',
+                    maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+                    WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+                    transition: 'all 0.3s ease',
+                    transform: 'scale(1.05)',
+                    '&:hover': {
+                      transform: 'scale(1.08)',
+                    },
                   }}
-                >
-                  <Box
-                    component="img"
-                    src={profileImg}
-                    alt="Profile"
-                    sx={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                    }}
-                  />
-                </Box>
-
+                />
               </Box>
             </Grid>
           </Grid>
@@ -237,33 +210,67 @@ const Home = () => {
       {/* ── Featured Projects ── */}
       <Box
         sx={{
-          py: 10,
-          position: 'relative',
-          overflow: 'hidden',
-          backgroundColor: '#f4eed7',
+          py: 12,
+          borderTop: '1px solid #1a1a1a',
+          backgroundColor: '#000000',
         }}
       >
-        {/* Wavy background overlay */}
-        <Box
-          sx={{
-            position: 'absolute',
-            inset: 0,
-            pointerEvents: 'none',
-            opacity: 0.3,
-            backgroundImage: [
-              'linear-gradient(rgba(255,255,255,0.18) 1px, transparent 1px)',
-              'linear-gradient(90deg, rgba(255,255,255,0.18) 1px, transparent 1px)',
-              'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1200 600\' preserveAspectRatio=\'none\'%3E%3Crect width=\'1200\' height=\'600\' fill=\'%23f4eed7\'/%3E%3Cpath d=\'M0,160 C240,140 360,220 540,180 C720,140 840,60 1020,80 C1140,95 1200,110 1200,110 L1200,600 L0,600 Z\' fill=\'%238ec1f4\' opacity=\'0.85\'/%3E%3Cpath d=\'M0,240 C240,220 360,280 540,240 C720,200 840,120 1020,150 C1140,175 1200,190 1200,190 L1200,600 L0,600 Z\' fill=\'%23d5e6fb\' opacity=\'0.9\'/%3E%3C/svg%3E")',
-            ].join(', '),
-            backgroundSize: '40px 40px, 40px 40px, cover',
-            backgroundPosition: '0 0, 0 0, 0 0',
-            backgroundRepeat: 'repeat, repeat, no-repeat',
-          }}
-        />
+        <Container maxWidth="lg">
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'flex-end',
+              mb: 6,
+              flexWrap: 'wrap',
+              gap: 2,
+            }}
+          >
+            <SectionTitle
+              title="Featured Projects"
+              subtitle="A selection of my best work and open-source contributions."
+            />
+            <Button
+              variant="outlined"
+              endIcon={<ArrowForwardIcon sx={{ fontSize: 16 }} />}
+              onClick={() => navigate('/projects')}
+              sx={{
+                mb: { xs: 0, md: 6 },
+                borderColor: '#262626',
+                color: '#ededed',
+                fontSize: '0.875rem',
+                borderRadius: '9999px',
+                px: 2.5,
+                py: 0.8,
+                backgroundColor: '#0a0a0a',
+                '&:hover': {
+                  borderColor: '#666666',
+                  backgroundColor: '#171717',
+                },
+              }}
+            >
+              All Projects
+            </Button>
+          </Box>
 
-       
+          <Grid
+            container
+            spacing={4}
+            ref={projectsRef}
+            sx={{
+              opacity: projectsVisible ? 1 : 0,
+              transform: projectsVisible ? 'translateY(0)' : 'translateY(30px)',
+              transition: 'all 0.6s ease',
+            }}
+          >
+            {featuredProjects.map((project, index) => (
+              <Grid size={{ xs: 12, md: 4 }} key={project.id}>
+                <ProjectCard project={project} index={index} />
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
       </Box>
-      
     </Box>
   );
 };

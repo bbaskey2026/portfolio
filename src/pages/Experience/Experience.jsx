@@ -6,14 +6,14 @@ import { experiences } from '../../store/portfolioData';
 
 const Experience = () => {
   return (
-    <Box sx={{ py: 8 }}>
+    <Box sx={{ py: 8, backgroundColor: '#000000', minHeight: '80vh', color: '#ededed' }}>
       <Container maxWidth="lg">
         <SectionTitle
           title="Work Experience"
-          subtitle="My professional journey and the companies I've contributed to."
+          subtitle="My professional journey and the organizations I've contributed to."
         />
 
-        <Box sx={{ maxWidth: 800, mx: 'auto' }}>
+        <Box sx={{ maxWidth: 840, mx: 'auto' }}>
           <ExperienceTimeline experiences={experiences} />
         </Box>
       </Container>

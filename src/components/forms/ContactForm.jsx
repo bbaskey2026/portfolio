@@ -32,13 +32,13 @@ const ContactForm = () => {
       await sendEmail(formData);
       setStatus({
         type: 'success',
-        message: 'Message sent successfully! I\'ll get back to you soon.',
+        message: 'Message sent successfully! I will get back to you soon.',
       });
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       setStatus({
         type: 'error',
-        message: error.message,
+        message: error.message || 'Failed to send message.',
       });
     } finally {
       setLoading(false);
@@ -48,21 +48,23 @@ const ContactForm = () => {
   const textFieldSx = {
     '& .MuiOutlinedInput-root': {
       borderRadius: '8px',
+      backgroundColor: '#0a0a0a',
+      color: '#ededed',
       '& fieldset': {
-        borderColor: '#E5E5E5',
+        borderColor: '#222222',
       },
       '&:hover fieldset': {
-        borderColor: '#CCCCCC',
+        borderColor: '#444444',
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#000000',
+        borderColor: '#ffffff',
         borderWidth: 1,
       },
     },
     '& .MuiInputLabel-root': {
-      color: '#999999',
+      color: '#666666',
       '&.Mui-focused': {
-        color: '#000000',
+        color: '#ededed',
       },
     },
   };
@@ -75,9 +77,9 @@ const ContactForm = () => {
           sx={{
             mb: 3,
             borderRadius: '8px',
-            border: '1px solid',
-            borderColor:
-              status.type === 'success' ? '#E5E5E5' : '#FFE5E5',
+            backgroundColor: status.type === 'success' ? '#072711' : '#2d0607',
+            color: status.type === 'success' ? '#4ade80' : '#f87171',
+            border: `1px solid ${status.type === 'success' ? '#166534' : '#991b1b'}`,
           }}
           onClose={() => setStatus({ type: '', message: '' })}
         >
@@ -85,7 +87,7 @@ const ContactForm = () => {
         </Alert>
       )}
 
-      <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+      <Box sx={{ display: 'flex', gap: 2, mb: 2, flexDirection: { xs: 'column', sm: 'row' } }}>
         <TextField
           fullWidth
           label="Name"
@@ -122,7 +124,7 @@ const ContactForm = () => {
         label="Message"
         name="message"
         multiline
-        rows={6}
+        rows={5}
         value={formData.message}
         onChange={handleChange}
         required
@@ -136,14 +138,23 @@ const ContactForm = () => {
         disabled={loading}
         endIcon={
           loading ? (
-            <CircularProgress size={20} color="inherit" />
+            <CircularProgress size={18} color="inherit" />
           ) : (
-            <SendIcon />
+            <SendIcon sx={{ fontSize: 18 }} />
           )
         }
         sx={{
-          py: 1.5,
-          px: 4,
+          py: 1.3,
+          px: 3.5,
+          backgroundColor: '#ffffff',
+          color: '#000000',
+          fontWeight: 600,
+          borderRadius: '9999px',
+          border: '1px solid #ffffff',
+          '&:hover': {
+            backgroundColor: '#eaeaea',
+            borderColor: '#eaeaea',
+          },
         }}
       >
         {loading ? 'Sending...' : 'Send Message'}
