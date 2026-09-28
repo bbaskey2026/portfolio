@@ -62,19 +62,8 @@ const getLanguageFromFileName = (filename) => {
 };
 
 const getFileIcon = (filename, type) => {
-  if (type === 'dir') return <FolderIcon sx={{ fontSize: 18, color: '#F5A623' }} />;
-  const ext = filename.split('.').pop()?.toLowerCase();
-  const colorMap = {
-    js: '#F7DF1E', jsx: '#61DAFB', ts: '#3178C6', tsx: '#61DAFB',
-    py: '#3572A5', rb: '#CC342D', java: '#B07219', html: '#E34C26',
-    css: '#563D7C', scss: '#C6538C', json: '#40BF6A', md: '#083FA1',
-    sh: '#89E051', go: '#00ADD8', rs: '#DEA584',
-  };
-  return (
-    <InsertDriveFileIcon
-      sx={{ fontSize: 18, color: colorMap[ext] || '#888888' }}
-    />
-  );
+  if (type === 'dir') return <FolderIcon sx={{ fontSize: 18, color: '#000000' }} />;
+  return <InsertDriveFileIcon sx={{ fontSize: 18, color: '#555555' }} />;
 };
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
@@ -82,30 +71,30 @@ const StatCard = ({ icon, label, value }) => (
   <Paper
     elevation={0}
     sx={{
-      border: '1px solid #222222',
-      borderRadius: '14px',
+      border: '1px solid #e5e5e5',
+      borderRadius: 2,
       p: 2.5,
       textAlign: 'center',
       height: '100%',
-      backgroundColor: '#0a0a0a',
+      backgroundColor: '#ffffff',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
       gap: 0.8,
-      transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+      transition: 'border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease',
       '&:hover': {
-        borderColor: '#444444',
-        backgroundColor: '#111111',
+        borderColor: '#000000',
         transform: 'translateY(-2px)',
+        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.04)',
       },
     }}
   >
-    <Box sx={{ color: '#ffffff', display: 'flex', justifyContent: 'center' }}>{icon}</Box>
-    <Typography variant="h5" sx={{ fontWeight: 700, color: '#ffffff', lineHeight: 1.2 }}>
+    <Box sx={{ color: '#000000', display: 'flex', justifyContent: 'center' }}>{icon}</Box>
+    <Typography variant="h5" sx={{ fontWeight: 800, color: '#000000', lineHeight: 1.2 }}>
       {value ?? '—'}
     </Typography>
-    <Typography variant="caption" sx={{ color: '#888888', fontSize: '0.78rem', fontWeight: 500 }}>
+    <Typography variant="caption" sx={{ color: '#666666', fontSize: '0.8rem', fontWeight: 600 }}>
       {label}
     </Typography>
   </Paper>
@@ -113,11 +102,11 @@ const StatCard = ({ icon, label, value }) => (
 
 const InfoRow = ({ icon, label, value }) => (
   <Stack direction="row" alignItems="center" gap={1.5} sx={{ py: 1.5 }}>
-    <Box sx={{ color: '#888888', display: 'flex' }}>{icon}</Box>
-    <Typography variant="body2" sx={{ color: '#888888', minWidth: 120, fontSize: '0.85rem' }}>
+    <Box sx={{ color: '#666666', display: 'flex' }}>{icon}</Box>
+    <Typography variant="body2" sx={{ color: '#666666', minWidth: 120, fontSize: '0.85rem' }}>
       {label}
     </Typography>
-    <Typography variant="body2" sx={{ color: '#ededed', fontWeight: 500, fontSize: '0.85rem' }}>
+    <Typography variant="body2" sx={{ color: '#000000', fontWeight: 600, fontSize: '0.85rem' }}>
       {value || '—'}
     </Typography>
   </Stack>
@@ -138,25 +127,25 @@ const FileTreeItem = ({ item, depth = 0, onFileClick, selectedFile }) => {
         py: 1,
         pl: `${(depth * 16) + 12}px`,
         cursor: 'pointer',
-        borderRadius: '6px',
+        borderRadius: 1,
         mx: 0.5,
-        backgroundColor: isSelected ? '#1c1c1c' : 'transparent',
-        border: isSelected ? '1px solid #333333' : '1px solid transparent',
+        backgroundColor: isSelected ? '#f5f5f5' : 'transparent',
+        border: isSelected ? '1px solid #cccccc' : '1px solid transparent',
         transition: 'all 0.15s ease',
         '&:hover': {
-          backgroundColor: isSelected ? '#1c1c1c' : '#141414',
+          backgroundColor: isSelected ? '#f5f5f5' : '#fafafa',
         },
       }}
     >
       {item.type === 'dir' && (
-        <ChevronRightIcon sx={{ fontSize: 16, color: '#888888', flexShrink: 0 }} />
+        <ChevronRightIcon sx={{ fontSize: 16, color: '#666666', flexShrink: 0 }} />
       )}
       {getFileIcon(item.name, item.type)}
       <Typography
         variant="body2"
         sx={{
-          color: isSelected ? '#ffffff' : '#a1a1a1',
-          fontWeight: isSelected ? 600 : 400,
+          color: isSelected ? '#000000' : '#444444',
+          fontWeight: isSelected ? 700 : 500,
           fontSize: '0.85rem',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
@@ -168,7 +157,7 @@ const FileTreeItem = ({ item, depth = 0, onFileClick, selectedFile }) => {
       {item.type === 'file' && (
         <Typography
           variant="caption"
-          sx={{ color: '#666666', fontSize: '0.7rem', ml: 'auto', flexShrink: 0 }}
+          sx={{ color: '#888888', fontSize: '0.75rem', ml: 'auto', flexShrink: 0 }}
         >
           {item.size > 1024
             ? `${(item.size / 1024).toFixed(1)}kb`
@@ -222,20 +211,19 @@ const CodeViewer = ({ file, repoName, branch, onClose, isMaximized, onToggleMaxi
 
   const language = getLanguageFromFileName(file.name);
   const lineCount = code.split('\n').length;
-
   const editorHeight = isMaximized ? 'calc(100vh - 120px)' : 680;
 
   return (
     <Paper
       elevation={0}
       sx={{
-        borderLeft: '1px solid #222222',
+        borderLeft: '1px solid #e5e5e5',
         borderRadius: 0,
         overflow: 'hidden',
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#0a0a0a',
+        backgroundColor: '#ffffff',
       }}
     >
       {/* Code Viewer Header */}
@@ -246,112 +234,93 @@ const CodeViewer = ({ file, repoName, branch, onClose, isMaximized, onToggleMaxi
           justifyContent: 'space-between',
           px: 2.5,
           py: 1.5,
-          backgroundColor: '#0f0f0f',
-          borderBottom: '1px solid #222222',
-          minHeight: 50,
+          backgroundColor: '#fafafa',
+          borderBottom: '1px solid #e5e5e5',
         }}
       >
-        <Stack direction="row" alignItems="center" gap={1.5}>
-          {getFileIcon(file.name, 'file')}
-          <Typography variant="body2" sx={{ fontWeight: 600, color: '#ffffff', fontSize: '0.9rem' }}>
+        <Stack direction="row" alignItems="center" gap={1.2}>
+          <InsertDriveFileIcon sx={{ fontSize: 18, color: '#000000' }} />
+          <Typography variant="body2" sx={{ fontWeight: 700, color: '#000000', fontSize: '0.85rem' }}>
             {file.name}
           </Typography>
-          {!loading && (
-            <Chip
-              label={language}
-              size="small"
-              sx={{
-                fontSize: '0.7rem',
-                height: 22,
-                backgroundColor: '#171717',
-                color: '#a1a1a1',
-                border: '1px solid #262626',
-                fontWeight: 600,
-                borderRadius: '4px',
-              }}
-            />
-          )}
-          {!loading && (
-            <Typography variant="caption" sx={{ color: '#666666', fontSize: '0.75rem' }}>
-              {lineCount} lines
-            </Typography>
-          )}
+          <Chip
+            label={language}
+            size="small"
+            sx={{
+              fontSize: '0.7rem',
+              fontWeight: 600,
+              height: 20,
+              backgroundColor: '#e5e5e5',
+              color: '#000000',
+              borderRadius: 1,
+            }}
+          />
+          <Typography variant="caption" sx={{ color: '#666666' }}>
+            {lineCount} lines
+          </Typography>
         </Stack>
 
-        <Stack direction="row" gap={0.5}>
-          <Tooltip title={copied ? 'Copied!' : 'Copy code'}>
+        <Stack direction="row" alignItems="center" gap={0.8}>
+          <Tooltip title={copied ? 'Copied!' : 'Copy Code'}>
             <IconButton
               size="small"
               onClick={handleCopy}
-              disabled={loading || !!error}
-              sx={{ color: copied ? '#4ade80' : '#888888', '&:hover': { color: '#ffffff' } }}
+              sx={{ color: '#000000', border: '1px solid #e5e5e5', borderRadius: 1 }}
             >
-              {copied ? <CheckIcon fontSize="small" /> : <ContentCopyIcon fontSize="small" />}
+              {copied ? <CheckIcon fontSize="small" sx={{ color: '#16a34a' }} /> : <ContentCopyIcon fontSize="small" />}
             </IconButton>
           </Tooltip>
-
-          <Tooltip title={isMaximized ? 'Exit Fullscreen' : 'Maximize IDE'}>
-            <IconButton size="small" onClick={onToggleMaximize} sx={{ color: '#888888', '&:hover': { color: '#ffffff' } }}>
+          <Tooltip title={isMaximized ? 'Restore View' : 'Maximize'}>
+            <IconButton
+              size="small"
+              onClick={onToggleMaximize}
+              sx={{ color: '#000000', border: '1px solid #e5e5e5', borderRadius: 1 }}
+            >
               {isMaximized ? <CloseFullscreenIcon fontSize="small" /> : <OpenInFullIcon fontSize="small" />}
             </IconButton>
           </Tooltip>
-
-          <Tooltip title="Open on GitHub">
+          <Tooltip title="Close File">
             <IconButton
               size="small"
-              component="a"
-              href={file.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{ color: '#888888', '&:hover': { color: '#ffffff' } }}
+              onClick={onClose}
+              sx={{ color: '#000000', border: '1px solid #e5e5e5', borderRadius: 1 }}
             >
-              <GitHubIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
-
-          <Tooltip title="Close file">
-            <IconButton size="small" onClick={onClose} sx={{ color: '#888888', '&:hover': { color: '#ffffff' } }}>
               <CloseIcon fontSize="small" />
             </IconButton>
           </Tooltip>
         </Stack>
       </Box>
 
-      {/* Code Content */}
-      <Box sx={{ overflow: 'auto', height: editorHeight, flexGrow: 1, backgroundColor: '#050505' }}>
+      {/* Code Area */}
+      <Box sx={{ flex: 1, overflow: 'auto', backgroundColor: '#1e1e1e' }}>
         {loading && (
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', minHeight: 300 }}>
             <CircularProgress size={32} sx={{ color: '#ffffff' }} />
           </Box>
         )}
         {error && (
-          <Alert severity="error" sx={{ m: 3, borderRadius: '8px', backgroundColor: '#2d0607', color: '#f87171', border: '1px solid #991b1b' }}>
-            {error}
-          </Alert>
+          <Box sx={{ p: 3 }}>
+            <Alert severity="error" sx={{ borderRadius: 1 }}>{error}</Alert>
+          </Box>
         )}
         {!loading && !error && (
           <SyntaxHighlighter
             language={language}
             style={vscDarkPlus}
             showLineNumbers
-            wrapLines
             customStyle={{
               margin: 0,
-              padding: '20px 0',
-              borderRadius: 0,
-              fontSize: '0.88rem',
-              lineHeight: '1.6',
-              backgroundColor: '#050505',
-              minHeight: '100%',
-              fontFamily: `'Geist Mono', 'Fira Code', 'Consolas', monospace`,
+              padding: '16px',
+              fontSize: '0.82rem',
+              lineHeight: 1.6,
+              background: '#1e1e1e',
+              fontFamily: '"JetBrains Mono", monospace',
+              minHeight: editorHeight,
             }}
             lineNumberStyle={{
-              color: '#444444',
-              fontSize: '0.8rem',
+              color: '#555555',
+              paddingRight: '16px',
               userSelect: 'none',
-              minWidth: '3.5em',
-              paddingRight: '1em',
-              textAlign: 'right',
             }}
           >
             {code}
@@ -362,56 +331,45 @@ const CodeViewer = ({ file, repoName, branch, onClose, isMaximized, onToggleMaxi
   );
 };
 
-// ─── File Browser ─────────────────────────────────────────────────────────────
-const FileBrowser = ({ repoName, branch }) => {
+// ─── Repository File Browser Tree ───────────────────────────────────────────
+const RepoBrowser = ({ repoName, branch = 'main' }) => {
   const [currentPath, setCurrentPath] = useState('');
-  const [contents, setContents] = useState([]);
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [isMaximized, setIsMaximized] = useState(false);
+  const [breadcrumbs, setBreadcrumbs] = useState([]);
 
-  const fetchContents = useCallback(async (path = '') => {
-    try {
-      setLoading(true);
-      setError(null);
+  const fetchContents = useCallback(
+    async (path = '') => {
+      try {
+        setLoading(true);
+        setError(null);
 
-      const url = path
-        ? `https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}/contents/${path}?ref=${branch}`
-        : `https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}/contents?ref=${branch}`;
+        const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}/contents/${path}?ref=${branch}`;
+        const res = await fetch(url);
 
-      const res = await fetch(url, {
-        headers: { Accept: 'application/vnd.github.v3+json' },
-      });
+        if (!res.ok) throw new Error(`Could not fetch contents (${res.status})`);
 
-      if (!res.ok) throw new Error('Failed to load directory contents.');
+        const data = await res.json();
 
-      const data = await res.json();
-
-      const sorted = [...data].sort((a, b) => {
-        if (a.type === b.type) return a.name.localeCompare(b.name);
-        return a.type === 'dir' ? -1 : 1;
-      });
-
-      setContents(sorted);
-      setCurrentPath(path);
-
-      if (path) {
-        const parts = path.split('/');
-        setBreadcrumbs(parts.map((part, i) => ({
-          name: part,
-          path: parts.slice(0, i + 1).join('/'),
-        })));
-      } else {
-        setBreadcrumbs([]);
+        if (Array.isArray(data)) {
+          const sorted = data.sort((a, b) => {
+            if (a.type === b.type) return a.name.localeCompare(b.name);
+            return a.type === 'dir' ? -1 : 1;
+          });
+          setItems(sorted);
+          setCurrentPath(path);
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  }, [repoName, branch]);
+    },
+    [repoName, branch]
+  );
 
   useEffect(() => {
     fetchContents('');
@@ -420,7 +378,9 @@ const FileBrowser = ({ repoName, branch }) => {
   const handleItemClick = (item) => {
     if (item.type === 'dir') {
       setSelectedFile(null);
-      fetchContents(item.path);
+      const newPath = currentPath ? `${currentPath}/${item.name}` : item.name;
+      fetchContents(newPath);
+      setBreadcrumbs((prev) => [...prev, { name: item.name, path: newPath }]);
     } else {
       setSelectedFile(item);
     }
@@ -429,26 +389,35 @@ const FileBrowser = ({ repoName, branch }) => {
   const handleBreadcrumbClick = (path) => {
     setSelectedFile(null);
     fetchContents(path);
+    if (!path) {
+      setBreadcrumbs([]);
+    } else {
+      const idx = breadcrumbs.findIndex((b) => b.path === path);
+      if (idx !== -1) {
+        setBreadcrumbs(breadcrumbs.slice(0, idx + 1));
+      }
+    }
   };
 
   const handleHomeClick = () => {
     setSelectedFile(null);
+    setBreadcrumbs([]);
     fetchContents('');
   };
 
-  const containerHeight = isMaximized ? '100vh' : 730;
-  const treeHeight = isMaximized ? 'calc(100vh - 110px)' : 680;
+  const containerHeight = isMaximized ? 'calc(100vh - 60px)' : 680;
+  const treeHeight = isMaximized ? 'calc(100vh - 120px)' : 600;
 
   return (
     <Paper
       elevation={0}
       sx={{
-        border: '1px solid #222222',
-        borderRadius: isMaximized ? 0 : '12px',
+        border: '1px solid #e5e5e5',
+        borderRadius: 2,
         overflow: 'hidden',
-        mb: 5,
-        backgroundColor: '#0a0a0a',
-        boxShadow: '0 12px 40px rgba(0,0,0,0.8)',
+        mb: 6,
+        backgroundColor: '#ffffff',
+        boxShadow: '0 10px 30px rgba(0,0,0,0.04)',
         ...(isMaximized && {
           position: 'fixed',
           top: 0,
@@ -465,43 +434,43 @@ const FileBrowser = ({ repoName, branch }) => {
         sx={{
           px: 3,
           py: 1.8,
-          borderBottom: '1px solid #222222',
-          backgroundColor: '#050505',
-          color: '#ffffff',
+          borderBottom: '1px solid #e5e5e5',
+          backgroundColor: '#fafafa',
+          color: '#000000',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
         }}
       >
         <Stack direction="row" alignItems="center" gap={1.5}>
-          <FolderOpenIcon sx={{ fontSize: 20, color: '#F5A623' }} />
-          <Typography variant="h6" sx={{ fontWeight: 700, fontSize: '0.95rem', color: '#ffffff', letterSpacing: '0.5px' }}>
+          <FolderOpenIcon sx={{ fontSize: 20, color: '#000000' }} />
+          <Typography variant="h6" sx={{ fontWeight: 800, fontSize: '0.95rem', color: '#000000', letterSpacing: '0.5px' }}>
             IDE EXPLORER
           </Typography>
           <Chip
             label={branch}
             size="small"
-            icon={<CodeIcon sx={{ fontSize: '14px !important', color: '#000000 !important' }} />}
+            icon={<CodeIcon sx={{ fontSize: '14px !important', color: '#ffffff !important' }} />}
             sx={{
               fontSize: '0.75rem',
               fontWeight: 600,
               height: 24,
-              backgroundColor: '#ffffff',
-              color: '#000000',
-              borderRadius: '4px',
+              backgroundColor: '#000000',
+              color: '#ffffff',
+              borderRadius: 1,
             }}
           />
         </Stack>
 
         <Stack direction="row" gap={1} alignItems="center">
-          <Typography variant="caption" sx={{ color: '#888888', display: { xs: 'none', md: 'block' } }}>
+          <Typography variant="caption" sx={{ color: '#666666', display: { xs: 'none', md: 'block' } }}>
             {isMaximized ? 'Fullscreen Mode' : 'Standard View'}
           </Typography>
           <Tooltip title={isMaximized ? 'Exit Fullscreen' : 'Maximize IDE'}>
             <IconButton
               size="small"
               onClick={() => setIsMaximized(!isMaximized)}
-              sx={{ color: '#ffffff', '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' } }}
+              sx={{ color: '#000000', border: '1px solid #e5e5e5', borderRadius: 1 }}
             >
               {isMaximized ? <CloseFullscreenIcon fontSize="small" /> : <OpenInFullIcon fontSize="small" />}
             </IconButton>
@@ -514,12 +483,12 @@ const FileBrowser = ({ repoName, branch }) => {
         sx={{
           px: 2.5,
           py: 1.2,
-          borderBottom: '1px solid #222222',
-          backgroundColor: '#0d0d0d',
+          borderBottom: '1px solid #e5e5e5',
+          backgroundColor: '#ffffff',
         }}
       >
         <Breadcrumbs
-          separator={<ChevronRightIcon sx={{ fontSize: 16, color: '#666666' }} />}
+          separator={<ChevronRightIcon sx={{ fontSize: 16, color: '#888888' }} />}
           sx={{ fontSize: '0.85rem' }}
         >
           <Link
@@ -530,7 +499,7 @@ const FileBrowser = ({ repoName, branch }) => {
               alignItems: 'center',
               gap: 0.8,
               cursor: 'pointer',
-              color: breadcrumbs.length === 0 ? '#ffffff' : '#888888',
+              color: breadcrumbs.length === 0 ? '#000000' : '#666666',
               fontWeight: breadcrumbs.length === 0 ? 700 : 500,
             }}
           >
@@ -544,7 +513,7 @@ const FileBrowser = ({ repoName, branch }) => {
               onClick={() => handleBreadcrumbClick(crumb.path)}
               sx={{
                 cursor: 'pointer',
-                color: i === breadcrumbs.length - 1 ? '#ffffff' : '#888888',
+                color: i === breadcrumbs.length - 1 ? '#000000' : '#666666',
                 fontWeight: i === breadcrumbs.length - 1 ? 700 : 500,
               }}
             >
@@ -556,31 +525,30 @@ const FileBrowser = ({ repoName, branch }) => {
 
       {/* Main IDE Workspace */}
       <Grid container sx={{ height: containerHeight }}>
-
         {/* File Tree Sidebar */}
         <Grid
-          size={{ xs: 12, md: selectedFile ? 3 : 12 }}
+          size={{ xs: 12, md: selectedFile ? 3.5 : 12 }}
           sx={{
             height: treeHeight,
             overflowY: 'auto',
-            backgroundColor: '#0a0a0a',
+            backgroundColor: '#ffffff',
           }}
         >
           {loading && (
             <Box sx={{ p: 3 }}>
-              {Array.from({ length: 12 }).map((_, i) => (
+              {Array.from({ length: 10 }).map((_, i) => (
                 <Skeleton
                   key={i}
                   variant="rectangular"
-                  height={36}
-                  sx={{ mb: 0.8, borderRadius: 1, backgroundColor: '#171717' }}
+                  height={32}
+                  sx={{ mb: 1, borderRadius: 1, bgcolor: '#f5f5f5' }}
                 />
               ))}
             </Box>
           )}
 
           {error && (
-            <Alert severity="error" sx={{ m: 2, borderRadius: '8px', backgroundColor: '#2d0607', color: '#f87171', border: '1px solid #991b1b' }}>
+            <Alert severity="error" sx={{ m: 2, borderRadius: 1 }}>
               {error}
             </Alert>
           )}
@@ -601,29 +569,20 @@ const FileBrowser = ({ repoName, branch }) => {
                     px: 2,
                     py: 1,
                     cursor: 'pointer',
-                    color: '#888888',
-                    '&:hover': { backgroundColor: '#171717', color: '#ffffff', borderRadius: '6px', mx: 0.5 },
-                    fontSize: '0.85rem',
-                    mb: 0.5,
-                    fontWeight: 600,
+                    color: '#666666',
+                    '&:hover': { color: '#000000', bgcolor: '#f5f5f5' },
                   }}
                 >
-                  <ArrowBackIcon sx={{ fontSize: 16 }} />
-                  <Typography variant="body2" sx={{ fontSize: '0.85rem', color: '#ffffff', fontWeight: 600 }}>
+                  <ChevronRightIcon sx={{ fontSize: 16, transform: 'rotate(180deg)' }} />
+                  <Typography variant="body2" sx={{ fontWeight: 600, fontSize: '0.85rem' }}>
                     .. (Parent Directory)
                   </Typography>
                 </Box>
               )}
 
-              {contents.length === 0 && (
-                <Typography variant="body2" sx={{ color: '#666666', textAlign: 'center', py: 6 }}>
-                  Empty directory
-                </Typography>
-              )}
-
-              {contents.map((item) => (
+              {items.map((item) => (
                 <FileTreeItem
-                  key={item.sha}
+                  key={item.sha || item.path}
                   item={item}
                   onFileClick={handleItemClick}
                   selectedFile={selectedFile}
@@ -635,7 +594,7 @@ const FileBrowser = ({ repoName, branch }) => {
 
         {/* Code Viewer Panel */}
         {selectedFile && (
-          <Grid size={{ xs: 12, md: 9 }} sx={{ height: treeHeight, overflow: 'hidden' }}>
+          <Grid size={{ xs: 12, md: 8.5 }} sx={{ height: treeHeight, display: 'flex', flexDirection: 'column' }}>
             <CodeViewer
               file={selectedFile}
               repoName={repoName}
@@ -647,70 +606,59 @@ const FileBrowser = ({ repoName, branch }) => {
           </Grid>
         )}
       </Grid>
-
-      {/* Browser Footer */}
-      {!loading && !error && (
-        <Box
-          sx={{
-            px: 3,
-            py: 1,
-            borderTop: '1px solid #222222',
-            backgroundColor: '#050505',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
-          <Typography variant="caption" sx={{ color: '#888888', fontWeight: 500, fontSize: '0.75rem' }}>
-            {contents.filter((c) => c.type === 'dir').length} folders,{' '}
-            {contents.filter((c) => c.type === 'file').length} files
-          </Typography>
-          {selectedFile && (
-            <Typography variant="caption" sx={{ color: '#ffffff', fontWeight: 500, fontSize: '0.75rem', fontFamily: 'monospace' }}>
-              {selectedFile.path}
-            </Typography>
-          )}
-        </Box>
-      )}
     </Paper>
   );
 };
 
-// ─── Main Component ───────────────────────────────────────────────────────────
+// ─── Main Project Detail Page Component ─────────────────────────────────────
 const ProjectDetail = () => {
   const { repoName } = useParams();
   const navigate = useNavigate();
 
   const [repo, setRepo] = useState(null);
-  const [languages, setLanguages] = useState({});
-  const [contributors, setContributors] = useState([]);
-  const [branches, setBranches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [readme, setReadme] = useState('');
+  const [readmeLoading, setReadmeLoading] = useState(true);
+  const [commits, setCommits] = useState([]);
+  const [activeTab, setActiveTab] = useState('explorer');
 
   useEffect(() => {
-    const fetchRepoDetails = async () => {
+    const fetchRepoData = async () => {
       try {
         setLoading(true);
         setError(null);
 
-        const headers = { Accept: 'application/vnd.github.mercy-preview+json' };
+        const repoRes = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}`);
+        if (!repoRes.ok) throw new Error(`Repository not found (${repoRes.status})`);
+        const repoData = await repoRes.json();
+        setRepo(repoData);
 
-        const [repoRes, langRes, contribRes, branchRes] = await Promise.allSettled([
-          fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}`, { headers }),
-          fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}/languages`, { headers }),
-          fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}/contributors?per_page=5`, { headers }),
-          fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}/branches`, { headers }),
-        ]);
-
-        if (repoRes.status === 'fulfilled' && repoRes.value.ok) {
-          setRepo(await repoRes.value.json());
-        } else {
-          throw new Error('Repository not found or unavailable.');
+        // Fetch README
+        try {
+          const readmeRes = await fetch(
+            `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repoName}/${repoData.default_branch || 'main'}/README.md`
+          );
+          if (readmeRes.ok) {
+            setReadme(await readmeRes.text());
+          }
+        } catch {
+          // ignore readme errors
+        } finally {
+          setReadmeLoading(false);
         }
-        if (langRes.status === 'fulfilled' && langRes.value.ok) setLanguages(await langRes.value.json());
-        if (contribRes.status === 'fulfilled' && contribRes.value.ok) setContributors(await contribRes.value.json());
-        if (branchRes.status === 'fulfilled' && branchRes.value.ok) setBranches(await branchRes.value.json());
+
+        // Fetch Recent Commits
+        try {
+          const commitsRes = await fetch(
+            `https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}/commits?per_page=5`
+          );
+          if (commitsRes.ok) {
+            setCommits(await commitsRes.json());
+          }
+        } catch {
+          // ignore commit errors
+        }
       } catch (err) {
         setError(err.message);
       } finally {
@@ -718,47 +666,39 @@ const ProjectDetail = () => {
       }
     };
 
-    fetchRepoDetails();
+    if (repoName) fetchRepoData();
   }, [repoName]);
 
-  const formatDate = (dateStr) => {
-    if (!dateStr) return '—';
-    return new Date(dateStr).toLocaleDateString('en-US', {
-      year: 'numeric', month: 'long', day: 'numeric',
-    });
-  };
-
-  const totalBytes = Object.values(languages).reduce((a, b) => a + b, 0);
-
-  // ── Loading ──────────────────────────────────────────────────────────────────
   if (loading) {
     return (
-      <Box sx={{ py: 8, backgroundColor: '#000000', minHeight: '100vh', color: '#ededed' }}>
+      <Box sx={{ py: 8, backgroundColor: '#ffffff', minHeight: '80vh' }}>
         <Container maxWidth="lg">
-          <Skeleton variant="rectangular" height={40} width={120} sx={{ mb: 4, borderRadius: 2, backgroundColor: '#171717' }} />
-          <Skeleton variant="rectangular" height={60} width="60%" sx={{ mb: 2, borderRadius: 2, backgroundColor: '#171717' }} />
-          <Skeleton variant="rectangular" height={24} width="40%" sx={{ mb: 4, borderRadius: 2, backgroundColor: '#171717' }} />
-          <Stack direction="row" gap={2} sx={{ mb: 6 }}>
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Skeleton key={i} variant="rectangular" height={90} sx={{ flex: 1, borderRadius: 2, backgroundColor: '#171717' }} />
+          <Skeleton variant="rectangular" height={40} width={150} sx={{ mb: 4, borderRadius: 1 }} />
+          <Skeleton variant="rectangular" height={100} sx={{ mb: 4, borderRadius: 2 }} />
+          <Grid container spacing={3}>
+            {Array.from({ length: 4 }).map((_, i) => (
+              <Grid size={{ xs: 6, md: 3 }} key={i}>
+                <Skeleton variant="rectangular" height={90} sx={{ borderRadius: 2 }} />
+              </Grid>
             ))}
-          </Stack>
-          <Skeleton variant="rectangular" height={650} sx={{ borderRadius: 2, mb: 3, backgroundColor: '#171717' }} />
+          </Grid>
         </Container>
       </Box>
     );
   }
 
-  // ── Error ────────────────────────────────────────────────────────────────────
-  if (error) {
+  if (error || !repo) {
     return (
-      <Box sx={{ py: 8, backgroundColor: '#000000', minHeight: '100vh', color: '#ededed' }}>
-        <Container maxWidth="lg">
-          <Alert severity="error" sx={{ mb: 4, borderRadius: '8px', backgroundColor: '#2d0607', color: '#f87171', border: '1px solid #991b1b' }}>{error}</Alert>
+      <Box sx={{ py: 12, backgroundColor: '#ffffff', minHeight: '80vh' }}>
+        <Container maxWidth="md">
+          <Alert severity="error" sx={{ mb: 4, borderRadius: 1 }}>
+            {error || 'Repository details could not be loaded.'}
+          </Alert>
           <Button
+            variant="outlined"
             startIcon={<ArrowBackIcon />}
             onClick={() => navigate('/projects')}
-            sx={{ color: '#ffffff', fontWeight: 600 }}
+            sx={{ borderColor: '#000000', color: '#000000' }}
           >
             Back to Projects
           </Button>
@@ -767,267 +707,342 @@ const ProjectDetail = () => {
     );
   }
 
-  return (
-    <Box sx={{ py: 8, backgroundColor: '#000000', minHeight: '100vh', color: '#ededed' }}>
-      <Container maxWidth="lg">
+  const formattedDate = (d) =>
+    new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 
+  return (
+    <Box sx={{ py: { xs: 6, md: 10 }, backgroundColor: '#ffffff', color: '#000000', minHeight: '90vh' }}>
+      <Container maxWidth="lg">
         {/* Back Button */}
         <Button
+          variant="text"
           startIcon={<ArrowBackIcon />}
           onClick={() => navigate('/projects')}
           sx={{
-            mb: 4, color: '#a1a1a1', fontWeight: 500, px: 0,
-            '&:hover': { color: '#ffffff', backgroundColor: 'transparent' },
+            mb: 4,
+            color: '#444444',
+            fontWeight: 600,
+            fontSize: '0.95rem',
+            '&:hover': {
+              color: '#000000',
+              bgcolor: '#f5f5f5',
+            },
           }}
         >
           Back to Projects
         </Button>
 
-        {/* Hero */}
-        <Box sx={{ mb: 5 }}>
-          <Stack direction="row" alignItems="center" gap={1.5} sx={{ mb: 1.5 }}>
-            <Chip
-              label={repo.private ? 'Private' : 'Public'}
-              size="small"
-              sx={{
-                backgroundColor: repo.private ? '#331a00' : '#072711',
-                color: repo.private ? '#fb923c' : '#4ade80',
-                border: `1px solid ${repo.private ? '#7c2d12' : '#166534'}`,
-                fontWeight: 600,
-              }}
-            />
-            {repo.archived && (
-              <Chip label="Archived" size="small" sx={{ backgroundColor: '#1a1a1a', color: '#888888', border: '1px solid #333333', fontWeight: 600 }} />
-            )}
-          </Stack>
-
-          <Typography
-            variant="h3"
-            sx={{ fontWeight: 800, color: '#ffffff', mb: 1.5, fontSize: { xs: '1.8rem', md: '2.5rem' }, lineHeight: 1.2, letterSpacing: '-0.03em' }}
+        {/* Top Header Card */}
+        <Box
+          sx={{
+            p: { xs: 3.5, md: 5 },
+            bgcolor: '#fafafa',
+            border: '1px solid #e5e5e5',
+            borderRadius: 2,
+            mb: 6,
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'flex-start',
+              flexWrap: 'wrap',
+              gap: 3,
+              mb: 3,
+            }}
           >
-            {repo.name.replace(/-/g, ' ').replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}
-          </Typography>
+            <Box>
+              <Typography
+                variant="h2"
+                component="h1"
+                sx={{
+                  fontWeight: 800,
+                  fontSize: { xs: '2rem', md: '2.8rem' },
+                  letterSpacing: '-1.5px',
+                  color: '#000000',
+                  mb: 1.5,
+                }}
+              >
+                {repo.name}
+              </Typography>
 
-          <Typography variant="body1" sx={{ color: '#a1a1a1', lineHeight: 1.7, mb: 3, maxWidth: 700, fontSize: '1.05rem' }}>
-            {repo.description || 'No description provided for this repository.'}
-          </Typography>
+              <Typography
+                sx={{
+                  color: '#555555',
+                  fontSize: '1.1rem',
+                  lineHeight: 1.7,
+                  maxWidth: 750,
+                }}
+              >
+                {repo.description || 'No description provided.'}
+              </Typography>
+            </Box>
 
-          {repo.topics?.length > 0 && (
-            <Stack direction="row" flexWrap="wrap" gap={1.5} sx={{ mb: 3.5 }}>
-              {repo.topics.map((topic) => (
-                <Chip
-                  key={topic}
-                  label={topic}
-                  size="small"
-                  sx={{ backgroundColor: '#141414', color: '#a1a1a1', border: '1px solid #262626', fontWeight: 500, borderRadius: '9999px', fontSize: '0.8rem', px: 1, py: 0.5 }}
-                />
-              ))}
-            </Stack>
-          )}
-
-          <Stack direction="row" gap={2.5} flexWrap="wrap">
-            <Button
-              variant="contained"
-              startIcon={<GitHubIcon />}
-              href={repo.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{
-                backgroundColor: '#ffffff', color: '#000000', borderRadius: '9999px',
-                border: '1px solid #ffffff',
-                px: 3.5, py: 1.3, fontWeight: 600, textTransform: 'none',
-                '&:hover': { backgroundColor: '#eaeaea', borderColor: '#eaeaea' },
-              }}
-            >
-              View on GitHub
-            </Button>
-            {repo.homepage && (
+            <Stack direction="row" spacing={1.5} flexWrap="wrap">
+              {repo.homepage && (
+                <Button
+                  variant="outlined"
+                  startIcon={<OpenInNewIcon />}
+                  href={repo.homepage}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    borderColor: '#000000',
+                    color: '#000000',
+                    borderRadius: 1,
+                    fontWeight: 600,
+                    '&:hover': { bgcolor: '#f5f5f5', borderColor: '#000000' },
+                  }}
+                >
+                  Live Demo
+                </Button>
+              )}
               <Button
-                variant="outlined"
-                startIcon={<OpenInNewIcon />}
-                href={repo.homepage}
+                variant="contained"
+                startIcon={<GitHubIcon />}
+                href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{
-                  borderColor: '#333333', color: '#ededed', borderRadius: '9999px',
-                  backgroundColor: '#0a0a0a',
-                  px: 3.5, py: 1.3, fontWeight: 600, textTransform: 'none',
-                  '&:hover': { borderColor: '#666666', backgroundColor: '#171717' },
+                  bgcolor: '#000000',
+                  color: '#ffffff',
+                  borderRadius: 1,
+                  fontWeight: 600,
+                  '&:hover': { bgcolor: '#222222' },
                 }}
               >
-                Live Demo
+                GitHub Repo
               </Button>
+            </Stack>
+          </Box>
+
+          {/* Topics & Languages */}
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, alignItems: 'center' }}>
+            {repo.language && (
+              <Chip
+                label={repo.language}
+                size="small"
+                sx={{
+                  bgcolor: '#000000',
+                  color: '#ffffff',
+                  fontWeight: 600,
+                  borderRadius: 1,
+                  px: 1,
+                }}
+              />
             )}
-          </Stack>
+            {(repo.topics || []).map((topic) => (
+              <Chip
+                key={topic}
+                label={topic}
+                size="small"
+                sx={{
+                  bgcolor: '#ffffff',
+                  color: '#000000',
+                  border: '1px solid #e5e5e5',
+                  borderRadius: 1,
+                  fontWeight: 500,
+                }}
+              />
+            ))}
+          </Box>
         </Box>
 
-        {/* Stats Row */}
-        <Grid container spacing={2.5} sx={{ mb: 5 }}>
-          <Grid size={{ xs: 6, sm: 4, md: 2.4 }}>
-            <StatCard icon={<StarIcon fontSize="small" sx={{ color: '#F5A623' }} />} label="Stars" value={repo.stargazers_count} />
+        {/* Stats Grid */}
+        <Grid container spacing={3} sx={{ mb: 6 }}>
+          <Grid size={{ xs: 6, sm: 3 }}>
+            <StatCard icon={<StarIcon sx={{ fontSize: 22 }} />} label="Stars" value={repo.stargazers_count} />
           </Grid>
-          <Grid size={{ xs: 6, sm: 4, md: 2.4 }}>
-            <StatCard icon={<ForkRightIcon fontSize="small" sx={{ color: '#a1a1a1' }} />} label="Forks" value={repo.forks_count} />
+          <Grid size={{ xs: 6, sm: 3 }}>
+            <StatCard icon={<ForkRightIcon sx={{ fontSize: 22 }} />} label="Forks" value={repo.forks_count} />
           </Grid>
-          <Grid size={{ xs: 6, sm: 4, md: 2.4 }}>
-            <StatCard icon={<VisibilityIcon fontSize="small" sx={{ color: '#60a5fa' }} />} label="Watchers" value={repo.watchers_count} />
+          <Grid size={{ xs: 6, sm: 3 }}>
+            <StatCard icon={<VisibilityIcon sx={{ fontSize: 22 }} />} label="Watchers" value={repo.watchers_count} />
           </Grid>
-          <Grid size={{ xs: 6, sm: 4, md: 2.4 }}>
-            <StatCard icon={<BugReportIcon fontSize="small" sx={{ color: '#f87171' }} />} label="Open Issues" value={repo.open_issues_count} />
-          </Grid>
-          <Grid size={{ xs: 12, sm: 4, md: 2.4 }}>
-            <StatCard icon={<AccountTreeIcon fontSize="small" sx={{ color: '#34d399' }} />} label="Branches" value={branches.length} />
+          <Grid size={{ xs: 6, sm: 3 }}>
+            <StatCard icon={<BugReportIcon sx={{ fontSize: 22 }} />} label="Issues" value={repo.open_issues_count} />
           </Grid>
         </Grid>
 
-        {/* ── File Browser ── */}
-        <FileBrowser repoName={repo.name} branch={repo.default_branch} />
+        {/* Tab View Selector */}
+        <Stack direction="row" spacing={1.5} sx={{ mb: 4 }}>
+          <Button
+            variant={activeTab === 'explorer' ? 'contained' : 'outlined'}
+            onClick={() => setActiveTab('explorer')}
+            sx={{
+              borderRadius: 1,
+              px: 3,
+              py: 1,
+              fontWeight: 600,
+              ...(activeTab === 'explorer'
+                ? { bgcolor: '#000000', color: '#ffffff' }
+                : { borderColor: '#e5e5e5', color: '#000000' }),
+            }}
+          >
+            Code Explorer
+          </Button>
 
-        {/* Main Content Grid */}
-        <Grid container spacing={4}>
-
-          {/* Left Column */}
-          <Grid size={{ xs: 12, md: 8 }}>
-
-            {/* Languages */}
-            {Object.keys(languages).length > 0 && (
-              <Paper elevation={0} sx={{ border: '1px solid #222222', borderRadius: '12px', p: 3, mb: 3, backgroundColor: '#0a0a0a' }}>
-                <Typography variant="h6" sx={{ fontWeight: 700, mb: 2.5, color: '#ffffff' }}>
-                  Languages
-                </Typography>
-                <Box sx={{ height: 8, borderRadius: '10px', overflow: 'hidden', display: 'flex', mb: 2.5, backgroundColor: '#171717' }}>
-                  {Object.entries(languages).map(([lang, bytes], i) => {
-                    const colors = ['#F7DF1E', '#3572A5', '#f34b7d', '#00ADD8', '#e34c26', '#563d7c', '#89e051', '#3178c6'];
-                    return (
-                      <Box key={lang} sx={{ width: `${(bytes / totalBytes) * 100}%`, backgroundColor: colors[i % colors.length] }} />
-                    );
-                  })}
-                </Box>
-                <Stack direction="row" flexWrap="wrap" gap={2}>
-                  {Object.entries(languages).map(([lang, bytes], i) => {
-                    const colors = ['#F7DF1E', '#3572A5', '#f34b7d', '#00ADD8', '#e34c26', '#563d7c', '#89e051', '#3178c6'];
-                    return (
-                      <Stack key={lang} direction="row" alignItems="center" gap={0.8}>
-                        <Box sx={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: colors[i % colors.length] }} />
-                        <Typography variant="body2" sx={{ color: '#ededed', fontWeight: 500, fontSize: '0.85rem' }}>{lang}</Typography>
-                        <Typography variant="caption" sx={{ color: '#888888' }}>
-                          {((bytes / totalBytes) * 100).toFixed(1)}%
-                        </Typography>
-                      </Stack>
-                    );
-                  })}
-                </Stack>
-              </Paper>
-            )}
-
-            {/* Contributors */}
-            {contributors.length > 0 && (
-              <Paper elevation={0} sx={{ border: '1px solid #222222', borderRadius: '12px', p: 3, mb: 3, backgroundColor: '#0a0a0a' }}>
-                <Typography variant="h6" sx={{ fontWeight: 700, mb: 2.5, color: '#ffffff' }}>
-                  Top Contributors
-                </Typography>
-                <Stack gap={1.5}>
-                  {contributors.map((contributor) => (
-                    <Stack
-                      key={contributor.id}
-                      direction="row"
-                      alignItems="center"
-                      justifyContent="space-between"
-                      component="a"
-                      href={contributor.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      sx={{
-                        textDecoration: 'none', p: 1.5, borderRadius: '8px',
-                        backgroundColor: '#0d0d0d', border: '1px solid #1f1f1f',
-                        transition: 'all 0.15s ease',
-                        '&:hover': { backgroundColor: '#171717', borderColor: '#333333' },
-                      }}
-                    >
-                      <Stack direction="row" alignItems="center" gap={1.5}>
-                        <Box
-                          component="img"
-                          src={contributor.avatar_url}
-                          alt={contributor.login}
-                          sx={{ width: 32, height: 32, borderRadius: '50%', border: '1px solid #333333' }}
-                        />
-                        <Typography variant="body2" sx={{ fontWeight: 600, color: '#ffffff' }}>
-                          {contributor.login}
-                        </Typography>
-                      </Stack>
-                      <Chip
-                        label={`${contributor.contributions} commits`}
-                        size="small"
-                        sx={{ backgroundColor: '#171717', color: '#a1a1a1', border: '1px solid #262626', fontSize: '0.7rem', fontWeight: 500 }}
-                      />
-                    </Stack>
-                  ))}
-                </Stack>
-              </Paper>
-            )}
-
-            {/* Branches */}
-            {branches.length > 0 && (
-              <Paper elevation={0} sx={{ border: '1px solid #222222', borderRadius: '12px', p: 3, backgroundColor: '#0a0a0a' }}>
-                <Typography variant="h6" sx={{ fontWeight: 700, mb: 2.5, color: '#ffffff' }}>
-                  Branches
-                </Typography>
-                <Stack direction="row" flexWrap="wrap" gap={1}>
-                  {branches.map((branch) => (
-                    <Chip
-                      key={branch.name}
-                      label={branch.name}
-                      icon={<CodeIcon sx={{ fontSize: '14px !important', color: branch.name === repo.default_branch ? '#000000 !important' : '#888888 !important' }} />}
-                      size="small"
-                      sx={{
-                        backgroundColor: branch.name === repo.default_branch ? '#ffffff' : '#141414',
-                        color: branch.name === repo.default_branch ? '#000000' : '#a1a1a1',
-                        fontWeight: branch.name === repo.default_branch ? 600 : 400,
-                        border: '1px solid',
-                        borderColor: branch.name === repo.default_branch ? '#ffffff' : '#262626',
-                        borderRadius: '6px',
-                      }}
-                    />
-                  ))}
-                </Stack>
-              </Paper>
-            )}
-          </Grid>
-
-          {/* Right Column */}
-          <Grid size={{ xs: 12, md: 4 }}>
-            <Paper
-              elevation={0}
-              sx={{ border: '1px solid #222222', borderRadius: '12px', p: 3, position: 'sticky', top: 24, backgroundColor: '#0a0a0a' }}
+          {readme && (
+            <Button
+              variant={activeTab === 'readme' ? 'contained' : 'outlined'}
+              onClick={() => setActiveTab('readme')}
+              sx={{
+                borderRadius: 1,
+                px: 3,
+                py: 1,
+                fontWeight: 600,
+                ...(activeTab === 'readme'
+                  ? { bgcolor: '#000000', color: '#ffffff' }
+                  : { borderColor: '#e5e5e5', color: '#000000' }),
+              }}
             >
-              <Typography variant="h6" sx={{ fontWeight: 700, mb: 1.5, color: '#ffffff' }}>
-                Repository Info
-              </Typography>
-              <Divider sx={{ mb: 1.5, borderColor: '#222222' }} />
-              <InfoRow icon={<CalendarTodayIcon fontSize="small" />} label="Created" value={formatDate(repo.created_at)} />
-              <Divider sx={{ borderColor: '#1a1a1a' }} />
-              <InfoRow icon={<UpdateIcon fontSize="small" />} label="Last Updated" value={formatDate(repo.updated_at)} />
-              <Divider sx={{ borderColor: '#1a1a1a' }} />
-              <InfoRow icon={<CodeIcon fontSize="small" />} label="Language" value={repo.language || 'Not specified'} />
-              <Divider sx={{ borderColor: '#1a1a1a' }} />
-              <InfoRow icon={<AccountTreeIcon fontSize="small" />} label="Default Branch" value={repo.default_branch} />
-              <Divider sx={{ borderColor: '#1a1a1a' }} />
-              <InfoRow icon={<ForkRightIcon fontSize="small" />} label="License" value={repo.license?.name || 'No license'} />
+              README.md
+            </Button>
+          )}
 
-              <Box sx={{ mt: 2.5, p: 2, backgroundColor: '#050505', border: '1px solid #1a1a1a', borderRadius: '8px' }}>
-                <Typography variant="caption" sx={{ color: '#888888', display: 'block', mb: 0.5 }}>
-                  Clone URL
-                </Typography>
-                <Typography
-                  variant="caption"
-                  sx={{ color: '#ededed', fontFamily: 'monospace', fontSize: '0.72rem', wordBreak: 'break-all' }}
+          {commits.length > 0 && (
+            <Button
+              variant={activeTab === 'commits' ? 'contained' : 'outlined'}
+              onClick={() => setActiveTab('commits')}
+              sx={{
+                borderRadius: 1,
+                px: 3,
+                py: 1,
+                fontWeight: 600,
+                ...(activeTab === 'commits'
+                  ? { bgcolor: '#000000', color: '#ffffff' }
+                  : { borderColor: '#e5e5e5', color: '#000000' }),
+              }}
+            >
+              Recent Commits
+            </Button>
+          )}
+        </Stack>
+
+        {/* Tab 1: Code Explorer */}
+        {activeTab === 'explorer' && (
+          <RepoBrowser repoName={repoName} branch={repo.default_branch || 'main'} />
+        )}
+
+        {/* Tab 2: README View */}
+        {activeTab === 'readme' && (
+          <Paper
+            elevation={0}
+            sx={{
+              p: { xs: 3, md: 5 },
+              bgcolor: '#ffffff',
+              border: '1px solid #e5e5e5',
+              borderRadius: 2,
+              mb: 6,
+            }}
+          >
+            <Typography variant="h5" sx={{ fontWeight: 800, mb: 3, color: '#000000' }}>
+              README.md
+            </Typography>
+            <Box
+              component="pre"
+              sx={{
+                whiteSpace: 'pre-wrap',
+                wordBreak: 'break-word',
+                fontFamily: '"JetBrains Mono", monospace',
+                fontSize: '0.9rem',
+                lineHeight: 1.7,
+                color: '#333333',
+                bgcolor: '#fafafa',
+                p: 3,
+                borderRadius: 1,
+                border: '1px solid #e5e5e5',
+              }}
+            >
+              {readme}
+            </Box>
+          </Paper>
+        )}
+
+        {/* Tab 3: Commits View */}
+        {activeTab === 'commits' && (
+          <Paper
+            elevation={0}
+            sx={{
+              p: { xs: 3, md: 4 },
+              bgcolor: '#ffffff',
+              border: '1px solid #e5e5e5',
+              borderRadius: 2,
+              mb: 6,
+            }}
+          >
+            <Typography variant="h5" sx={{ fontWeight: 800, mb: 3, color: '#000000' }}>
+              Recent Commits
+            </Typography>
+            <Stack spacing={2}>
+              {commits.map((c) => (
+                <Box
+                  key={c.sha}
+                  sx={{
+                    p: 2.5,
+                    bgcolor: '#fafafa',
+                    border: '1px solid #e5e5e5',
+                    borderRadius: 1,
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
+                    gap: 1.5,
+                  }}
                 >
-                  {repo.clone_url}
-                </Typography>
-              </Box>
-            </Paper>
+                  <Box>
+                    <Typography variant="body1" sx={{ fontWeight: 600, color: '#000000', mb: 0.5 }}>
+                      {c.commit.message}
+                    </Typography>
+                    <Typography variant="caption" sx={{ color: '#666666' }}>
+                      by {c.commit.author?.name} · {formattedDate(c.commit.author?.date)}
+                    </Typography>
+                  </Box>
+                  <Chip
+                    label={c.sha.substring(0, 7)}
+                    size="small"
+                    component="a"
+                    href={c.html_url}
+                    target="_blank"
+                    clickable
+                    sx={{
+                      fontFamily: 'monospace',
+                      fontWeight: 700,
+                      bgcolor: '#ffffff',
+                      border: '1px solid #e5e5e5',
+                      color: '#000000',
+                    }}
+                  />
+                </Box>
+              ))}
+            </Stack>
+          </Paper>
+        )}
+
+        {/* Repository Metadata Breakdown */}
+        <Box
+          sx={{
+            p: { xs: 3, md: 4 },
+            bgcolor: '#ffffff',
+            border: '1px solid #e5e5e5',
+            borderRadius: 2,
+          }}
+        >
+          <Typography variant="h6" sx={{ fontWeight: 800, color: '#000000', mb: 2 }}>
+            Repository Details
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <InfoRow icon={<AccountTreeIcon sx={{ fontSize: 18 }} />} label="Default Branch" value={repo.default_branch} />
+              <InfoRow icon={<CalendarTodayIcon sx={{ fontSize: 18 }} />} label="Created On" value={formattedDate(repo.created_at)} />
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <InfoRow icon={<UpdateIcon sx={{ fontSize: 18 }} />} label="Last Updated" value={formattedDate(repo.updated_at)} />
+              <InfoRow icon={<CodeIcon sx={{ fontSize: 18 }} />} label="Primary Language" value={repo.language} />
+            </Grid>
           </Grid>
-        </Grid>
+        </Box>
       </Container>
     </Box>
   );

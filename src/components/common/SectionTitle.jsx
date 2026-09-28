@@ -1,29 +1,32 @@
 import React from 'react';
 import { Typography, Box } from '@mui/material';
-import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 
-const SectionTitle = ({ title, subtitle, align = 'left' }) => {
-  const [ref, isVisible] = useIntersectionObserver();
-
+const SectionTitle = ({ tag, title, subtitle, align = 'left' }) => {
   return (
-    <Box
-      ref={ref}
-      sx={{
-        mb: 6,
-        textAlign: align,
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-        transition: 'all 0.5s ease',
-      }}
-    >
+    <Box sx={{ mb: 5, textAlign: align }}>
+      {tag && (
+        <Typography
+          sx={{
+            fontSize: 14,
+            fontWeight: 800,
+            letterSpacing: 2,
+            color: '#000000',
+            mb: 2,
+            textTransform: 'uppercase',
+          }}
+        >
+          {tag}
+        </Typography>
+      )}
       <Typography
         variant="h2"
         component="h2"
         sx={{
           mb: 1.5,
-          color: '#ffffff',
-          letterSpacing: '-0.03em',
-          fontWeight: 700,
+          color: '#000000',
+          letterSpacing: '-1.5px',
+          fontWeight: 800,
+          fontSize: { xs: '2rem', md: '2.5rem' },
         }}
       >
         {title}
@@ -32,11 +35,11 @@ const SectionTitle = ({ title, subtitle, align = 'left' }) => {
         <Typography
           variant="body1"
           sx={{
-            maxWidth: 600,
+            maxWidth: 700,
             mx: align === 'center' ? 'auto' : 0,
-            color: '#888888',
+            color: '#555555',
             fontSize: '1.05rem',
-            lineHeight: 1.6,
+            lineHeight: 1.7,
           }}
         >
           {subtitle}

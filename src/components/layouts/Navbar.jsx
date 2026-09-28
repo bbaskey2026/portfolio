@@ -13,54 +13,52 @@ import {
   ListItemText,
   useMediaQuery,
   useTheme,
+  Stack,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Logo from '../common/Logo';
 import { NAV_ITEMS } from '../../config/constants';
-import useScrollPosition from '../../hooks/useScrollPosition';
 
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const { isScrolled } = useScrollPosition();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const handleNavClick = (path) => {
-    navigate(path);
     setDrawerOpen(false);
+    navigate(path);
   };
 
   return (
     <>
       <AppBar
-        position="fixed"
+        position="sticky"
+        elevation={0}
         sx={{
-          backgroundColor: isScrolled
-            ? 'rgba(0, 0, 0, 0.85)'
-            : 'rgba(0, 0, 0, 0.75)',
-          backdropFilter: 'blur(16px)',
-          borderBottom: '1px solid #222222',
-          transition: 'all 0.2s ease',
-          boxShadow: 'none',
+          bgcolor: '#ffffff',
+          color: '#000000',
+          borderBottom: '1px solid #e5e5e5',
+          zIndex: 1100,
         }}
       >
         <Container maxWidth="lg">
           <Toolbar
+            disableGutters
             sx={{
+              minHeight: 72,
+              display: 'flex',
               justifyContent: 'space-between',
-              py: 1,
-              px: { xs: 0 },
             }}
           >
             <Logo />
 
             {/* Desktop Navigation */}
             {!isMobile && (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
+              <Stack direction="row" spacing={1} alignItems="center">
                 {NAV_ITEMS.map((item) => {
                   const isActive = location.pathname === item.path;
                   return (
@@ -68,18 +66,16 @@ const Navbar = () => {
                       key={item.path}
                       onClick={() => handleNavClick(item.path)}
                       sx={{
-                        color: isActive ? '#ffffff' : '#888888',
-                        fontWeight: isActive ? 600 : 400,
-                        fontSize: '0.875rem',
-                        px: 2.2,
-                        py: 0.9,
-                        borderRadius: '9999px',
-                        backgroundColor: isActive
-                          ? 'rgba(255, 255, 255, 0.08)'
-                          : 'transparent',
+                        color: isActive ? '#000000' : '#555555',
+                        fontWeight: isActive ? 700 : 500,
+                        fontSize: '0.95rem',
+                        px: 2,
+                        py: 0.8,
+                        borderRadius: 1,
+                        backgroundColor: isActive ? '#f5f5f5' : 'transparent',
                         '&:hover': {
-                          backgroundColor: 'rgba(255, 255, 255, 0.06)',
-                          color: '#ffffff',
+                          bgcolor: '#f5f5f5',
+                          color: '#000000',
                         },
                       }}
                     >
@@ -87,28 +83,27 @@ const Navbar = () => {
                     </Button>
                   );
                 })}
+
                 <Button
                   variant="contained"
                   onClick={() => handleNavClick('/contact')}
                   sx={{
-                    ml: 2.5,
-                    backgroundColor: '#ffffff',
-                    color: '#000000',
+                    ml: 1.5,
+                    bgcolor: '#000000',
+                    color: '#ffffff',
                     fontWeight: 600,
-                    fontSize: '0.875rem',
-                    px: 3,
-                    py: 0.9,
-                    borderRadius: '9999px',
-                    border: '1px solid #ffffff',
+                    fontSize: '0.9rem',
+                    px: 2.5,
+                    py: 1,
+                    borderRadius: 1,
                     '&:hover': {
-                      backgroundColor: '#eaeaea',
-                      borderColor: '#eaeaea',
+                      bgcolor: '#222222',
                     },
                   }}
                 >
-                  Get in Touch
+                  Contact Me
                 </Button>
-              </Box>
+              </Stack>
             )}
 
             {/* Mobile Menu Button */}
@@ -116,9 +111,10 @@ const Navbar = () => {
               <IconButton
                 onClick={() => setDrawerOpen(true)}
                 sx={{
-                  border: '1px solid #222222',
-                  borderRadius: '50%',
-                  color: '#ffffff',
+                  border: '1px solid #e5e5e5',
+                  borderRadius: 1,
+                  color: '#000000',
+                  p: 1,
                 }}
               >
                 <MenuIcon />
@@ -136,10 +132,11 @@ const Navbar = () => {
         PaperProps={{
           sx: {
             width: '100%',
-            maxWidth: 320,
-            p: 2.5,
-            backgroundColor: '#0a0a0a',
-            borderLeft: '1px solid #222222',
+            maxWidth: 300,
+            p: 3,
+            bgcolor: '#ffffff',
+            color: '#000000',
+            borderLeft: '1px solid #e5e5e5',
           },
         }}
       >
@@ -148,16 +145,16 @@ const Navbar = () => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            mb: 3,
+            mb: 4,
           }}
         >
           <Logo />
           <IconButton
             onClick={() => setDrawerOpen(false)}
             sx={{
-              border: '1px solid #222222',
-              borderRadius: '50%',
-              color: '#ffffff',
+              border: '1px solid #e5e5e5',
+              borderRadius: 1,
+              color: '#000000',
             }}
           >
             <CloseIcon />
@@ -167,25 +164,23 @@ const Navbar = () => {
           {NAV_ITEMS.map((item) => {
             const isActive = location.pathname === item.path;
             return (
-              <ListItem key={item.path} disablePadding sx={{ mb: 0.5 }}>
+              <ListItem key={item.path} disablePadding sx={{ mb: 1 }}>
                 <ListItemButton
                   onClick={() => handleNavClick(item.path)}
                   sx={{
-                    borderRadius: '9999px',
-                    backgroundColor: isActive
-                      ? 'rgba(255, 255, 255, 0.08)'
-                      : 'transparent',
+                    borderRadius: 1,
+                    bgcolor: isActive ? '#f5f5f5' : 'transparent',
                     '&:hover': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                      bgcolor: '#f5f5f5',
                     },
                   }}
                 >
                   <ListItemText
                     primary={item.label}
                     primaryTypographyProps={{
-                      fontWeight: isActive ? 600 : 400,
-                      color: isActive ? '#ffffff' : '#a1a1a1',
-                      fontSize: '0.95rem',
+                      fontWeight: isActive ? 700 : 500,
+                      color: '#000000',
+                      fontSize: '1rem',
                     }}
                   />
                 </ListItemButton>
@@ -199,24 +194,19 @@ const Navbar = () => {
           onClick={() => handleNavClick('/contact')}
           sx={{
             mt: 3,
-            backgroundColor: '#ffffff',
-            color: '#000000',
+            bgcolor: '#000000',
+            color: '#ffffff',
             fontWeight: 600,
-            py: 1.2,
-            borderRadius: '9999px',
-            border: '1px solid #ffffff',
+            py: 1.5,
+            borderRadius: 1,
             '&:hover': {
-              backgroundColor: '#eaeaea',
-              borderColor: '#eaeaea',
+              bgcolor: '#222222',
             },
           }}
         >
-          Get in Touch
+          Contact Me
         </Button>
       </Drawer>
-
-      {/* Toolbar spacer */}
-      <Toolbar sx={{ py: 1 }} />
     </>
   );
 };
