@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Chip, Stack } from '@mui/material';
+import { Box, Typography, Chip } from '@mui/material';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 
 const ExperienceItem = ({ experience, index }) => {
@@ -33,9 +33,7 @@ const ExperienceItem = ({ experience, index }) => {
             width: 10,
             height: 10,
             borderRadius: '50%',
-            backgroundColor: '#ffffff',
-            border: '2px solid #000000',
-            boxShadow: '0 0 0 2px #333333',
+            backgroundColor: '#000000',
             zIndex: 1,
           }}
         />
@@ -43,7 +41,7 @@ const ExperienceItem = ({ experience, index }) => {
           sx={{
             width: 1,
             flexGrow: 1,
-            backgroundColor: '#222222',
+            backgroundColor: '#e5e5e5',
             mt: 1,
           }}
         />
@@ -53,12 +51,13 @@ const ExperienceItem = ({ experience, index }) => {
         <Box
           sx={{
             p: { xs: 2.5, md: 3.5 },
-            backgroundColor: '#0a0a0a',
-            border: '1px solid #222222',
-            borderRadius: '16px',
-            transition: 'all 0.2s ease',
+            backgroundColor: '#ffffff',
+            border: '1px solid #e5e5e5',
+            borderRadius: 2,
+            transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
             '&:hover': {
-              borderColor: '#444444',
+              borderColor: '#000000',
+              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.04)',
             },
           }}
         >
@@ -74,19 +73,24 @@ const ExperienceItem = ({ experience, index }) => {
           >
             <Typography
               variant="h5"
-              sx={{ color: '#ffffff', fontWeight: 600, fontSize: { xs: '1.1rem', md: '1.2rem' }, letterSpacing: '-0.02em' }}
+              sx={{
+                color: '#000000',
+                fontWeight: 700,
+                fontSize: { xs: '1.15rem', md: '1.25rem' },
+                letterSpacing: '-0.5px',
+              }}
             >
               {experience.role}
             </Typography>
             <Typography
               variant="body2"
               sx={{
-                color: '#a1a1a1',
-                fontSize: '0.8rem',
-                fontFamily: 'monospace',
-                backgroundColor: '#141414',
-                border: '1px solid #262626',
-                borderRadius: '9999px',
+                color: '#444444',
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                backgroundColor: '#f5f5f5',
+                border: '1px solid #e5e5e5',
+                borderRadius: 1,
                 px: 1.2,
                 py: 0.3,
                 whiteSpace: 'nowrap',
@@ -99,13 +103,13 @@ const ExperienceItem = ({ experience, index }) => {
           <Typography
             variant="body2"
             sx={{
-              color: '#a1a1a1',
+              color: '#333333',
               mb: 2.5,
-              fontWeight: 500,
+              fontWeight: 600,
               fontSize: '0.95rem',
             }}
           >
-            {experience.company} · <span style={{ color: '#777777' }}>{experience.location}</span>
+            {experience.company} · <span style={{ color: '#777777', fontWeight: 400 }}>{experience.location}</span>
           </Typography>
 
           <Box component="ul" sx={{ pl: 2, mb: 3 }}>
@@ -115,8 +119,8 @@ const ExperienceItem = ({ experience, index }) => {
                 key={i}
                 sx={{
                   mb: 0.8,
-                  color: '#888888',
-                  fontSize: '0.9rem',
+                  color: '#555555',
+                  fontSize: '0.92rem',
                   lineHeight: 1.7,
                 }}
               >
@@ -125,21 +129,20 @@ const ExperienceItem = ({ experience, index }) => {
             ))}
           </Box>
 
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, width: '100%', maxWidth: '100%' }}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
             {experience.technologies.map((tech) => (
               <Chip
                 key={tech}
                 label={tech}
                 size="small"
                 sx={{
-                  fontSize: '0.75rem',
-                  borderRadius: '9999px',
-                  px: 1,
-                  py: 0.4,
-                  backgroundColor: '#141414',
-                  color: '#a1a1a1',
-                  border: '1px solid #262626',
-                  maxWidth: '100%',
+                  fontSize: '0.8rem',
+                  borderRadius: 1,
+                  px: 0.8,
+                  py: 0.3,
+                  backgroundColor: '#f1f1f1',
+                  color: '#000000',
+                  border: '1px solid #e5e5e5',
                 }}
               />
             ))}

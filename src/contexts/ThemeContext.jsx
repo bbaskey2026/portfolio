@@ -4,8 +4,8 @@ import { CssBaseline } from '@mui/material';
 import theme from '../theme';
 
 const ThemeContext = createContext({
-  mode: 'dark',
-  isDark: true,
+  mode: 'light',
+  isDark: false,
   toggleTheme: () => {},
 });
 
@@ -20,8 +20,8 @@ export const useThemeContext = () => {
 export const ThemeContextProvider = ({ children }) => {
   const value = useMemo(
     () => ({
-      mode: 'dark',
-      isDark: true,
+      mode: 'light',
+      isDark: false,
       toggleTheme: () => {},
     }),
     []

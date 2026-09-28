@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, LinearProgress } from '@mui/material';
+import { Box, Typography, Chip } from '@mui/material';
 import {
   SiReact,
   SiJavascript,
@@ -12,6 +12,7 @@ import {
   SiExpress,
   SiMongodb,
   SiMysql,
+  SiPostgresql,
   SiGit,
   SiPostman,
   SiVisualstudiocode,
@@ -22,155 +23,123 @@ import {
   SiNextdotjs,
   SiDocker,
   SiPython,
+  SiGo,
+  SiAngular,
 } from 'react-icons/si';
-import { FaJava, FaCode, FaServer, FaTools } from 'react-icons/fa';
+import { FaJava, FaCode, FaServer } from 'react-icons/fa';
 
 export const SKILL_METADATA = {
-  React: { icon: SiReact, color: '#61DAFB', label: 'Frontend' },
-  JavaScript: { icon: SiJavascript, color: '#F7DF1E', label: 'Frontend' },
-  'HTML/CSS': { icon: SiHtml5, color: '#E34F26', label: 'Frontend' },
-  'Material-UI': { icon: SiMui, color: '#007FFF', label: 'Frontend' },
-  Vite: { icon: SiVite, color: '#646CFF', label: 'Frontend' },
-  TypeScript: { icon: SiTypescript, color: '#3178C6', label: 'Frontend' },
-  'Tailwind CSS': { icon: SiTailwindcss, color: '#38BDF8', label: 'Frontend' },
-  'Next.js': { icon: SiNextdotjs, color: '#FFFFFF', label: 'Frontend' },
+  React: { icon: SiReact, tag: 'UI Library', desc: 'Component architecture, hooks & performance' },
+  JavaScript: { icon: SiJavascript, tag: 'Core Language', desc: 'ES6+, Async/Await, DOM APIs & events' },
+  TypeScript: { icon: SiTypescript, tag: 'Typed JS', desc: 'Type safety, generics & robust interfaces' },
+  Angular: { icon: SiAngular, tag: 'Framework', desc: 'Enterprise client architecture & services' },
+  'HTML/CSS': { icon: SiHtml5, tag: 'Web Core', desc: 'Semantic HTML5, modern flexbox & grid' },
+  'Material-UI': { icon: SiMui, tag: 'Design System', desc: 'Custom design themes & accessible UI' },
+  'Material UI': { icon: SiMui, tag: 'Design System', desc: 'Custom design themes & accessible UI' },
+  Vite: { icon: SiVite, tag: 'Build Tool', desc: 'Fast HMR & modern ESM bundling' },
+  'Tailwind CSS': { icon: SiTailwindcss, tag: 'Styling', desc: 'Utility-first modern styling' },
+  'Next.js': { icon: SiNextdotjs, tag: 'Framework', desc: 'Server-side rendering & API routes' },
 
-  Java: { icon: FaJava, color: '#EA2D2E', label: 'Backend' },
-  'Spring Boot': { icon: SiSpringboot, color: '#6DB33F', label: 'Backend' },
-  'Node.js': { icon: SiNodedotjs, color: '#5FA04E', label: 'Backend' },
-  Express: { icon: SiExpress, color: '#EDEDED', label: 'Backend' },
-  MongoDB: { icon: SiMongodb, color: '#47A248', label: 'Backend' },
-  MySQL: { icon: SiMysql, color: '#4479A1', label: 'Backend' },
-  'REST APIs': { icon: FaServer, color: '#60A5FA', label: 'Backend' },
-  Python: { icon: SiPython, color: '#3776AB', label: 'Backend' },
+  Java: { icon: FaJava, tag: 'OOP Language', desc: 'Core Java, Collections, OOP & Streams' },
+  'Spring Boot': { icon: SiSpringboot, tag: 'Framework', desc: 'Enterprise microservices, JPA & REST APIs' },
+  'Node.js': { icon: SiNodedotjs, tag: 'Runtime', desc: 'Event-driven server architecture & async APIs' },
+  Express: { icon: SiExpress, tag: 'Backend Framework', desc: 'Middleware, routing & secure endpoints' },
+  Go: { icon: SiGo, tag: 'Backend Language', desc: 'High-concurrency services & Fiber framework' },
+  Fiber: { icon: SiGo, tag: 'Web Framework', desc: 'High-performance Go web APIs' },
+  PostgreSQL: { icon: SiPostgresql, tag: 'Relational DB', desc: 'Complex queries, indexing & transactions' },
+  MongoDB: { icon: SiMongodb, tag: 'NoSQL Database', desc: 'Document schemas, CRUD & aggregations' },
+  MySQL: { icon: SiMysql, tag: 'Relational DB', desc: 'Normalized schemas & SQL design' },
+  'REST APIs': { icon: FaServer, tag: 'Architecture', desc: 'API architecture, CRUD & integrations' },
+  Python: { icon: SiPython, tag: 'Programming', desc: 'Scripting, backend logic & automation' },
 
-  Git: { icon: SiGit, color: '#F05032', label: 'Tools' },
-  Postman: { icon: SiPostman, color: '#FF6C37', label: 'Tools' },
-  'VS Code': { icon: SiVisualstudiocode, color: '#007ACC', label: 'Tools' },
-  Linux: { icon: SiLinux, color: '#FCC624', label: 'Tools' },
-  Figma: { icon: SiFigma, color: '#F24E1E', label: 'Tools' },
-  Docker: { icon: SiDocker, color: '#2496ED', label: 'Tools' },
+  Docker: { icon: SiDocker, tag: 'Containers', desc: 'Containerization, Dockerfile & Compose' },
+  Git: { icon: SiGit, tag: 'Version Control', desc: 'Branching, merging & team workflows' },
+  Postman: { icon: SiPostman, tag: 'API Testing', desc: 'Endpoint debugging & documentation' },
+  'VS Code': { icon: SiVisualstudiocode, tag: 'Development', desc: 'Primary IDE & debugging workflows' },
+  Linux: { icon: SiLinux, tag: 'Environment', desc: 'Shell scripting & server management' },
+  Figma: { icon: SiFigma, tag: 'UI / UX Design', desc: 'Wireframing & design prototypes' },
 };
 
-function SkillChart({ name, level = 70 }) {
-  const meta = SKILL_METADATA[name] || { icon: FaCode, color: '#ffffff' };
+function SkillChart({ name }) {
+  const meta = SKILL_METADATA[name] || { icon: FaCode, tag: 'Skill', desc: 'Full-stack engineering capability' };
   const Icon = meta.icon;
-
-  const getProficiencyText = (val) => {
-    if (val >= 75) return 'Advanced';
-    if (val >= 68) return 'Proficient';
-    return 'Intermediate';
-  };
 
   return (
     <Box
       sx={{
-        p: 2,
-        backgroundColor: '#0c0c0c',
-        border: '1px solid #1f1f1f',
-        borderRadius: '12px',
+        p: 2.6,
+        backgroundColor: '#ffffff',
+        border: '1px solid #e5e5e5',
+        borderRadius: 2,
         display: 'flex',
-        flexDirection: 'column',
-        gap: 1.2,
-        transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
-        position: 'relative',
-        overflow: 'hidden',
+        alignItems: 'flex-start',
+        gap: 2.2,
+        transition: 'transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
         '&:hover': {
-          borderColor: '#383838',
-          backgroundColor: '#141414',
-          transform: 'translateY(-2px)',
-          boxShadow: `0 8px 24px -6px rgba(0, 0, 0, 0.8), 0 0 15px -3px ${meta.color}18`,
-          '& .skill-icon-wrap': {
-            transform: 'scale(1.08)',
-            borderColor: meta.color,
-            boxShadow: `0 0 12px ${meta.color}33`,
-          },
-          '& .skill-progress-bar': {
-            backgroundColor: meta.color,
-          },
+          borderColor: '#000000',
+          transform: 'translateY(-3px)',
+          boxShadow: '0 10px 28px rgba(0, 0, 0, 0.05)',
         },
       }}
     >
-      {/* Top row: Icon + Name + Percentage */}
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-          <Box
-            className="skill-icon-wrap"
+      <Box
+        sx={{
+          width: 48,
+          height: 48,
+          borderRadius: 1.5,
+          backgroundColor: '#f5f5f5',
+          border: '1px solid #e5e5e5',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: '#000000',
+          flexShrink: 0,
+        }}
+      >
+        <Icon size={24} />
+      </Box>
+
+      <Box sx={{ flex: 1, minWidth: 0 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 0.8, gap: 1 }}>
+          <Typography
+            variant="body1"
             sx={{
-              width: 36,
-              height: 36,
-              borderRadius: '10px',
-              backgroundColor: '#171717',
-              border: '1px solid #282828',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: meta.color,
-              transition: 'all 0.25s ease',
-              flexShrink: 0,
+              fontWeight: 800,
+              color: '#000000',
+              fontSize: '1.05rem',
+              lineHeight: 1.2,
             }}
           >
-            <Icon size={18} />
-          </Box>
-          <Box>
-            <Typography
-              variant="body2"
-              sx={{
-                fontWeight: 600,
-                color: '#ffffff',
-                fontSize: '0.9rem',
-                lineHeight: 1.2,
-              }}
-            >
-              {name}
-            </Typography>
-            <Typography
-              variant="caption"
-              sx={{
-                color: '#777777',
-                fontSize: '0.72rem',
-                fontWeight: 500,
-              }}
-            >
-              {getProficiencyText(level)}
-            </Typography>
-          </Box>
+            {name}
+          </Typography>
+
+          <Chip
+            label={meta.tag}
+            size="small"
+            sx={{
+              fontSize: '0.78rem',
+              fontWeight: 600,
+              height: 22,
+              backgroundColor: '#f1f1f1',
+              color: '#333333',
+              borderRadius: 1,
+              border: '1px solid #e5e5e5',
+            }}
+          />
         </Box>
 
         <Typography
-          variant="caption"
+          variant="body2"
           sx={{
-            color: '#a1a1a1',
-            fontFamily: 'monospace',
-            fontWeight: 600,
-            fontSize: '0.8rem',
-            backgroundColor: '#141414',
-            border: '1px solid #222222',
-            borderRadius: '9999px',
-            px: 1,
-            py: 0.2,
+            color: '#555555',
+            fontSize: '0.88rem',
+            lineHeight: 1.45,
+            display: 'block',
           }}
         >
-          {level}%
+          {meta.desc}
         </Typography>
       </Box>
-
-      {/* Sleek Minimal Progress Line */}
-      <LinearProgress
-        variant="determinate"
-        value={level}
-        sx={{
-          height: 4,
-          borderRadius: 2,
-          backgroundColor: '#1a1a1a',
-          '& .MuiLinearProgress-bar': {
-            className: 'skill-progress-bar',
-            backgroundColor: meta.color,
-            borderRadius: 2,
-            transition: 'transform 0.4s ease, background-color 0.2s ease',
-          },
-        }}
-      />
     </Box>
   );
 }

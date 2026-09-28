@@ -11,36 +11,24 @@ const Logo = () => {
         textDecoration: 'none',
         display: 'flex',
         alignItems: 'center',
-        gap: 1.5,
+        gap: 1.2,
       }}
     >
-      {/* Vercel-style geometric triangle glyph */}
       <Box
         sx={{
-          width: 24,
-          height: 24,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          width: 14,
+          height: 14,
+          bgcolor: '#000000',
+          borderRadius: '2px',
         }}
-      >
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 75 65"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M37.5 0L75 65H0L37.5 0Z" fill="#FFFFFF" />
-        </svg>
-      </Box>
+      />
       <Typography
         variant="h6"
         sx={{
-          color: '#ffffff',
-          fontWeight: 700,
-          letterSpacing: '-0.03em',
-          fontSize: '1rem',
+          color: '#000000',
+          fontWeight: 800,
+          letterSpacing: '-0.5px',
+          fontSize: '1.1rem',
         }}
       >
         Bhima Baskey

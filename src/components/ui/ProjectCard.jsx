@@ -5,7 +5,6 @@ import {
   CardContent,
   Typography,
   Chip,
-  Stack,
   Box,
   IconButton,
   Tooltip,
@@ -15,14 +14,13 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import StarIcon from '@mui/icons-material/Star';
 import ForkRightIcon from '@mui/icons-material/ForkRight';
-import CodeIcon from '@mui/icons-material/Code';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 
-const ProjectCard = ({ project, index }) => {
+const ProjectCard = ({ project, index = 0 }) => {
   const [ref, isVisible] = useIntersectionObserver();
   const navigate = useNavigate();
 
-  const repoSlug = project.title
+  const repoSlug = (project.title || '')
     .toLowerCase()
     .replace(/\s+/g, '-');
 
@@ -34,224 +32,164 @@ const ProjectCard = ({ project, index }) => {
     e.stopPropagation();
   };
 
+  const technologies = project.technologies || project.stack || [];
+
   return (
     <Card
       ref={ref}
+      elevation={0}
       onClick={handleCardClick}
       sx={{
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-        transition: `all 0.4s ease ${index * 0.08}s`,
+        bgcolor: '#ffffff',
+        border: '1px solid #e5e5e5',
+        borderRadius: 2,
         cursor: 'pointer',
-        backgroundColor: '#0a0a0a',
-        border: '1px solid #222222',
-        borderRadius: '12px',
-        overflow: 'hidden',
-        position: 'relative',
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+        transition: `transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, opacity 0.4s ease ${index * 0.05}s`,
         '&:hover': {
-          borderColor: '#444444',
-          transform: 'translateY(-3px)',
-          boxShadow: '0 8px 30px rgba(0, 0, 0, 0.6)',
+          borderColor: '#cccccc',
+          transform: 'translateY(-5px)',
+          boxShadow: '0 12px 30px rgba(0, 0, 0, 0.06)',
         },
         '&:hover .arrow-icon': {
           transform: 'translate(3px, -3px)',
-          color: '#ffffff',
+          color: '#000000',
         },
       }}
     >
-      {/* Project Image Placeholder */}
-      <Box
-        sx={{
-          height: 180,
-          backgroundColor: '#111111',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderBottom: '1px solid #1f1f1f',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
-        <Box
-          sx={{
-            width: '85%',
-            height: '75%',
-            backgroundColor: '#171717',
-            border: '1px solid #262626',
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 1.5,
-          }}
-        >
-          <CodeIcon sx={{ color: '#555555', fontSize: 24 }} />
-          <Typography variant="body2" sx={{ color: '#888888', fontWeight: 600, fontSize: '0.85rem' }}>
-            {project.title}
-          </Typography>
-        </Box>
-
-        {/* Top-right Action Badges */}
-        <Box
-          sx={{
-            position: 'absolute',
-            top: 12,
-            right: 12,
-            display: 'flex',
-            gap: 1.2,
-          }}
-          onClick={handleIconClick}
-        >
-          {project.stars > 0 && (
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 0.4,
-                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                border: '1px solid #2a2a2a',
-                borderRadius: '6px',
-                px: 0.8,
-                py: 0.3,
-              }}
-            >
-              <StarIcon sx={{ fontSize: 13, color: '#F5A623' }} />
-              <Typography
-                variant="caption"
-                sx={{ fontSize: '0.7rem', color: '#ededed', fontWeight: 600 }}
-              >
-                {project.stars}
-              </Typography>
-            </Box>
-          )}
-
-          {project.forks > 0 && (
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 0.4,
-                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                border: '1px solid #2a2a2a',
-                borderRadius: '6px',
-                px: 0.8,
-                py: 0.3,
-              }}
-            >
-              <ForkRightIcon sx={{ fontSize: 13, color: '#a1a1a1' }} />
-              <Typography
-                variant="caption"
-                sx={{ fontSize: '0.7rem', color: '#ededed', fontWeight: 600 }}
-              >
-                {project.forks}
-              </Typography>
-            </Box>
-          )}
-
-          {project.githubUrl && (
-            <Tooltip title="View on GitHub" arrow>
-              <IconButton
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                size="small"
-                sx={{
-                  backgroundColor: '#141414',
-                  border: '1px solid #2a2a2a',
-                  color: '#ededed',
-                  p: 0.6,
-                  '&:hover': {
-                    backgroundColor: '#262626',
-                    borderColor: '#444444',
-                    color: '#ffffff',
-                  },
-                }}
-              >
-                <GitHubIcon sx={{ fontSize: 16 }} />
-              </IconButton>
-            </Tooltip>
-          )}
-
-          {project.liveUrl && (
-            <Tooltip title="Live Demo" arrow>
-              <IconButton
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                size="small"
-                sx={{
-                  backgroundColor: '#141414',
-                  border: '1px solid #2a2a2a',
-                  color: '#ededed',
-                  p: 0.6,
-                  '&:hover': {
-                    backgroundColor: '#262626',
-                    borderColor: '#444444',
-                    color: '#ffffff',
-                  },
-                }}
-              >
-                <LaunchIcon sx={{ fontSize: 16 }} />
-              </IconButton>
-            </Tooltip>
-          )}
-        </Box>
-      </Box>
-
-      {/* Card Content */}
       <CardContent
         sx={{
-          flexGrow: 1,
+          p: 3.5,
           display: 'flex',
           flexDirection: 'column',
-          p: 3,
+          height: '100%',
+          boxSizing: 'border-box',
         }}
       >
-        {/* Title Row */}
+        {/* Top Row: Title & Action Icons */}
         <Box
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'flex-start',
-            mb: 1.5,
+            mb: 2,
+            gap: 1.5,
           }}
         >
           <Typography
             variant="h5"
             sx={{
-              fontWeight: 600,
-              color: '#ffffff',
-              fontSize: '1.15rem',
-              letterSpacing: '-0.02em',
+              fontWeight: 700,
+              color: '#000000',
+              fontSize: { xs: '1.2rem', md: '1.3rem' },
+              letterSpacing: '-0.5px',
               flex: 1,
-              pr: 1,
             }}
           >
             {project.title}
           </Typography>
-          <ArrowOutwardIcon
-            className="arrow-icon"
+
+          <Box
             sx={{
-              fontSize: 18,
-              color: '#666666',
-              transition: 'all 0.2s ease',
-              flexShrink: 0,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 0.8,
             }}
-          />
+            onClick={handleIconClick}
+          >
+            {project.stars > 0 && (
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 0.4,
+                  bgcolor: '#f5f5f5',
+                  border: '1px solid #e5e5e5',
+                  borderRadius: 1,
+                  px: 0.8,
+                  py: 0.3,
+                }}
+              >
+                <StarIcon sx={{ fontSize: 13, color: '#f59e0b' }} />
+                <Typography
+                  variant="caption"
+                  sx={{ fontSize: '0.75rem', color: '#000000', fontWeight: 600 }}
+                >
+                  {project.stars}
+                </Typography>
+              </Box>
+            )}
+
+            {project.githubUrl && (
+              <Tooltip title="View GitHub" arrow>
+                <IconButton
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  size="small"
+                  sx={{
+                    bgcolor: '#f5f5f5',
+                    border: '1px solid #e5e5e5',
+                    color: '#000000',
+                    p: 0.6,
+                    '&:hover': {
+                      bgcolor: '#ebebeb',
+                      borderColor: '#000000',
+                    },
+                  }}
+                >
+                  <GitHubIcon sx={{ fontSize: 16 }} />
+                </IconButton>
+              </Tooltip>
+            )}
+
+            {project.liveUrl && (
+              <Tooltip title="Live Demo" arrow>
+                <IconButton
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  size="small"
+                  sx={{
+                    bgcolor: '#f5f5f5',
+                    border: '1px solid #e5e5e5',
+                    color: '#000000',
+                    p: 0.6,
+                    '&:hover': {
+                      bgcolor: '#ebebeb',
+                      borderColor: '#000000',
+                    },
+                  }}
+                >
+                  <LaunchIcon sx={{ fontSize: 16 }} />
+                </IconButton>
+              </Tooltip>
+            )}
+
+            <ArrowOutwardIcon
+              className="arrow-icon"
+              sx={{
+                fontSize: 20,
+                color: '#888888',
+                transition: 'all 0.2s ease',
+                ml: 0.5,
+              }}
+            />
+          </Box>
         </Box>
 
         {/* Description */}
         <Typography
-          variant="body2"
           sx={{
+            color: '#555555',
+            lineHeight: 1.7,
+            fontSize: '0.95rem',
             mb: 3,
             flexGrow: 1,
-            color: '#888888',
-            lineHeight: 1.6,
-            fontSize: '0.875rem',
             display: '-webkit-box',
             WebkitLineClamp: 3,
             WebkitBoxOrient: 'vertical',
@@ -262,64 +200,31 @@ const ProjectCard = ({ project, index }) => {
         </Typography>
 
         {/* Tech Chips */}
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.8, width: '100%', maxWidth: '100%' }}>
-          {project.technologies.slice(0, 5).map((tech) => (
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 1,
+            mt: 'auto',
+          }}
+        >
+          {technologies.map((tech) => (
             <Chip
               key={tech}
               label={tech}
               size="small"
               sx={{
-                fontSize: '0.74rem',
-                borderRadius: '9999px',
-                px: 0.8,
-                py: 0.3,
-                borderColor: '#262626',
-                color: '#a1a1a1',
-                backgroundColor: '#141414',
-                border: '1px solid #262626',
-                maxWidth: '100%',
+                bgcolor: '#f1f1f1',
+                color: '#000000',
+                border: '1px solid #e5e5e5',
+                borderRadius: 1,
+                fontWeight: 500,
+                fontSize: '0.8rem',
+                px: 0.5,
               }}
             />
           ))}
-          {project.technologies.length > 5 && (
-            <Chip
-              label={`+${project.technologies.length - 5}`}
-              size="small"
-              sx={{
-                fontSize: '0.74rem',
-                borderRadius: '9999px',
-                px: 0.8,
-                py: 0.3,
-                borderColor: '#262626',
-                color: '#666666',
-                backgroundColor: '#111111',
-                border: '1px solid #222222',
-                maxWidth: '100%',
-              }}
-            />
-          )}
         </Box>
-
-        {/* View Details hint */}
-        <Typography
-          variant="caption"
-          sx={{
-            mt: 2,
-            color: '#ffffff',
-            fontWeight: 500,
-            fontSize: '0.75rem',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 0.5,
-            opacity: 0,
-            transition: 'opacity 0.2s ease',
-            '.MuiCard-root:hover &': {
-              opacity: 1,
-            },
-          }}
-        >
-          View repository details →
-        </Typography>
       </CardContent>
     </Card>
   );
