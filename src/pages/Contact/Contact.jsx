@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import {
   Box,
-  Container,
   Typography,
   Button,
   Stack,
-  Divider,
 } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import CheckIcon from '@mui/icons-material/Check';
 import LaunchIcon from '@mui/icons-material/Launch';
@@ -27,19 +24,16 @@ const Contact = () => {
 
   const contactItems = [
     {
-      icon: <EmailIcon sx={{ fontSize: 20, color: '#000000' }} />,
       label: 'Email',
       value: SITE_CONFIG.email,
       href: `mailto:${SITE_CONFIG.email}`,
     },
     {
-      icon: <PhoneIcon sx={{ fontSize: 20, color: '#000000' }} />,
       label: 'Phone',
       value: SITE_CONFIG.phone,
       href: `tel:${SITE_CONFIG.phone}`,
     },
     {
-      icon: <LocationOnIcon sx={{ fontSize: 20, color: '#000000' }} />,
       label: 'Location',
       value: SITE_CONFIG.location,
       href: null,
@@ -48,17 +42,17 @@ const Contact = () => {
 
   const socialLinks = [
     {
-      icon: <FaGithub size={17} />,
+      icon: <FaGithub size={15} />,
       name: 'GitHub',
       url: SOCIAL_LINKS.github || 'https://github.com/bbaskey2026',
     },
     {
-      icon: <FaLinkedin size={17} />,
+      icon: <FaLinkedin size={15} />,
       name: 'LinkedIn',
       url: SOCIAL_LINKS.linkedin,
     },
     {
-      icon: <FaTwitter size={17} />,
+      icon: <FaTwitter size={15} />,
       name: 'Twitter / X',
       url: SOCIAL_LINKS.twitter,
     },
@@ -67,247 +61,197 @@ const Contact = () => {
   return (
     <Box
       sx={{
-        py: { xs: 8, md: 12 },
+        backgroundColor: '#000000',
+        color: '#ffffff',
         minHeight: '85vh',
-        backgroundColor: '#ffffff',
-        color: '#000000',
+        width: '100%',
+        maxWidth: '100vw',
+        overflowX: 'hidden',
       }}
     >
-      <Container maxWidth="lg">
-        <Box
+      <Box
+        sx={{
+          maxWidth: '1040px',
+          margin: '0 auto',
+          padding: { xs: '40px 16px', sm: '48px 20px', md: '72px 24px' },
+        }}
+      >
+        <Typography
           sx={{
-            display: 'grid',
-            gridTemplateColumns: {
-              xs: '1fr',
-              md: '180px 1fr',
-            },
-            gap: {
-              xs: 3,
-              md: 8,
-            },
-            width: '100%',
-            maxWidth: '100%',
+            color: '#8ec5ff',
+            fontSize: '14px',
+            marginBottom: '12px',
+            fontWeight: 500,
           }}
         >
-          <Typography
+          Contact
+        </Typography>
+
+        <Typography
+          component="h1"
+          sx={{
+            fontSize: 'clamp(38px, 8vw, 68px)',
+            lineHeight: 1.03,
+            letterSpacing: '-.04em',
+            fontWeight: 500,
+            margin: '0 0 24px',
+            maxWidth: '800px',
+            color: '#ffffff',
+          }}
+        >
+          Let’s work together.
+        </Typography>
+
+        <Typography
+          sx={{
+            color: '#cfcfcf',
+            maxWidth: '560px',
+            fontSize: '16px',
+            lineHeight: 1.6,
+            margin: '0 0 36px',
+          }}
+        >
+          Open to internships and full-time software roles. Feel free to reach out directly via email, phone, or connect with me on social platforms.
+        </Typography>
+
+        {/* Action Buttons */}
+        <Stack direction="row" spacing={1.5} flexWrap="wrap" sx={{ mb: '56px' }}>
+          <Box
+            component="a"
+            href={`mailto:${SITE_CONFIG.email}`}
             sx={{
-              fontSize: 14,
-              fontWeight: 800,
-              letterSpacing: 2,
+              display: 'inline-block',
+              background: '#ffffff',
               color: '#000000',
+              padding: '10px 22px',
+              borderRadius: 999,
+              fontSize: '15px',
+              textDecoration: 'none',
+              fontWeight: 500,
+              transition: 'transform .2s',
+              '&:hover': {
+                transform: 'translateY(-2px)',
+              },
             }}
           >
-            CONTACT
-          </Typography>
+            Say Hello
+          </Box>
 
-          <Box sx={{ minWidth: 0, width: '100%' }}>
-            {/* Main Headline */}
-            <Typography
-              component="h1"
+          <Button
+            variant="outlined"
+            startIcon={copied ? <CheckIcon sx={{ color: '#8ec5ff' }} /> : <ContentCopyIcon sx={{ fontSize: 16 }} />}
+            onClick={handleCopyEmail}
+            sx={{
+              borderColor: '#2a2a2a',
+              color: copied ? '#8ec5ff' : '#cfcfcf',
+              padding: '10px 20px',
+              borderRadius: 999,
+              fontSize: '14px',
+              fontWeight: 500,
+              '&:hover': {
+                borderColor: '#3b82f6',
+                color: '#ffffff',
+                transform: 'translateY(-2px)',
+              },
+            }}
+          >
+            {copied ? 'Email Copied!' : 'Copy Email'}
+          </Button>
+        </Stack>
+
+        {/* Contact Details List (plain rows like .edu) */}
+        <Box sx={{ borderTop: '1px solid #2a2a2a', mb: '56px' }}>
+          {contactItems.map((item) => (
+            <Box
+              key={item.label}
               sx={{
-                fontWeight: 800,
-                color: '#000000',
-                fontSize: { xs: '2.4rem', sm: '3.6rem', md: '4.8rem' },
-                lineHeight: 1.05,
-                letterSpacing: { xs: '-1px', md: '-3px' },
-                mb: 3.5,
-                wordBreak: 'break-word',
+                display: 'flex',
+                justifyContent: 'space-between',
+                gap: '16px',
+                padding: '18px 0',
+                borderBottom: '1px solid #2a2a2a',
+                flexWrap: 'wrap',
+                alignItems: 'baseline',
               }}
             >
-              Let's build
-              <br />
-              something.
-            </Typography>
+              <Typography component="span" sx={{ color: '#8ec5ff', fontSize: '15px', fontWeight: 500 }}>
+                {item.label}
+              </Typography>
 
-            <Typography
-              sx={{
-                color: '#444444',
-                lineHeight: 1.8,
-                fontSize: { xs: 16, sm: 18, md: 20 },
-                mb: 4.5,
-                maxWidth: 700,
-                wordBreak: 'break-word',
-              }}
-            >
-              I am actively seeking software engineering internships and entry-level roles.
-              Feel free to reach out directly via email, phone, or connect with me on social media.
-            </Typography>
-
-            {/* Action Buttons */}
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 6 }}>
-              <Button
-                variant="contained"
-                size="large"
-                startIcon={<EmailIcon />}
-                href={`mailto:${SITE_CONFIG.email}`}
-                sx={{
-                  py: 1.6,
-                  px: 3.5,
-                  backgroundColor: '#000000',
-                  color: '#ffffff',
-                  fontWeight: 600,
-                  borderRadius: 1,
-                  fontSize: '1rem',
-                  '&:hover': {
-                    backgroundColor: '#222222',
-                  },
-                }}
-              >
-                Say Hello
-              </Button>
-
-              <Button
-                variant="outlined"
-                size="large"
-                startIcon={copied ? <CheckIcon sx={{ color: '#16a34a' }} /> : <ContentCopyIcon />}
-                onClick={handleCopyEmail}
-                sx={{
-                  py: 1.6,
-                  px: 3.5,
-                  borderColor: copied ? '#16a34a' : '#000000',
-                  backgroundColor: copied ? '#f0fdf4' : 'transparent',
-                  color: copied ? '#16a34a' : '#000000',
-                  borderRadius: 1,
-                  fontSize: '1rem',
-                  fontWeight: 600,
-                  '&:hover': {
-                    borderColor: '#000000',
-                    backgroundColor: '#f5f5f5',
-                  },
-                }}
-              >
-                {copied ? 'Email Copied!' : 'Copy Email'}
-              </Button>
-            </Stack>
-
-            <Divider sx={{ my: 5 }} />
-
-            {/* Contact Details List */}
-            <Stack spacing={3} sx={{ mb: 6 }}>
-              {contactItems.map((item) => (
-                <Box
-                  key={item.label}
+              {item.href ? (
+                <Typography
+                  component="a"
+                  href={item.href}
                   sx={{
-                    display: 'flex',
+                    color: '#ffffff',
+                    fontSize: '16px',
+                    textDecoration: 'none',
+                    display: 'inline-flex',
                     alignItems: 'center',
-                    gap: 2.5,
-                    flexWrap: 'wrap',
-                  }}
-                >
-                  <Box
-                    sx={{
-                      width: 44,
-                      height: 44,
-                      borderRadius: 1,
-                      backgroundColor: '#f5f5f5',
-                      border: '1px solid #e5e5e5',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
-                    }}
-                  >
-                    {item.icon}
-                  </Box>
-
-                  <Box>
-                    <Typography
-                      variant="caption"
-                      sx={{
-                        color: '#777777',
-                        textTransform: 'uppercase',
-                        fontWeight: 700,
-                        fontSize: '0.75rem',
-                        letterSpacing: 1,
-                        display: 'block',
-                      }}
-                    >
-                      {item.label}
-                    </Typography>
-
-                    {item.href ? (
-                      <Typography
-                        component="a"
-                        href={item.href}
-                        variant="body1"
-                        sx={{
-                          fontWeight: 600,
-                          color: '#000000',
-                          fontSize: '1.1rem',
-                          textDecoration: 'none',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: 0.8,
-                          '&:hover': {
-                            textDecoration: 'underline',
-                          },
-                        }}
-                      >
-                        {item.value}
-                        <LaunchIcon sx={{ fontSize: 15, opacity: 0.6 }} />
-                      </Typography>
-                    ) : (
-                      <Typography
-                        variant="body1"
-                        sx={{
-                          fontWeight: 600,
-                          color: '#000000',
-                          fontSize: '1.1rem',
-                        }}
-                      >
-                        {item.value}
-                      </Typography>
-                    )}
-                  </Box>
-                </Box>
-              ))}
-            </Stack>
-
-            <Divider sx={{ my: 5 }} />
-
-            {/* Social Links */}
-            <Typography
-              sx={{
-                fontSize: 14,
-                fontWeight: 800,
-                letterSpacing: 2,
-                color: '#000000',
-                mb: 3,
-                textTransform: 'uppercase',
-              }}
-            >
-              Social Networks
-            </Typography>
-
-            <Stack direction="row" spacing={2} flexWrap="wrap">
-              {socialLinks.map((social) => (
-                <Button
-                  key={social.name}
-                  variant="outlined"
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  startIcon={social.icon}
-                  sx={{
-                    borderColor: '#e5e5e5',
-                    color: '#000000',
-                    borderRadius: 1,
-                    px: 2.5,
-                    py: 1,
-                    fontWeight: 600,
+                    gap: 0.8,
+                    wordBreak: 'break-word',
                     '&:hover': {
-                      borderColor: '#000000',
-                      bgcolor: '#f5f5f5',
+                      color: '#8ec5ff',
+                      textDecoration: 'underline',
                     },
                   }}
                 >
-                  {social.name}
-                </Button>
-              ))}
-            </Stack>
-          </Box>
+                  {item.value}
+                  <LaunchIcon sx={{ fontSize: 14, opacity: 0.6 }} />
+                </Typography>
+              ) : (
+                <Typography component="span" sx={{ color: '#ffffff', fontSize: '16px', wordBreak: 'break-word' }}>
+                  {item.value}
+                </Typography>
+              )}
+            </Box>
+          ))}
         </Box>
-      </Container>
+
+        {/* Social Links */}
+        <Typography
+          sx={{
+            color: '#8ec5ff',
+            fontSize: '14px',
+            marginBottom: '16px',
+            fontWeight: 500,
+          }}
+        >
+          Social Networks
+        </Typography>
+
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+          {socialLinks.map((social) => (
+            <Box
+              key={social.name}
+              component="a"
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 1,
+                border: '1px solid #2a2a2a',
+                borderRadius: 999,
+                padding: '6px 16px',
+                fontSize: '13px',
+                color: '#dddddd',
+                textDecoration: 'none',
+                transition: 'all 0.2s ease',
+                '&:hover': {
+                  borderColor: '#3b82f6',
+                  color: '#ffffff',
+                  transform: 'translateY(-2px)',
+                },
+              }}
+            >
+              {social.icon}
+              {social.name}
+            </Box>
+          ))}
+        </Box>
+      </Box>
     </Box>
   );
 };

@@ -67,36 +67,36 @@ function SkillChart({ name }) {
   return (
     <Box
       sx={{
-        p: 2.6,
-        backgroundColor: '#ffffff',
-        border: '1px solid #e5e5e5',
-        borderRadius: 2,
+        p: 2.5,
+        backgroundColor: '#1c1c1c',
+        border: '1px solid #2a2a2a',
+        borderRadius: '20px',
         display: 'flex',
         alignItems: 'flex-start',
-        gap: 2.2,
+        gap: 2,
         transition: 'transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
         '&:hover': {
-          borderColor: '#000000',
+          borderColor: '#3b82f6',
           transform: 'translateY(-3px)',
-          boxShadow: '0 10px 28px rgba(0, 0, 0, 0.05)',
+          boxShadow: '0 10px 28px rgba(59, 130, 246, 0.1)',
         },
       }}
     >
       <Box
         sx={{
-          width: 48,
-          height: 48,
-          borderRadius: 1.5,
-          backgroundColor: '#f5f5f5',
-          border: '1px solid #e5e5e5',
+          width: 44,
+          height: 44,
+          borderRadius: 999,
+          backgroundColor: '#161616',
+          border: '1px solid #2a2a2a',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#000000',
+          color: '#8ec5ff',
           flexShrink: 0,
         }}
       >
-        <Icon size={24} />
+        <Icon size={22} />
       </Box>
 
       <Box sx={{ flex: 1, minWidth: 0 }}>
@@ -104,9 +104,9 @@ function SkillChart({ name }) {
           <Typography
             variant="body1"
             sx={{
-              fontWeight: 800,
-              color: '#000000',
-              fontSize: '1.05rem',
+              fontWeight: 500,
+              color: '#ffffff',
+              fontSize: '1rem',
               lineHeight: 1.2,
             }}
           >
@@ -117,13 +117,13 @@ function SkillChart({ name }) {
             label={meta.tag}
             size="small"
             sx={{
-              fontSize: '0.78rem',
-              fontWeight: 600,
+              fontSize: '0.75rem',
+              fontWeight: 500,
               height: 22,
-              backgroundColor: '#f1f1f1',
-              color: '#333333',
-              borderRadius: 1,
-              border: '1px solid #e5e5e5',
+              backgroundColor: 'transparent',
+              color: '#8ec5ff',
+              borderRadius: 999,
+              border: '1px solid #2a2a2a',
             }}
           />
         </Box>
@@ -131,8 +131,8 @@ function SkillChart({ name }) {
         <Typography
           variant="body2"
           sx={{
-            color: '#555555',
-            fontSize: '0.88rem',
+            color: '#9a9a9a',
+            fontSize: '0.85rem',
             lineHeight: 1.45,
             display: 'block',
           }}

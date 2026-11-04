@@ -5,7 +5,6 @@ import {
   Typography,
   Stack,
   Button,
-  Divider,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { SITE_CONFIG, SOCIAL_LINKS, NAV_ITEMS } from '../../config/constants';
@@ -15,40 +14,32 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        bgcolor: '#ffffff',
-        color: '#000000',
-        borderTop: '1px solid #e5e5e5',
+        bgcolor: '#000000',
+        color: '#666666',
+        borderTop: '1px solid #2a2a2a',
         mt: 'auto',
+        py: 4,
       }}
     >
-      <Container maxWidth="lg" sx={{ py: 6 }}>
+      <Box sx={{ maxWidth: '1040px', width: '100%', margin: '0 auto', px: '24px' }}>
         <Box
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             flexWrap: 'wrap',
-            gap: 3,
+            gap: 2,
+            fontSize: '13px',
           }}
         >
           <Box>
             <Typography
               sx={{
-                fontWeight: 800,
-                fontSize: 16,
-                letterSpacing: '-0.5px',
-                mb: 0.5,
-              }}
-            >
-              {SITE_CONFIG.name}
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: 14,
+                fontSize: '13px',
                 color: '#666666',
               }}
             >
-              © {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.
+              © {new Date().getFullYear()} {SITE_CONFIG.name} · {SITE_CONFIG.location}
             </Typography>
           </Box>
 
@@ -58,11 +49,13 @@ const Footer = () => {
                 key={item.path}
                 component={Link}
                 to={item.path}
-                color="inherit"
                 sx={{
-                  color: '#444444',
-                  fontSize: 14,
-                  '&:hover': { color: '#000000', bgcolor: '#f5f5f5' },
+                  color: '#9a9a9a',
+                  fontSize: '13px',
+                  p: '4px 10px',
+                  borderRadius: 999,
+                  minWidth: 'auto',
+                  '&:hover': { color: '#ffffff', bgcolor: 'rgba(255, 255, 255, 0.05)' },
                 }}
               >
                 {item.label}
@@ -73,11 +66,13 @@ const Footer = () => {
                 href={SOCIAL_LINKS.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                color="inherit"
                 sx={{
-                  color: '#444444',
-                  fontSize: 14,
-                  '&:hover': { color: '#000000', bgcolor: '#f5f5f5' },
+                  color: '#9a9a9a',
+                  fontSize: '13px',
+                  p: '4px 10px',
+                  borderRadius: 999,
+                  minWidth: 'auto',
+                  '&:hover': { color: '#ffffff', bgcolor: 'rgba(255, 255, 255, 0.05)' },
                 }}
               >
                 GitHub
@@ -88,30 +83,21 @@ const Footer = () => {
                 href={SOCIAL_LINKS.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                color="inherit"
                 sx={{
-                  color: '#444444',
-                  fontSize: 14,
-                  '&:hover': { color: '#000000', bgcolor: '#f5f5f5' },
+                  color: '#9a9a9a',
+                  fontSize: '13px',
+                  p: '4px 10px',
+                  borderRadius: 999,
+                  minWidth: 'auto',
+                  '&:hover': { color: '#ffffff', bgcolor: 'rgba(255, 255, 255, 0.05)' },
                 }}
               >
                 LinkedIn
               </Button>
             )}
-            <Button
-              href={`mailto:${SITE_CONFIG.email}`}
-              color="inherit"
-              sx={{
-                color: '#444444',
-                fontSize: 14,
-                '&:hover': { color: '#000000', bgcolor: '#f5f5f5' },
-              }}
-            >
-              Email
-            </Button>
           </Stack>
         </Box>
-      </Container>
+      </Box>
     </Box>
   );
 };

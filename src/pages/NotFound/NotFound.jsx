@@ -13,17 +13,17 @@ const NotFound = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ffffff',
-        color: '#000000',
+        backgroundColor: '#000000',
+        color: '#ffffff',
         py: 8,
       }}
     >
       <Container maxWidth="sm" sx={{ textAlign: 'center' }}>
         <Typography
           sx={{
-            fontSize: '8rem',
+            fontSize: { xs: '6rem', md: '8rem' },
             fontWeight: 800,
-            color: '#f0f0f0',
+            color: '#1c1c1c',
             lineHeight: 1,
             mb: 2,
             letterSpacing: '-5px',
@@ -34,14 +34,14 @@ const NotFound = () => {
 
         <Typography
           variant="h3"
-          sx={{ mb: 2, color: '#000000', fontWeight: 800, letterSpacing: '-1px' }}
+          sx={{ mb: 2, color: '#ffffff', fontWeight: 500, letterSpacing: '-0.03em' }}
         >
           Page not found
         </Typography>
 
         <Typography
           variant="body1"
-          sx={{ mb: 4, color: '#666666', fontSize: '1.05rem' }}
+          sx={{ mb: 4, color: '#9a9a9a', fontSize: '1.05rem' }}
         >
           Sorry, the page you are looking for does not exist or has been moved.
         </Typography>
@@ -52,14 +52,16 @@ const NotFound = () => {
           onClick={() => navigate('/')}
           size="large"
           sx={{
-            backgroundColor: '#000000',
-            color: '#ffffff',
-            fontWeight: 600,
-            py: 1.4,
+            backgroundColor: '#ffffff',
+            color: '#000000',
+            fontWeight: 500,
+            py: 1.3,
             px: 3.5,
-            borderRadius: 1,
+            borderRadius: 999,
+            border: '1px solid #ffffff',
             '&:hover': {
-              backgroundColor: '#222222',
+              backgroundColor: '#ededed',
+              transform: 'translateY(-2px)',
             },
           }}
         >

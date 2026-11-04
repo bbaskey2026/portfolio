@@ -1,473 +1,267 @@
 import React, { useState } from 'react';
 import {
   Box,
-  Container,
   Typography,
-  Grid,
   Button,
-  Chip,
-  Stack,
-  Divider,
 } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
-import SchoolIcon from '@mui/icons-material/School';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import CodeIcon from '@mui/icons-material/Code';
-import StorageIcon from '@mui/icons-material/Storage';
-import BuildIcon from '@mui/icons-material/Build';
 import SkillTree from '../../components/ui/SkillTree';
-import { skills, education } from '../../store/portfolioData';
+import { education } from '../../store/portfolioData';
 import profileImg from '../../assets/images/profileImage.jpeg';
 import { SITE_CONFIG } from '../../config/constants';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 
 const About = () => {
   const [bioRef, bioVisible] = useIntersectionObserver();
-  const [eduRef, eduVisible] = useIntersectionObserver();
   const [imgError, setImgError] = useState(false);
 
   return (
-    <Box sx={{ py: { xs: 6, sm: 8, md: 12 }, backgroundColor: '#ffffff', color: '#000000', width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
-      <Container maxWidth="lg" sx={{ px: { xs: 2.5, sm: 3, md: 4 } }}>
+    <Box
+      sx={{
+        backgroundColor: '#000000',
+        color: '#ffffff',
+        width: '100%',
+        maxWidth: '100vw',
+        overflowX: 'hidden',
+      }}
+    >
+      <Box
+        sx={{
+          maxWidth: '1040px',
+          margin: '0 auto',
+          padding: { xs: '40px 16px', sm: '56px 24px', md: '72px 24px' },
+        }}
+      >
         {/* ── 1. Bio Section ── */}
         <Box
+          component="section"
+          ref={bioRef}
           sx={{
-            display: 'grid',
-            gridTemplateColumns: {
-              xs: '1fr',
-              md: '180px 1fr',
-            },
-            gap: {
-              xs: 2.5,
-              md: 8,
-            },
-            mb: { xs: 6, md: 10 },
-            width: '100%',
+            paddingBottom: { xs: '48px', md: '72px' },
+            opacity: bioVisible ? 1 : 0,
+            transform: bioVisible ? 'translateY(0)' : 'translateY(16px)',
+            transition: 'all 0.4s ease',
           }}
         >
-          <Typography
-            sx={{
-              fontSize: 14,
-              fontWeight: 800,
-              letterSpacing: 2,
-              color: '#000000',
-            }}
-          >
-            ABOUT
+          <Typography sx={{ color: '#8ec5ff', fontSize: '14px', marginBottom: '12px', fontWeight: 500 }}>
+            About
           </Typography>
 
-          <Box sx={{ minWidth: 0, width: '100%' }}>
-            <Grid
-              container
-              spacing={{ xs: 4, md: 6 }}
-              ref={bioRef}
-              alignItems="center"
-              sx={{
-                opacity: bioVisible ? 1 : 0,
-                transform: bioVisible ? 'translateY(0)' : 'translateY(24px)',
-                transition: 'all 0.5s ease',
-              }}
-            >
-              <Grid size={{ xs: 12, md: 5 }} sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Typography
+            component="h1"
+            sx={{
+              fontSize: 'clamp(28px, 6vw, 54px)',
+              lineHeight: 1.1,
+              fontWeight: 500,
+              letterSpacing: '-.04em',
+              margin: '0 0 24px',
+              maxWidth: '850px',
+              color: '#ffffff',
+              wordBreak: 'break-word',
+            }}
+          >
+            Building scalable software and clean digital experiences.
+          </Typography>
+
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', md: '1.2fr 0.8fr' },
+              gap: { xs: 4, md: 6 },
+              alignItems: 'center',
+              mt: 3,
+            }}
+          >
+            <Box>
+              <Typography sx={{ mb: 2.5, lineHeight: 1.65, color: '#cfcfcf', fontSize: { xs: '15px', sm: '16px' } }}>
+                I am {SITE_CONFIG.name}, a Software Engineering student based in{' '}
+                <strong style={{ color: '#ffffff', fontWeight: 500 }}>{SITE_CONFIG.location}</strong>. Currently pursuing B.Tech in Electrical and
+                Electronics Engineering at VSSUT while developing production-ready full-stack applications with{' '}
+                <strong style={{ color: '#ffffff', fontWeight: 500 }}>React, Node.js, Express, Java, Spring Boot, Go</strong>, and modern databases.
+              </Typography>
+
+              <Typography sx={{ mb: 2.5, lineHeight: 1.65, color: '#9a9a9a', fontSize: '15px' }}>
+                My focus centers around backend performance, clean REST API design, modular component architecture,
+                and intuitive user interfaces. I love solving technical bottlenecks and turning ideas into scalable, reliable products.
+              </Typography>
+
+              <Typography sx={{ mb: 4, lineHeight: 1.65, color: '#9a9a9a', fontSize: '15px' }}>
+                Currently open to software engineering internships and junior developer opportunities where
+                I can collaborate with experienced teams and deliver real customer impact.
+              </Typography>
+
+              <Button
+                variant="contained"
+                startIcon={<DownloadIcon sx={{ fontSize: 18 }} />}
+                href={SITE_CONFIG.resumeUrl}
+                sx={{
+                  bgcolor: '#ffffff',
+                  color: '#000000',
+                  padding: '10px 22px',
+                  borderRadius: 999,
+                  fontSize: '15px',
+                  fontWeight: 500,
+                  border: '1px solid #ffffff',
+                  '&:hover': {
+                    bgcolor: '#ffffff',
+                    transform: 'translateY(-2px)',
+                  },
+                }}
+              >
+                Download resume
+              </Button>
+            </Box>
+
+            <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+              <Box
+                sx={{
+                  width: { xs: 190, sm: 240, md: 280 },
+                  height: { xs: 190, sm: 240, md: 280 },
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  border: '1px solid #2a2a2a',
+                  flexShrink: 0,
+                }}
+              >
                 <Box
+                  component="img"
+                  src={profileImg}
+                  alt={SITE_CONFIG.name}
                   sx={{
-                    width: { xs: 280, sm: 330, md: 360 },
-                    height: { xs: 280, sm: 330, md: 360 },
-                    borderRadius: '50%',
-                    overflow: 'hidden',
-                    boxShadow: '0 16px 44px rgba(0, 0, 0, 0.09)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    transition: 'transform 0.3s ease',
-                    '&:hover': {
-                      transform: 'scale(1.03)',
-                    },
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: imgError ? 'none' : 'block',
                   }}
-                >
+                  onError={() => setImgError(true)}
+                />
+                {imgError && (
                   <Box
-                    component="img"
-                    src={profileImg}
-                    alt={SITE_CONFIG.name}
                     sx={{
                       width: '100%',
                       height: '100%',
-                      objectFit: 'cover',
-                      borderRadius: '50%',
-                      display: imgError ? 'none' : 'block',
-                    }}
-                    onError={() => setImgError(true)}
-                  />
-                  {imgError && (
-                    <Box
-                      sx={{
-                        width: '100%',
-                        height: '100%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      <Typography sx={{ fontSize: '3.5rem' }}>👨‍💻</Typography>
-                    </Box>
-                  )}
-                </Box>
-              </Grid>
-
-              <Grid size={{ xs: 12, md: 7 }}>
-                <Typography
-                  sx={{
-                    fontSize: {
-                      xs: 26,
-                      md: 36,
-                    },
-                    lineHeight: 1.25,
-                    fontWeight: 700,
-                    letterSpacing: '-1px',
-                    color: '#000000',
-                    mb: 3,
-                  }}
-                >
-                  A motivated student building scalable software and clean digital experiences
-                </Typography>
-
-                <Typography
-                  sx={{ mb: 2.5, lineHeight: 1.8, color: '#444444', fontSize: '1.05rem' }}
-                >
-                  I am {SITE_CONFIG.name}, a Software Engineering student based in{' '}
-                  <strong style={{ color: '#000000' }}>{SITE_CONFIG.location}</strong>. I am currently pursuing B.Tech in Electrical and
-                  Electronics Engineering at VSSUT while actively engineering full-stack applications with{' '}
-                  <strong style={{ color: '#000000' }}>Java, Spring Boot, React, Node.js, Go</strong>, and modern databases.
-                </Typography>
-
-                <Typography
-                  sx={{ mb: 2.5, lineHeight: 1.8, color: '#555555', fontSize: '1rem' }}
-                >
-                  My focus is on strengthening backend architecture, REST API design, transaction workflows,
-                  and building intuitive, responsive user interfaces. I enjoy turning complex business requirements
-                  into dependable software systems.
-                </Typography>
-
-                <Typography
-                  sx={{ mb: 4, lineHeight: 1.8, color: '#555555', fontSize: '1rem' }}
-                >
-                  Currently open to software engineering internships and junior developer opportunities where
-                  I can contribute to impactful software products.
-                </Typography>
-
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                  <Button
-                    variant="contained"
-                    startIcon={<DownloadIcon sx={{ fontSize: 18 }} />}
-                    href={SITE_CONFIG.resumeUrl}
-                    size="large"
-                    sx={{
-                      bgcolor: '#000000',
-                      color: '#ffffff',
-                      borderRadius: 1,
-                      px: 3.5,
-                      py: 1.4,
-                      fontWeight: 600,
-                      '&:hover': {
-                        bgcolor: '#222222',
-                      },
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                     }}
                   >
-                    Download Resume
-                  </Button>
-                </Stack>
-              </Grid>
-            </Grid>
+                    <Typography sx={{ fontSize: '3rem' }}>👨‍💻</Typography>
+                  </Box>
+                )}
+              </Box>
+            </Box>
           </Box>
         </Box>
-
-        <Divider sx={{ my: { xs: 6, md: 10 } }} />
 
         {/* ── 2. Skills Section ── */}
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: {
-              xs: '1fr',
-              md: '180px 1fr',
-            },
-            gap: {
-              xs: 2.5,
-              md: 8,
-            },
-            mb: { xs: 6, md: 10 },
-            width: '100%',
-          }}
-        >
-          <Typography
-            sx={{
-              fontSize: 14,
-              fontWeight: 800,
-              letterSpacing: 2,
-              color: '#000000',
-            }}
-          >
-            SKILLS
+        <Box component="section" sx={{ padding: { xs: '48px 0', md: '72px 0' }, borderTop: '1px solid #2a2a2a' }}>
+          <Typography sx={{ color: '#8ec5ff', fontSize: '14px', marginBottom: '12px', fontWeight: 500 }}>
+            Skills
           </Typography>
 
-          <Box sx={{ minWidth: 0, width: '100%' }}>
-            <Typography
-              sx={{
-                fontSize: {
-                  xs: 22,
-                  sm: 28,
-                  md: 32,
-                },
-                lineHeight: 1.3,
-                fontWeight: 700,
-                letterSpacing: '-1px',
-                color: '#000000',
-                mb: 2,
-                wordBreak: 'break-word',
-              }}
-            >
-              Technical Expertise
-            </Typography>
+          <Typography
+            component="h2"
+            sx={{
+              fontSize: 'clamp(26px, 5vw, 44px)',
+              letterSpacing: '-.03em',
+              fontWeight: 500,
+              margin: '0 0 16px',
+            }}
+          >
+            Technical expertise
+          </Typography>
 
-            <Typography
-              sx={{
-                fontSize: { xs: 15, sm: 16 },
-                lineHeight: 1.7,
-                color: '#555555',
-                maxWidth: 750,
-                mb: 4,
-                wordBreak: 'break-word',
-              }}
-            >
-              System architecture map displaying core engineering domains, framework branches,
-              and specific technology leaf nodes.
-            </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: '15px', sm: '16px' },
+              lineHeight: 1.6,
+              color: '#9a9a9a',
+              maxWidth: '680px',
+              margin: '0 0 32px',
+            }}
+          >
+            Core engineering domains, backend microservices, frontend systems, and developer tooling.
+          </Typography>
 
-            <SkillTree />
-          </Box>
+          <SkillTree />
         </Box>
-
-        <Divider sx={{ my: { xs: 6, md: 10 } }} />
 
         {/* ── 3. Education Section ── */}
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: {
-              xs: '1fr',
-              md: '180px 1fr',
-            },
-            gap: {
-              xs: 2.5,
-              md: 8,
-            },
-            width: '100%',
-          }}
-        >
-          <Typography
-            sx={{
-              fontSize: 14,
-              fontWeight: 800,
-              letterSpacing: 2,
-              color: '#000000',
-            }}
-          >
-            EDUCATION
+        <Box component="section" sx={{ padding: { xs: '48px 0', md: '72px 0' }, borderTop: '1px solid #2a2a2a' }}>
+          <Typography sx={{ color: '#8ec5ff', fontSize: '14px', marginBottom: '12px', fontWeight: 500 }}>
+            Education
           </Typography>
 
-          <Box sx={{ minWidth: 0, width: '100%' }}>
-            <Typography
-              sx={{
-                fontSize: {
-                  xs: 24,
-                  md: 32,
-                },
-                lineHeight: 1.3,
-                fontWeight: 700,
-                letterSpacing: '-1px',
-                color: '#000000',
-                mb: 2,
-              }}
-            >
-              Academic Background
-            </Typography>
+          <Typography
+            component="h2"
+            sx={{
+              fontSize: 'clamp(26px, 5vw, 44px)',
+              letterSpacing: '-.03em',
+              fontWeight: 500,
+              margin: '0 0 28px',
+            }}
+          >
+            Learning path
+          </Typography>
 
-            <Typography
-              sx={{
-                fontSize: 16,
-                lineHeight: 1.7,
-                color: '#555555',
-                maxWidth: 700,
-                mb: 5,
-              }}
-            >
-              Formal education and engineering qualifications that built my analytical foundation.
-            </Typography>
+          <Box>
+            {education.map((edu) => (
+              <Box
+                key={edu.id}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  gap: '12px',
+                  padding: '16px 0',
+                  borderBottom: '1px solid #2a2a2a',
+                  flexWrap: 'wrap',
+                }}
+              >
+                <Box sx={{ minWidth: { xs: '100%', sm: 'auto' } }}>
+                  <Typography component="b" sx={{ fontWeight: 500, color: '#ffffff', fontSize: '16px', display: 'block' }}>
+                    {edu.institution}
+                  </Typography>
+                  <Typography component="span" sx={{ color: '#9a9a9a', fontSize: '14px' }}>
+                    {edu.degree} — {edu.field}
+                  </Typography>
+                </Box>
+                <Typography component="span" sx={{ color: '#8ec5ff', fontSize: '14px', fontWeight: 500 }}>
+                  {edu.period}
+                </Typography>
+              </Box>
+            ))}
 
-            <Grid
-              container
-              spacing={3.5}
-              ref={eduRef}
-              sx={{
-                opacity: eduVisible ? 1 : 0,
-                transform: eduVisible ? 'translateY(0)' : 'translateY(24px)',
-                transition: 'all 0.5s ease',
-              }}
-            >
-              {education.map((edu) => (
-                <Grid size={{ xs: 12, md: edu.id === 1 ? 12 : 6 }} key={edu.id}>
-                  <Box
-                    sx={{
-                      p: { xs: 3, md: 4 },
-                      backgroundColor: '#ffffff',
-                      border: '1px solid #e5e5e5',
-                      borderRadius: 2,
-                      height: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-between',
-                      transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-                      '&:hover': {
-                        borderColor: '#000000',
-                        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.04)',
-                      },
-                    }}
-                  >
-                    <Box>
-                      {/* Header */}
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          mb: 2,
-                          flexWrap: 'wrap',
-                          gap: 1,
-                        }}
-                      >
-                        <Chip
-                          icon={<SchoolIcon sx={{ fontSize: '15px !important', color: '#000000' }} />}
-                          label={edu.type}
-                          size="small"
-                          sx={{
-                            backgroundColor: '#f5f5f5',
-                            color: '#000000',
-                            border: '1px solid #e5e5e5',
-                            borderRadius: 1,
-                            fontWeight: 600,
-                            fontSize: '0.8rem',
-                          }}
-                        />
-                        <Chip
-                          icon={<CalendarMonthIcon sx={{ fontSize: '14px !important', color: '#666666' }} />}
-                          label={edu.period}
-                          size="small"
-                          sx={{
-                            color: '#555555',
-                            backgroundColor: '#fafafa',
-                            borderRadius: 1,
-                            border: '1px solid #e5e5e5',
-                            fontSize: '0.8rem',
-                          }}
-                        />
-                      </Box>
-
-                      {/* Degree & Field */}
-                      <Typography
-                        variant="h5"
-                        sx={{
-                          color: '#000000',
-                          fontWeight: 700,
-                          fontSize: { xs: '1.2rem', md: '1.35rem' },
-                          letterSpacing: '-0.5px',
-                          mb: 0.5,
-                        }}
-                      >
-                        {edu.degree}
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          color: '#444444',
-                          fontWeight: 600,
-                          fontSize: '1rem',
-                          mb: 1.5,
-                        }}
-                      >
-                        {edu.field}
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          color: '#666666',
-                          fontSize: '0.92rem',
-                          mb: 2.5,
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 0.6,
-                        }}
-                      >
-                        <LocationOnIcon sx={{ fontSize: 16, color: '#666666' }} />
-                        {edu.institution} · {edu.location}
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          color: '#555555',
-                          fontSize: '0.95rem',
-                          lineHeight: 1.7,
-                          mb: 3,
-                        }}
-                      >
-                        {edu.description}
-                      </Typography>
-
-                      {edu.points && edu.points.length > 0 && (
-                        <Box component="ul" sx={{ pl: 2.5, mb: 3 }}>
-                          {edu.points.map((pt, idx) => (
-                            <Box
-                              component="li"
-                              key={idx}
-                              sx={{
-                                color: '#666666',
-                                fontSize: '0.9rem',
-                                lineHeight: 1.65,
-                                mb: 0.8,
-                              }}
-                            >
-                              {pt}
-                            </Box>
-                          ))}
-                        </Box>
-                      )}
-                    </Box>
-
-                    {edu.skills && (
-                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.8, mt: 'auto' }}>
-                        {edu.skills.map((s) => (
-                          <Chip
-                            key={s}
-                            label={s}
-                            size="small"
-                            sx={{
-                              fontSize: '0.78rem',
-                              borderRadius: 1,
-                              backgroundColor: '#f1f1f1',
-                              color: '#000000',
-                              border: '1px solid #e5e5e5',
-                            }}
-                          />
-                        ))}
-                      </Box>
-                    )}
-                  </Box>
-                </Grid>
-              ))}
-            </Grid>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '20px' }}>
+              <Box
+                component="span"
+                sx={{
+                  border: '1px solid #2a2a2a',
+                  borderRadius: 999,
+                  padding: '5px 12px',
+                  fontSize: '13px',
+                  color: '#dddddd',
+                  wordBreak: 'break-word',
+                }}
+              >
+                Data Structures &amp; Algorithms — Udemy (Abdul Bari)
+              </Box>
+              <Box
+                component="span"
+                sx={{
+                  border: '1px solid #2a2a2a',
+                  borderRadius: 999,
+                  padding: '5px 12px',
+                  fontSize: '13px',
+                  color: '#dddddd',
+                  wordBreak: 'break-word',
+                }}
+              >
+                MERN-STACK — 30dayscoding
+              </Box>
+            </Box>
           </Box>
         </Box>
-      </Container>
+      </Box>
     </Box>
   );
 };

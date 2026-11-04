@@ -9,29 +9,34 @@ const Logo = () => {
       to="/"
       sx={{
         textDecoration: 'none',
-        display: 'flex',
+        display: 'inline-flex',
         alignItems: 'center',
         gap: 1.2,
       }}
     >
       <Box
         sx={{
-          width: 14,
-          height: 14,
-          bgcolor: '#000000',
-          borderRadius: '2px',
+          width: 8,
+          height: 8,
+          bgcolor: '#3b82f6',
+          borderRadius: '50%',
+          boxShadow: '0 0 10px #3b82f6',
         }}
       />
       <Typography
-        variant="h6"
         sx={{
-          color: '#000000',
-          fontWeight: 800,
-          letterSpacing: '-0.5px',
-          fontSize: '1.1rem',
+          color: '#ffffff',
+          fontWeight: 700,
+          letterSpacing: '-0.02em',
+          fontSize: '1.25rem',
+          fontFamily: '"Inter", sans-serif',
+          '& span': {
+            fontWeight: 300,
+            color: '#cfcfcf',
+          },
         }}
       >
-        Bhima Baskey
+        Bhima<span> Baskey</span>
       </Typography>
     </Box>
   );

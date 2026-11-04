@@ -108,19 +108,20 @@ const CustomCursor = () => {
             position: 'absolute',
             top: 0,
             left: 0,
-            width: isHovered ? 40 : 28,
-            height: isHovered ? 40 : 28,
-            marginTop: isHovered ? '-20px' : '-14px',
-            marginLeft: isHovered ? '-20px' : '-14px',
+            width: isHovered ? 44 : 28,
+            height: isHovered ? 44 : 28,
+            marginTop: isHovered ? '-22px' : '-14px',
+            marginLeft: isHovered ? '-22px' : '-14px',
             borderRadius: '50%',
             border: isHovered
-              ? '1.5px solid rgba(0, 0, 0, 0.7)'
-              : '1px solid rgba(0, 0, 0, 0.25)',
+              ? '1.5px solid rgba(142, 197, 255, 0.85)'
+              : '1px solid rgba(59, 130, 246, 0.4)',
             backgroundColor: isHovered
-              ? 'rgba(0, 0, 0, 0.04)'
+              ? 'rgba(59, 130, 246, 0.12)'
               : 'transparent',
+            boxShadow: isHovered ? '0 0 15px rgba(59, 130, 246, 0.35)' : 'none',
             transform: isClicked ? 'scale(0.85)' : 'scale(1)',
-            transition: 'width 0.2s ease, height 0.2s ease, margin 0.2s ease, border 0.15s ease, background-color 0.15s ease, transform 0.15s ease',
+            transition: 'width 0.2s ease, height 0.2s ease, margin 0.2s ease, border 0.15s ease, background-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease',
           }}
         />
       </Box>
@@ -149,7 +150,8 @@ const CustomCursor = () => {
             marginTop: '-2.5px',
             marginLeft: '-2.5px',
             borderRadius: '50%',
-            backgroundColor: '#000000',
+            backgroundColor: '#8ec5ff',
+            boxShadow: '0 0 8px #8ec5ff',
             transform: isClicked ? 'scale(0.6)' : 'scale(1)',
             transition: 'transform 0.15s ease',
           }}

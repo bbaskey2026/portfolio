@@ -64,8 +64,8 @@ const getLanguageFromFileName = (filename = '') => {
 };
 
 const getFileIcon = (filename, type) => {
-  if (type === 'dir') return <FolderIcon sx={{ fontSize: 18, color: '#000000', flexShrink: 0 }} />;
-  return <InsertDriveFileIcon sx={{ fontSize: 18, color: '#666666', flexShrink: 0 }} />;
+  if (type === 'dir') return <FolderIcon sx={{ fontSize: 18, color: '#8ec5ff', flexShrink: 0 }} />;
+  return <InsertDriveFileIcon sx={{ fontSize: 18, color: '#9a9a9a', flexShrink: 0 }} />;
 };
 
 // ─── Fallback Sample Code for offline / non-GitHub matching projects ───────────
@@ -107,44 +107,34 @@ const FALLBACK_FILES = [
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
 const StatCard = ({ icon, label, value }) => (
-  <Paper
-    elevation={0}
+  <Box
     sx={{
-      border: '1px solid #e5e5e5',
-      borderRadius: 2,
-      p: { xs: 1.8, sm: 2.5 },
-      textAlign: 'center',
-      height: '100%',
-      backgroundColor: '#ffffff',
+      borderTop: '1px solid #2a2a2a',
+      py: 2,
+      backgroundColor: 'transparent',
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: 0.8,
-      transition: 'border-color 0.2s ease, transform 0.2s ease',
-      '&:hover': {
-        borderColor: '#000000',
-        transform: 'translateY(-2px)',
-      },
+      alignItems: 'flex-start',
+      gap: 0.5,
     }}
   >
-    <Box sx={{ color: '#000000', display: 'flex', justifyContent: 'center' }}>{icon}</Box>
-    <Typography variant="h5" sx={{ fontWeight: 800, color: '#000000', lineHeight: 1.2, fontSize: { xs: '1.2rem', sm: '1.5rem' } }}>
+    <Box sx={{ color: '#8ec5ff', display: 'flex' }}>{icon}</Box>
+    <Typography variant="h5" sx={{ fontWeight: 500, color: '#ffffff', lineHeight: 1.2, fontSize: { xs: '1.2rem', sm: '1.4rem' } }}>
       {value ?? '—'}
     </Typography>
-    <Typography variant="caption" sx={{ color: '#666666', fontSize: '0.78rem', fontWeight: 600 }}>
+    <Typography variant="caption" sx={{ color: '#9a9a9a', fontSize: '0.78rem' }}>
       {label}
     </Typography>
-  </Paper>
+  </Box>
 );
 
 const InfoRow = ({ icon, label, value }) => (
   <Stack direction="row" alignItems="center" gap={1.5} sx={{ py: 1, flexWrap: 'wrap' }}>
-    <Box sx={{ color: '#666666', display: 'flex' }}>{icon}</Box>
-    <Typography variant="body2" sx={{ color: '#666666', minWidth: 100, fontSize: '0.85rem' }}>
+    <Box sx={{ color: '#8ec5ff', display: 'flex' }}>{icon}</Box>
+    <Typography variant="body2" sx={{ color: '#9a9a9a', minWidth: 100, fontSize: '0.85rem' }}>
       {label}
     </Typography>
-    <Typography variant="body2" sx={{ color: '#000000', fontWeight: 600, fontSize: '0.85rem', wordBreak: 'break-word' }}>
+    <Typography variant="body2" sx={{ color: '#ffffff', fontWeight: 500, fontSize: '0.85rem', wordBreak: 'break-word' }}>
       {value || '—'}
     </Typography>
   </Stack>
@@ -165,25 +155,25 @@ const FileTreeItem = ({ item, depth = 0, onFileClick, selectedFile }) => {
         py: 1.1,
         pl: `${Math.min(depth * 14 + 12, 40)}px`,
         cursor: 'pointer',
-        borderRadius: 1,
+        borderRadius: 999,
         mx: 0.5,
-        backgroundColor: isSelected ? '#f5f5f5' : 'transparent',
-        border: isSelected ? '1px solid #cccccc' : '1px solid transparent',
+        backgroundColor: isSelected ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+        border: isSelected ? '1px solid #3b82f6' : '1px solid transparent',
         transition: 'all 0.15s ease',
         '&:hover': {
-          backgroundColor: isSelected ? '#f5f5f5' : '#fafafa',
+          backgroundColor: isSelected ? 'rgba(59, 130, 246, 0.2)' : 'rgba(255, 255, 255, 0.04)',
         },
       }}
     >
       {item.type === 'dir' && (
-        <ChevronRightIcon sx={{ fontSize: 16, color: '#666666', flexShrink: 0 }} />
+        <ChevronRightIcon sx={{ fontSize: 16, color: '#8ec5ff', flexShrink: 0 }} />
       )}
       {getFileIcon(item.name, item.type)}
       <Typography
         variant="body2"
         sx={{
-          color: isSelected ? '#000000' : '#333333',
-          fontWeight: isSelected ? 700 : 500,
+          color: isSelected ? '#8ec5ff' : '#cfcfcf',
+          fontWeight: isSelected ? 600 : 400,
           fontSize: '0.85rem',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
@@ -196,7 +186,7 @@ const FileTreeItem = ({ item, depth = 0, onFileClick, selectedFile }) => {
       {item.type === 'file' && (
         <Typography
           variant="caption"
-          sx={{ color: '#888888', fontSize: '0.75rem', ml: 'auto', flexShrink: 0 }}
+          sx={{ color: '#6a6a6a', fontSize: '0.75rem', ml: 'auto', flexShrink: 0 }}
         >
           {item.size ? (item.size > 1024 ? `${(item.size / 1024).toFixed(1)}kb` : `${item.size}b`) : ''}
         </Typography>
@@ -262,14 +252,14 @@ const CodeViewer = ({ file, repoName, branch, onClose, isMaximized, onToggleMaxi
     <Paper
       elevation={0}
       sx={{
-        borderLeft: { xs: 'none', md: '1px solid #e5e5e5' },
-        borderTop: { xs: '1px solid #e5e5e5', md: 'none' },
+        borderLeft: { xs: 'none', md: '1px solid #2a2a2a' },
+        borderTop: { xs: '1px solid #2a2a2a', md: 'none' },
         borderRadius: 0,
         overflow: 'hidden',
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#161616',
         width: '100%',
         maxWidth: '100%',
       }}
@@ -282,8 +272,8 @@ const CodeViewer = ({ file, repoName, branch, onClose, isMaximized, onToggleMaxi
           justifyContent: 'space-between',
           px: { xs: 1.5, sm: 2.5 },
           py: 1.2,
-          backgroundColor: '#fafafa',
-          borderBottom: '1px solid #e5e5e5',
+          backgroundColor: '#1c1c1c',
+          borderBottom: '1px solid #2a2a2a',
           flexWrap: 'wrap',
           gap: 1,
         }}
@@ -300,23 +290,23 @@ const CodeViewer = ({ file, repoName, branch, onClose, isMaximized, onToggleMaxi
                 fontSize: '0.78rem',
                 py: 0.4,
                 px: 1,
-                bgcolor: '#ffffff',
-                border: '1px solid #e5e5e5',
-                color: '#000000',
-                borderRadius: 1,
-                fontWeight: 600,
+                bgcolor: '#2a2a2a',
+                border: '1px solid #333',
+                color: '#ffffff',
+                borderRadius: 999,
+                fontWeight: 500,
               }}
             >
               Files
             </Button>
           )}
 
-          <InsertDriveFileIcon sx={{ fontSize: 16, color: '#000000', flexShrink: 0 }} />
+          <InsertDriveFileIcon sx={{ fontSize: 16, color: '#8ec5ff', flexShrink: 0 }} />
           <Typography
             variant="body2"
             sx={{
-              fontWeight: 700,
-              color: '#000000',
+              fontWeight: 500,
+              color: '#ffffff',
               fontSize: { xs: '0.8rem', sm: '0.88rem' },
               overflow: 'hidden',
               textOverflow: 'ellipsis',
@@ -331,11 +321,11 @@ const CodeViewer = ({ file, repoName, branch, onClose, isMaximized, onToggleMaxi
             size="small"
             sx={{
               fontSize: '0.68rem',
-              fontWeight: 600,
+              fontWeight: 500,
               height: 20,
-              backgroundColor: '#e5e5e5',
-              color: '#000000',
-              borderRadius: 1,
+              backgroundColor: '#2a2a2a',
+              color: '#dddddd',
+              borderRadius: 999,
             }}
           />
         </Stack>
@@ -345,16 +335,16 @@ const CodeViewer = ({ file, repoName, branch, onClose, isMaximized, onToggleMaxi
             <IconButton
               size="small"
               onClick={handleCopy}
-              sx={{ color: '#000000', border: '1px solid #e5e5e5', borderRadius: 1, p: 0.6 }}
+              sx={{ color: '#ffffff', border: '1px solid #2a2a2a', borderRadius: 999, p: 0.6, bgcolor: '#1c1c1c' }}
             >
-              {copied ? <CheckIcon fontSize="small" sx={{ color: '#16a34a' }} /> : <ContentCopyIcon fontSize="small" />}
+              {copied ? <CheckIcon fontSize="small" sx={{ color: '#8ec5ff' }} /> : <ContentCopyIcon fontSize="small" />}
             </IconButton>
           </Tooltip>
           <Tooltip title={isMaximized ? 'Restore View' : 'Maximize'}>
             <IconButton
               size="small"
               onClick={onToggleMaximize}
-              sx={{ color: '#000000', border: '1px solid #e5e5e5', borderRadius: 1, p: 0.6, display: { xs: 'none', sm: 'flex' } }}
+              sx={{ color: '#ffffff', border: '1px solid #2a2a2a', borderRadius: 999, p: 0.6, bgcolor: '#1c1c1c', display: { xs: 'none', sm: 'flex' } }}
             >
               {isMaximized ? <CloseFullscreenIcon fontSize="small" /> : <OpenInFullIcon fontSize="small" />}
             </IconButton>
@@ -363,7 +353,7 @@ const CodeViewer = ({ file, repoName, branch, onClose, isMaximized, onToggleMaxi
             <IconButton
               size="small"
               onClick={onClose}
-              sx={{ color: '#000000', border: '1px solid #e5e5e5', borderRadius: 1, p: 0.6 }}
+              sx={{ color: '#ffffff', border: '1px solid #2a2a2a', borderRadius: 999, p: 0.6, bgcolor: '#1c1c1c' }}
             >
               <CloseIcon fontSize="small" />
             </IconButton>
@@ -513,12 +503,12 @@ const RepoBrowser = ({ repoName, branch = 'main' }) => {
     <Paper
       elevation={0}
       sx={{
-        border: '1px solid #e5e5e5',
-        borderRadius: 2,
+        border: '1px solid #2a2a2a',
+        borderRadius: '24px',
         overflow: 'hidden',
         mb: { xs: 4, md: 6 },
-        backgroundColor: '#ffffff',
-        boxShadow: '0 8px 24px rgba(0,0,0,0.03)',
+        backgroundColor: '#161616',
+        boxShadow: '0 16px 40px rgba(0,0,0,0.4)',
         width: '100%',
         maxWidth: '100%',
         ...(isMaximized && {
@@ -537,9 +527,9 @@ const RepoBrowser = ({ repoName, branch = 'main' }) => {
         sx={{
           px: { xs: 2, sm: 3 },
           py: 1.5,
-          borderBottom: '1px solid #e5e5e5',
-          backgroundColor: '#fafafa',
-          color: '#000000',
+          borderBottom: '1px solid #2a2a2a',
+          backgroundColor: '#1c1c1c',
+          color: '#ffffff',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -548,34 +538,34 @@ const RepoBrowser = ({ repoName, branch = 'main' }) => {
         }}
       >
         <Stack direction="row" alignItems="center" gap={1.2}>
-          <FolderOpenIcon sx={{ fontSize: 18, color: '#000000' }} />
-          <Typography variant="h6" sx={{ fontWeight: 800, fontSize: { xs: '0.85rem', sm: '0.95rem' }, color: '#000000', letterSpacing: '0.5px' }}>
+          <FolderOpenIcon sx={{ fontSize: 18, color: '#8ec5ff' }} />
+          <Typography variant="h6" sx={{ fontWeight: 600, fontSize: { xs: '0.85rem', sm: '0.95rem' }, color: '#ffffff', letterSpacing: '0.5px' }}>
             IDE EXPLORER
           </Typography>
           <Chip
             label={branch}
             size="small"
-            icon={<CodeIcon sx={{ fontSize: '13px !important', color: '#ffffff !important' }} />}
+            icon={<CodeIcon sx={{ fontSize: '13px !important', color: '#8ec5ff !important' }} />}
             sx={{
               fontSize: '0.7rem',
-              fontWeight: 600,
+              fontWeight: 500,
               height: 22,
-              backgroundColor: '#000000',
-              color: '#ffffff',
-              borderRadius: 1,
+              backgroundColor: '#2a2a2a',
+              color: '#8ec5ff',
+              borderRadius: 999,
             }}
           />
         </Stack>
 
         <Stack direction="row" gap={1} alignItems="center">
-          <Typography variant="caption" sx={{ color: '#666666', display: { xs: 'none', md: 'block' } }}>
+          <Typography variant="caption" sx={{ color: '#9a9a9a', display: { xs: 'none', md: 'block' } }}>
             {isMaximized ? 'Fullscreen Mode' : 'Interactive Explorer'}
           </Typography>
           <Tooltip title={isMaximized ? 'Exit Fullscreen' : 'Maximize IDE'}>
             <IconButton
               size="small"
               onClick={() => setIsMaximized(!isMaximized)}
-              sx={{ color: '#000000', border: '1px solid #e5e5e5', borderRadius: 1, p: 0.6, display: { xs: 'none', sm: 'flex' } }}
+              sx={{ color: '#ffffff', border: '1px solid #2a2a2a', borderRadius: 999, p: 0.6, bgcolor: '#1c1c1c', display: { xs: 'none', sm: 'flex' } }}
             >
               {isMaximized ? <CloseFullscreenIcon fontSize="small" /> : <OpenInFullIcon fontSize="small" />}
             </IconButton>
@@ -588,14 +578,14 @@ const RepoBrowser = ({ repoName, branch = 'main' }) => {
         sx={{
           px: { xs: 1.8, sm: 2.5 },
           py: 1,
-          borderBottom: '1px solid #e5e5e5',
-          backgroundColor: '#ffffff',
+          borderBottom: '1px solid #2a2a2a',
+          backgroundColor: '#161616',
           overflowX: 'auto',
           whiteSpace: 'nowrap',
         }}
       >
         <Breadcrumbs
-          separator={<ChevronRightIcon sx={{ fontSize: 14, color: '#888888' }} />}
+          separator={<ChevronRightIcon sx={{ fontSize: 14, color: '#6a6a6a' }} />}
           sx={{ fontSize: { xs: '0.78rem', sm: '0.85rem' } }}
         >
           <Link
@@ -606,8 +596,8 @@ const RepoBrowser = ({ repoName, branch = 'main' }) => {
               alignItems: 'center',
               gap: 0.6,
               cursor: 'pointer',
-              color: breadcrumbs.length === 0 ? '#000000' : '#666666',
-              fontWeight: breadcrumbs.length === 0 ? 700 : 500,
+              color: breadcrumbs.length === 0 ? '#8ec5ff' : '#9a9a9a',
+              fontWeight: breadcrumbs.length === 0 ? 600 : 400,
             }}
           >
             <HomeIcon sx={{ fontSize: 14 }} />
@@ -620,8 +610,8 @@ const RepoBrowser = ({ repoName, branch = 'main' }) => {
               onClick={() => handleBreadcrumbClick(crumb.path)}
               sx={{
                 cursor: 'pointer',
-                color: i === breadcrumbs.length - 1 ? '#000000' : '#666666',
-                fontWeight: i === breadcrumbs.length - 1 ? 700 : 500,
+                color: i === breadcrumbs.length - 1 ? '#8ec5ff' : '#9a9a9a',
+                fontWeight: i === breadcrumbs.length - 1 ? 600 : 400,
               }}
             >
               {crumb.name}
@@ -648,8 +638,8 @@ const RepoBrowser = ({ repoName, branch = 'main' }) => {
               height: { xs: 'auto', md: '100%' },
               minHeight: { xs: 260, md: 540 },
               overflowY: 'auto',
-              backgroundColor: '#ffffff',
-              borderRight: { xs: 'none', md: selectedFile ? '1px solid #e5e5e5' : 'none' },
+              backgroundColor: '#161616',
+              borderRight: { xs: 'none', md: selectedFile ? '1px solid #2a2a2a' : 'none' },
               p: 1,
             }}
           >
@@ -660,7 +650,7 @@ const RepoBrowser = ({ repoName, branch = 'main' }) => {
                     key={i}
                     variant="rectangular"
                     height={32}
-                    sx={{ mb: 1, borderRadius: 1, bgcolor: '#f5f5f5' }}
+                    sx={{ mb: 1, borderRadius: 999, bgcolor: '#242424' }}
                   />
                 ))}
               </Box>
@@ -682,13 +672,13 @@ const RepoBrowser = ({ repoName, branch = 'main' }) => {
                       px: 2,
                       py: 1,
                       cursor: 'pointer',
-                      color: '#666666',
-                      borderRadius: 1,
-                      '&:hover': { color: '#000000', bgcolor: '#f5f5f5' },
+                      color: '#9a9a9a',
+                      borderRadius: 999,
+                      '&:hover': { color: '#ffffff', bgcolor: 'rgba(255, 255, 255, 0.05)' },
                     }}
                   >
-                    <ChevronRightIcon sx={{ fontSize: 16, transform: 'rotate(180deg)' }} />
-                    <Typography variant="body2" sx={{ fontWeight: 600, fontSize: '0.85rem' }}>
+                    <ChevronRightIcon sx={{ fontSize: 16, transform: 'rotate(180deg)', color: '#8ec5ff' }} />
+                    <Typography variant="body2" sx={{ fontWeight: 500, fontSize: '0.85rem' }}>
                       .. (Parent Directory)
                     </Typography>
                   </Box>
@@ -839,14 +829,14 @@ const ProjectDetail = () => {
 
   if (loading) {
     return (
-      <Box sx={{ py: 8, backgroundColor: '#ffffff', minHeight: '80vh', width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
+      <Box sx={{ py: 8, backgroundColor: '#000000', minHeight: '80vh', width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
         <Container maxWidth="lg" sx={{ px: { xs: 2.5, sm: 3, md: 4 } }}>
-          <Skeleton variant="rectangular" height={36} width={130} sx={{ mb: 4, borderRadius: 1 }} />
-          <Skeleton variant="rectangular" height={120} sx={{ mb: 4, borderRadius: 2 }} />
+          <Skeleton variant="rectangular" height={36} width={130} sx={{ mb: 4, borderRadius: 999, bgcolor: '#1c1c1c' }} />
+          <Skeleton variant="rectangular" height={120} sx={{ mb: 4, borderRadius: '24px', bgcolor: '#1c1c1c' }} />
           <Grid container spacing={2}>
             {Array.from({ length: 4 }).map((_, i) => (
               <Grid size={{ xs: 6, sm: 3 }} key={i}>
-                <Skeleton variant="rectangular" height={80} sx={{ borderRadius: 2 }} />
+                <Skeleton variant="rectangular" height={80} sx={{ borderRadius: '20px', bgcolor: '#1c1c1c' }} />
               </Grid>
             ))}
           </Grid>
@@ -859,8 +849,8 @@ const ProjectDetail = () => {
     new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 
   return (
-    <Box sx={{ py: { xs: 5, sm: 8, md: 10 }, backgroundColor: '#ffffff', color: '#000000', minHeight: '90vh', width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
-      <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
+    <Box sx={{ py: { xs: 4, sm: 6, md: 8 }, backgroundColor: '#000000', color: '#ffffff', minHeight: '90vh', width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
+      <Box sx={{ maxWidth: '1040px', margin: '0 auto', px: { xs: '16px', sm: '24px' } }}>
         {/* Back Button */}
         <Button
           variant="text"
@@ -868,12 +858,13 @@ const ProjectDetail = () => {
           onClick={() => navigate('/projects')}
           sx={{
             mb: 3.5,
-            color: '#444444',
-            fontWeight: 600,
+            color: '#9a9a9a',
+            fontWeight: 500,
             fontSize: '0.92rem',
+            borderRadius: 999,
             '&:hover': {
-              color: '#000000',
-              bgcolor: '#f5f5f5',
+              color: '#ffffff',
+              bgcolor: 'rgba(255, 255, 255, 0.05)',
             },
           }}
         >
@@ -883,11 +874,10 @@ const ProjectDetail = () => {
         {/* Top Header Card */}
         <Box
           sx={{
-            p: { xs: 2.5, sm: 3.5, md: 4.5 },
-            bgcolor: '#fafafa',
-            border: '1px solid #e5e5e5',
-            borderRadius: 2,
-            mb: { xs: 4, md: 6 },
+            py: '24px',
+            bgcolor: 'transparent',
+            borderTop: '1px solid #2a2a2a',
+            mb: { xs: 4, md: 5 },
           }}
         >
           <Box
@@ -905,10 +895,10 @@ const ProjectDetail = () => {
                 variant="h2"
                 component="h1"
                 sx={{
-                  fontWeight: 800,
+                  fontWeight: 500,
                   fontSize: { xs: '1.75rem', sm: '2.4rem', md: '2.8rem' },
-                  letterSpacing: { xs: '-0.8px', md: '-1.5px' },
-                  color: '#000000',
+                  letterSpacing: '-0.03em',
+                  color: '#ffffff',
                   mb: 1.5,
                   wordBreak: 'break-word',
                 }}
@@ -918,8 +908,8 @@ const ProjectDetail = () => {
 
               <Typography
                 sx={{
-                  color: '#555555',
-                  fontSize: { xs: '0.98rem', sm: '1.08rem' },
+                  color: '#cfcfcf',
+                  fontSize: { xs: '0.98rem', sm: '1.05rem' },
                   lineHeight: 1.65,
                   maxWidth: 750,
                   wordBreak: 'break-word',
@@ -939,12 +929,12 @@ const ProjectDetail = () => {
                   rel="noopener noreferrer"
                   size="small"
                   sx={{
-                    borderColor: '#000000',
-                    color: '#000000',
-                    borderRadius: 1,
-                    fontWeight: 600,
+                    borderColor: '#2a2a2a',
+                    color: '#ffffff',
+                    borderRadius: 999,
+                    fontWeight: 500,
                     fontSize: '0.85rem',
-                    '&:hover': { bgcolor: '#f5f5f5', borderColor: '#000000' },
+                    '&:hover': { bgcolor: 'rgba(59, 130, 246, 0.08)', borderColor: '#3b82f6' },
                   }}
                 >
                   Live Demo
@@ -959,12 +949,13 @@ const ProjectDetail = () => {
                   rel="noopener noreferrer"
                   size="small"
                   sx={{
-                    bgcolor: '#000000',
-                    color: '#ffffff',
-                    borderRadius: 1,
-                    fontWeight: 600,
+                    bgcolor: '#ffffff',
+                    color: '#000000',
+                    borderRadius: 999,
+                    fontWeight: 500,
                     fontSize: '0.85rem',
-                    '&:hover': { bgcolor: '#222222' },
+                    border: '1px solid #ffffff',
+                    '&:hover': { bgcolor: '#ededed' },
                   }}
                 >
                   GitHub
@@ -980,11 +971,11 @@ const ProjectDetail = () => {
                 label={repo.language}
                 size="small"
                 sx={{
-                  bgcolor: '#000000',
-                  color: '#ffffff',
-                  fontWeight: 700,
-                  borderRadius: 1,
-                  px: 0.8,
+                  bgcolor: '#ffffff',
+                  color: '#000000',
+                  fontWeight: 600,
+                  borderRadius: 999,
+                  px: 1,
                   fontSize: '0.78rem',
                 }}
               />
@@ -995,12 +986,16 @@ const ProjectDetail = () => {
                 label={topic}
                 size="small"
                 sx={{
-                  bgcolor: '#ffffff',
-                  color: '#000000',
-                  border: '1px solid #e5e5e5',
-                  borderRadius: 1,
-                  fontWeight: 500,
+                  bgcolor: 'transparent',
+                  color: '#dddddd',
+                  border: '1px solid #2a2a2a',
+                  borderRadius: 999,
+                  fontWeight: 400,
                   fontSize: '0.78rem',
+                  '&:hover': {
+                    borderColor: '#3b82f6',
+                    color: '#ffffff',
+                  },
                 }}
               />
             ))}
@@ -1008,7 +1003,7 @@ const ProjectDetail = () => {
         </Box>
 
         {/* Stats Grid */}
-        <Grid container spacing={{ xs: 1.5, sm: 2.5 }} sx={{ mb: { xs: 4, md: 6 } }}>
+        <Grid container spacing={{ xs: 1.5, sm: 2.5 }} sx={{ mb: { xs: 4, md: 5 } }}>
           <Grid size={{ xs: 6, sm: 3 }}>
             <StatCard icon={<StarIcon sx={{ fontSize: 20 }} />} label="Stars" value={repo.stargazers_count} />
           </Grid>
@@ -1029,14 +1024,14 @@ const ProjectDetail = () => {
             variant={activeTab === 'explorer' ? 'contained' : 'outlined'}
             onClick={() => setActiveTab('explorer')}
             sx={{
-              borderRadius: 1,
-              px: { xs: 2, sm: 3 },
+              borderRadius: 999,
+              px: { xs: 2.2, sm: 3 },
               py: 0.8,
-              fontWeight: 700,
+              fontWeight: 500,
               fontSize: '0.88rem',
               ...(activeTab === 'explorer'
-                ? { bgcolor: '#000000', color: '#ffffff' }
-                : { borderColor: '#e5e5e5', color: '#000000', bgcolor: '#ffffff' }),
+                ? { bgcolor: '#ffffff', color: '#000000', border: '1px solid #ffffff' }
+                : { borderColor: '#2a2a2a', color: '#dddddd', bgcolor: '#1c1c1c' }),
             }}
           >
             Code Explorer
@@ -1047,14 +1042,14 @@ const ProjectDetail = () => {
               variant={activeTab === 'readme' ? 'contained' : 'outlined'}
               onClick={() => setActiveTab('readme')}
               sx={{
-                borderRadius: 1,
-                px: { xs: 2, sm: 3 },
+                borderRadius: 999,
+                px: { xs: 2.2, sm: 3 },
                 py: 0.8,
-                fontWeight: 700,
+                fontWeight: 500,
                 fontSize: '0.88rem',
                 ...(activeTab === 'readme'
-                  ? { bgcolor: '#000000', color: '#ffffff' }
-                  : { borderColor: '#e5e5e5', color: '#000000', bgcolor: '#ffffff' }),
+                  ? { bgcolor: '#ffffff', color: '#000000', border: '1px solid #ffffff' }
+                  : { borderColor: '#2a2a2a', color: '#dddddd', bgcolor: '#1c1c1c' }),
               }}
             >
               README.md
@@ -1066,14 +1061,14 @@ const ProjectDetail = () => {
               variant={activeTab === 'commits' ? 'contained' : 'outlined'}
               onClick={() => setActiveTab('commits')}
               sx={{
-                borderRadius: 1,
-                px: { xs: 2, sm: 3 },
+                borderRadius: 999,
+                px: { xs: 2.2, sm: 3 },
                 py: 0.8,
-                fontWeight: 700,
+                fontWeight: 500,
                 fontSize: '0.88rem',
                 ...(activeTab === 'commits'
-                  ? { bgcolor: '#000000', color: '#ffffff' }
-                  : { borderColor: '#e5e5e5', color: '#000000', bgcolor: '#ffffff' }),
+                  ? { bgcolor: '#ffffff', color: '#000000', border: '1px solid #ffffff' }
+                  : { borderColor: '#2a2a2a', color: '#dddddd', bgcolor: '#1c1c1c' }),
               }}
             >
               Recent Commits
@@ -1088,18 +1083,16 @@ const ProjectDetail = () => {
 
         {/* Tab 2: README View */}
         {activeTab === 'readme' && (
-          <Paper
-            elevation={0}
+          <Box
             sx={{
-              p: { xs: 2.5, sm: 4, md: 5 },
-              bgcolor: '#ffffff',
-              border: '1px solid #e5e5e5',
-              borderRadius: 2,
+              py: '24px',
+              bgcolor: 'transparent',
+              borderTop: '1px solid #2a2a2a',
               mb: 6,
               overflowX: 'auto',
             }}
           >
-            <Typography variant="h5" sx={{ fontWeight: 800, mb: 2.5, color: '#000000', fontSize: '1.25rem' }}>
+            <Typography variant="h5" sx={{ fontWeight: 500, mb: 2.5, color: '#ffffff', fontSize: '1.25rem' }}>
               README.md
             </Typography>
             <Box
@@ -1110,32 +1103,28 @@ const ProjectDetail = () => {
                 fontFamily: '"JetBrains Mono", monospace',
                 fontSize: { xs: '0.82rem', sm: '0.9rem' },
                 lineHeight: 1.7,
-                color: '#333333',
-                bgcolor: '#fafafa',
-                p: { xs: 2, sm: 3 },
-                borderRadius: 1,
-                border: '1px solid #e5e5e5',
+                color: '#cfcfcf',
+                bgcolor: 'transparent',
+                p: 0,
                 overflowX: 'auto',
               }}
             >
               {readme}
             </Box>
-          </Paper>
+          </Box>
         )}
 
         {/* Tab 3: Commits View */}
         {activeTab === 'commits' && (
-          <Paper
-            elevation={0}
+          <Box
             sx={{
-              p: { xs: 2.5, sm: 3.5, md: 4 },
-              bgcolor: '#ffffff',
-              border: '1px solid #e5e5e5',
-              borderRadius: 2,
+              py: '24px',
+              bgcolor: 'transparent',
+              borderTop: '1px solid #2a2a2a',
               mb: 6,
             }}
           >
-            <Typography variant="h5" sx={{ fontWeight: 800, mb: 3, color: '#000000', fontSize: '1.25rem' }}>
+            <Typography variant="h5" sx={{ fontWeight: 500, mb: 3, color: '#ffffff', fontSize: '1.25rem' }}>
               Recent Commits
             </Typography>
             <Stack spacing={2}>
@@ -1143,10 +1132,8 @@ const ProjectDetail = () => {
                 <Box
                   key={c.sha}
                   sx={{
-                    p: 2.2,
-                    bgcolor: '#fafafa',
-                    border: '1px solid #e5e5e5',
-                    borderRadius: 1,
+                    py: 1.5,
+                    borderBottom: '1px solid #2a2a2a',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -1155,10 +1142,10 @@ const ProjectDetail = () => {
                   }}
                 >
                   <Box sx={{ minWidth: 0, flex: 1 }}>
-                    <Typography variant="body1" sx={{ fontWeight: 600, color: '#000000', mb: 0.5, fontSize: '0.92rem', wordBreak: 'break-word' }}>
+                    <Typography variant="body1" sx={{ fontWeight: 500, color: '#ffffff', mb: 0.5, fontSize: '0.92rem', wordBreak: 'break-word' }}>
                       {c.commit.message}
                     </Typography>
-                    <Typography variant="caption" sx={{ color: '#666666' }}>
+                    <Typography variant="caption" sx={{ color: '#8ec5ff' }}>
                       by {c.commit.author?.name} · {formattedDate(c.commit.author?.date)}
                     </Typography>
                   </Box>
@@ -1171,29 +1158,29 @@ const ProjectDetail = () => {
                     clickable
                     sx={{
                       fontFamily: 'monospace',
-                      fontWeight: 700,
-                      bgcolor: '#ffffff',
-                      border: '1px solid #e5e5e5',
-                      color: '#000000',
+                      fontWeight: 500,
+                      bgcolor: 'transparent',
+                      border: '1px solid #2a2a2a',
+                      color: '#8ec5ff',
+                      borderRadius: 999,
                     }}
                   />
                 </Box>
               ))}
             </Stack>
-          </Paper>
+          </Box>
         )}
 
         {/* Repository Metadata Breakdown */}
         <Box
           sx={{
-            p: { xs: 2.5, sm: 3.5, md: 4 },
-            bgcolor: '#ffffff',
-            border: '1px solid #e5e5e5',
-            borderRadius: 2,
+            py: '24px',
+            bgcolor: 'transparent',
+            borderTop: '1px solid #2a2a2a',
             width: '100%',
           }}
         >
-          <Typography variant="h6" sx={{ fontWeight: 800, color: '#000000', mb: 2, fontSize: '1.05rem' }}>
+          <Typography variant="h6" sx={{ fontWeight: 500, color: '#ffffff', mb: 2, fontSize: '1.05rem' }}>
             Repository Details
           </Typography>
           <Grid container spacing={2}>
@@ -1207,7 +1194,7 @@ const ProjectDetail = () => {
             </Grid>
           </Grid>
         </Box>
-      </Container>
+      </Box>
     </Box>
   );
 };
