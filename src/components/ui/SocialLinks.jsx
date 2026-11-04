@@ -3,7 +3,7 @@ import { IconButton, Stack } from '@mui/material';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { SOCIAL_LINKS } from '../../config/constants';
 
-const SocialLinks = ({ size = 'medium', color = '#000000' }) => {
+const SocialLinks = ({ size = 'medium', color = '#ffffff' }) => {
   const links = [
     { icon: <FaGithub size={18} />, url: SOCIAL_LINKS.github, label: 'GitHub' },
     { icon: <FaLinkedin size={18} />, url: SOCIAL_LINKS.linkedin, label: 'LinkedIn' },
@@ -22,16 +22,17 @@ const SocialLinks = ({ size = 'medium', color = '#000000' }) => {
           size={size}
           sx={{
             color: color,
-            border: '1px solid #e5e5e5',
-            backgroundColor: '#ffffff',
-            borderRadius: 1,
+            border: '1px solid #2a2a2a',
+            backgroundColor: '#1c1c1c',
+            borderRadius: 999,
             p: 1.2,
             '&:hover': {
-              borderColor: '#000000',
-              backgroundColor: '#f5f5f5',
+              borderColor: '#3b82f6',
+              backgroundColor: 'rgba(59, 130, 246, 0.08)',
+              color: '#8ec5ff',
               transform: 'translateY(-2px)',
             },
-            transition: 'all 0.15s ease',
+            transition: 'all 0.2s ease',
           }}
         >
           {link.icon}

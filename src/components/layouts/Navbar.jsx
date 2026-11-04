@@ -39,17 +39,19 @@ const Navbar = () => {
         position="sticky"
         elevation={0}
         sx={{
-          bgcolor: '#ffffff',
-          color: '#000000',
-          borderBottom: '1px solid #e5e5e5',
+          bgcolor: 'rgba(0, 0, 0, 0.85)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          color: '#ffffff',
+          borderBottom: '1px solid #2a2a2a',
           zIndex: 1100,
         }}
       >
-        <Container maxWidth="lg">
+        <Box sx={{ maxWidth: '1040px', width: '100%', margin: '0 auto', px: { xs: 2, sm: 3 } }}>
           <Toolbar
             disableGutters
             sx={{
-              minHeight: 72,
+              minHeight: { xs: 64, sm: 76 },
               display: 'flex',
               justifyContent: 'space-between',
             }}
@@ -66,16 +68,17 @@ const Navbar = () => {
                       key={item.path}
                       onClick={() => handleNavClick(item.path)}
                       sx={{
-                        color: isActive ? '#000000' : '#555555',
-                        fontWeight: isActive ? 700 : 500,
-                        fontSize: '0.95rem',
+                        color: isActive ? '#ffffff' : '#9a9a9a',
+                        fontWeight: isActive ? 600 : 400,
+                        fontSize: '0.92rem',
                         px: 2,
                         py: 0.8,
-                        borderRadius: 1,
-                        backgroundColor: isActive ? '#f5f5f5' : 'transparent',
+                        borderRadius: 999,
+                        backgroundColor: isActive ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+                        transition: 'all 0.2s ease',
                         '&:hover': {
-                          bgcolor: '#f5f5f5',
-                          color: '#000000',
+                          bgcolor: 'rgba(255, 255, 255, 0.06)',
+                          color: '#ffffff',
                         },
                       }}
                     >
@@ -89,19 +92,22 @@ const Navbar = () => {
                   onClick={() => handleNavClick('/contact')}
                   sx={{
                     ml: 1.5,
-                    bgcolor: '#000000',
-                    color: '#ffffff',
-                    fontWeight: 600,
-                    fontSize: '0.9rem',
-                    px: 2.5,
+                    bgcolor: '#ffffff',
+                    color: '#000000',
+                    fontWeight: 500,
+                    fontSize: '0.92rem',
+                    px: 2.8,
                     py: 1,
-                    borderRadius: 1,
+                    borderRadius: 999,
+                    border: '1px solid #ffffff',
+                    transition: 'transform 0.2s ease, background-color 0.2s ease',
                     '&:hover': {
-                      bgcolor: '#222222',
+                      bgcolor: '#ededed',
+                      transform: 'translateY(-2px)',
                     },
                   }}
                 >
-                  Contact Me
+                  Contact me
                 </Button>
               </Stack>
             )}
@@ -111,17 +117,18 @@ const Navbar = () => {
               <IconButton
                 onClick={() => setDrawerOpen(true)}
                 sx={{
-                  border: '1px solid #e5e5e5',
-                  borderRadius: 1,
-                  color: '#000000',
+                  border: '1px solid #2a2a2a',
+                  borderRadius: 999,
+                  color: '#ffffff',
                   p: 1,
+                  bgcolor: '#161616',
                 }}
               >
                 <MenuIcon />
               </IconButton>
             )}
           </Toolbar>
-        </Container>
+        </Box>
       </AppBar>
 
       {/* Mobile Drawer */}
@@ -134,9 +141,9 @@ const Navbar = () => {
             width: '100%',
             maxWidth: 300,
             p: 3,
-            bgcolor: '#ffffff',
-            color: '#000000',
-            borderLeft: '1px solid #e5e5e5',
+            bgcolor: '#161616',
+            color: '#ffffff',
+            borderLeft: '1px solid #2a2a2a',
           },
         }}
       >
@@ -152,9 +159,10 @@ const Navbar = () => {
           <IconButton
             onClick={() => setDrawerOpen(false)}
             sx={{
-              border: '1px solid #e5e5e5',
-              borderRadius: 1,
-              color: '#000000',
+              border: '1px solid #2a2a2a',
+              borderRadius: 999,
+              color: '#ffffff',
+              bgcolor: '#1c1c1c',
             }}
           >
             <CloseIcon />
@@ -168,18 +176,18 @@ const Navbar = () => {
                 <ListItemButton
                   onClick={() => handleNavClick(item.path)}
                   sx={{
-                    borderRadius: 1,
-                    bgcolor: isActive ? '#f5f5f5' : 'transparent',
+                    borderRadius: 999,
+                    bgcolor: isActive ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
                     '&:hover': {
-                      bgcolor: '#f5f5f5',
+                      bgcolor: 'rgba(255, 255, 255, 0.05)',
                     },
                   }}
                 >
                   <ListItemText
                     primary={item.label}
                     primaryTypographyProps={{
-                      fontWeight: isActive ? 700 : 500,
-                      color: '#000000',
+                      fontWeight: isActive ? 600 : 400,
+                      color: isActive ? '#ffffff' : '#9a9a9a',
                       fontSize: '1rem',
                     }}
                   />
@@ -194,17 +202,17 @@ const Navbar = () => {
           onClick={() => handleNavClick('/contact')}
           sx={{
             mt: 3,
-            bgcolor: '#000000',
-            color: '#ffffff',
-            fontWeight: 600,
-            py: 1.5,
-            borderRadius: 1,
+            bgcolor: '#ffffff',
+            color: '#000000',
+            fontWeight: 500,
+            py: 1.4,
+            borderRadius: 999,
             '&:hover': {
-              bgcolor: '#222222',
+              bgcolor: '#ededed',
             },
           }}
         >
-          Contact Me
+          Contact me
         </Button>
       </Drawer>
     </>

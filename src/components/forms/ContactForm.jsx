@@ -47,24 +47,24 @@ const ContactForm = () => {
 
   const textFieldSx = {
     '& .MuiOutlinedInput-root': {
-      borderRadius: '8px',
-      backgroundColor: '#0a0a0a',
-      color: '#ededed',
+      borderRadius: '16px',
+      backgroundColor: '#161616',
+      color: '#ffffff',
       '& fieldset': {
-        borderColor: '#222222',
+        borderColor: '#2a2a2a',
       },
       '&:hover fieldset': {
-        borderColor: '#444444',
+        borderColor: '#3b82f6',
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#ffffff',
-        borderWidth: 1,
+        borderColor: '#8ec5ff',
+        borderWidth: 1.5,
       },
     },
     '& .MuiInputLabel-root': {
-      color: '#666666',
+      color: '#9a9a9a',
       '&.Mui-focused': {
-        color: '#ededed',
+        color: '#8ec5ff',
       },
     },
   };
@@ -76,10 +76,10 @@ const ContactForm = () => {
           severity={status.type}
           sx={{
             mb: 3,
-            borderRadius: '8px',
-            backgroundColor: status.type === 'success' ? '#072711' : '#2d0607',
-            color: status.type === 'success' ? '#4ade80' : '#f87171',
-            border: `1px solid ${status.type === 'success' ? '#166534' : '#991b1b'}`,
+            borderRadius: '16px',
+            backgroundColor: status.type === 'success' ? 'rgba(59, 130, 246, 0.15)' : '#2d0607',
+            color: status.type === 'success' ? '#8ec5ff' : '#f87171',
+            border: `1px solid ${status.type === 'success' ? '#3b82f6' : '#991b1b'}`,
           }}
           onClose={() => setStatus({ type: '', message: '' })}
         >
@@ -148,12 +148,12 @@ const ContactForm = () => {
           px: 3.5,
           backgroundColor: '#ffffff',
           color: '#000000',
-          fontWeight: 600,
-          borderRadius: '9999px',
+          fontWeight: 500,
+          borderRadius: 999,
           border: '1px solid #ffffff',
           '&:hover': {
-            backgroundColor: '#eaeaea',
-            borderColor: '#eaeaea',
+            backgroundColor: '#ededed',
+            transform: 'translateY(-2px)',
           },
         }}
       >

@@ -14,8 +14,8 @@ const MainLayout = () => {
         overflowX: 'hidden',
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#ffffff',
-        color: '#000000',
+        backgroundColor: '#000000',
+        color: '#ffffff',
       }}
     >
       <Navbar />

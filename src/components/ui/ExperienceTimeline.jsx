@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Chip } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 
 const ExperienceItem = ({ experience, index }) => {
@@ -9,145 +9,77 @@ const ExperienceItem = ({ experience, index }) => {
     <Box
       ref={ref}
       sx={{
-        display: 'flex',
-        gap: { xs: 2, md: 4 },
-        pb: 5,
-        position: 'relative',
+        borderLeft: '1px solid #2a2a2a',
+        paddingLeft: '24px',
+        marginLeft: '6px',
+        pb: index === 0 ? '36px' : '36px',
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
-        transition: `all 0.5s ease ${index * 0.1}s`,
-        '&:last-child': { pb: 0 },
+        transform: isVisible ? 'translateY(0)' : 'translateY(16px)',
+        transition: `all 0.4s ease ${index * 0.1}s`,
       }}
     >
-      {/* Timeline line */}
-      <Box
+      <Typography
+        component="h3"
         sx={{
-          display: { xs: 'none', md: 'flex' },
-          flexDirection: 'column',
-          alignItems: 'center',
-          minWidth: 20,
+          margin: 0,
+          fontWeight: 500,
+          fontSize: '22px',
+          color: '#ffffff',
         }}
       >
-        <Box
-          sx={{
-            width: 10,
-            height: 10,
-            borderRadius: '50%',
-            backgroundColor: '#000000',
-            zIndex: 1,
-          }}
-        />
-        <Box
-          sx={{
-            width: 1,
-            flexGrow: 1,
-            backgroundColor: '#e5e5e5',
-            mt: 1,
-          }}
-        />
+        {experience.role} <span style={{ color: '#9a9a9a', fontWeight: 400 }}>· {experience.company}</span>
+      </Typography>
+
+      <Typography
+        sx={{
+          color: '#8ec5ff',
+          fontSize: '14px',
+          margin: '4px 0 14px',
+        }}
+      >
+        {experience.period} · {experience.location}
+      </Typography>
+
+      <Box
+        component="ul"
+        sx={{
+          margin: 0,
+          paddingLeft: '18px',
+          color: '#cfcfcf',
+        }}
+      >
+        {experience.description.map((item, i) => (
+          <Box
+            component="li"
+            key={i}
+            sx={{
+              marginBottom: '8px',
+              fontSize: '15px',
+              lineHeight: 1.6,
+            }}
+          >
+            {item}
+          </Box>
+        ))}
       </Box>
 
-      <Box sx={{ flex: 1, minWidth: 0 }}>
-        <Box
-          sx={{
-            p: { xs: 2.5, md: 3.5 },
-            backgroundColor: '#ffffff',
-            border: '1px solid #e5e5e5',
-            borderRadius: 2,
-            transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-            '&:hover': {
-              borderColor: '#000000',
-              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.04)',
-            },
-          }}
-        >
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '8px', mt: '14px' }}>
+        {experience.technologies.map((tech) => (
           <Box
+            key={tech}
+            component="span"
             sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: { xs: 'flex-start', sm: 'center' },
-              flexDirection: { xs: 'column', sm: 'row' },
-              mb: 1,
-              gap: 1,
+              border: '1px solid #2a2a2a',
+              borderRadius: 999,
+              padding: '4px 12px',
+              fontSize: '12px',
+              color: '#cfcfcf',
+              display: 'inline-block',
             }}
           >
-            <Typography
-              variant="h5"
-              sx={{
-                color: '#000000',
-                fontWeight: 700,
-                fontSize: { xs: '1.15rem', md: '1.25rem' },
-                letterSpacing: '-0.5px',
-              }}
-            >
-              {experience.role}
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{
-                color: '#444444',
-                fontSize: '0.85rem',
-                fontWeight: 600,
-                backgroundColor: '#f5f5f5',
-                border: '1px solid #e5e5e5',
-                borderRadius: 1,
-                px: 1.2,
-                py: 0.3,
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {experience.period}
-            </Typography>
+            {tech}
           </Box>
-
-          <Typography
-            variant="body2"
-            sx={{
-              color: '#333333',
-              mb: 2.5,
-              fontWeight: 600,
-              fontSize: '0.95rem',
-            }}
-          >
-            {experience.company} · <span style={{ color: '#777777', fontWeight: 400 }}>{experience.location}</span>
-          </Typography>
-
-          <Box component="ul" sx={{ pl: 2, mb: 3 }}>
-            {experience.description.map((item, i) => (
-              <Box
-                component="li"
-                key={i}
-                sx={{
-                  mb: 0.8,
-                  color: '#555555',
-                  fontSize: '0.92rem',
-                  lineHeight: 1.7,
-                }}
-              >
-                {item}
-              </Box>
-            ))}
-          </Box>
-
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-            {experience.technologies.map((tech) => (
-              <Chip
-                key={tech}
-                label={tech}
-                size="small"
-                sx={{
-                  fontSize: '0.8rem',
-                  borderRadius: 1,
-                  px: 0.8,
-                  py: 0.3,
-                  backgroundColor: '#f1f1f1',
-                  color: '#000000',
-                  border: '1px solid #e5e5e5',
-                }}
-              />
-            ))}
-          </Box>
-        </Box>
+        ))}
       </Box>
     </Box>
   );
@@ -155,7 +87,7 @@ const ExperienceItem = ({ experience, index }) => {
 
 const ExperienceTimeline = ({ experiences }) => {
   return (
-    <Box>
+    <Box sx={{ mt: 2 }}>
       {experiences.map((exp, index) => (
         <ExperienceItem key={exp.id} experience={exp} index={index} />
       ))}

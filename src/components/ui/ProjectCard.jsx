@@ -1,11 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Card,
-  CardContent,
+  Box,
   Typography,
   Chip,
-  Box,
   IconButton,
   Tooltip,
 } from '@mui/material';
@@ -13,7 +11,6 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import StarIcon from '@mui/icons-material/Star';
-import ForkRightIcon from '@mui/icons-material/ForkRight';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 
 const ProjectCard = ({ project, index = 0 }) => {
@@ -35,198 +32,189 @@ const ProjectCard = ({ project, index = 0 }) => {
   const technologies = project.technologies || project.stack || [];
 
   return (
-    <Card
+    <Box
       ref={ref}
-      elevation={0}
       onClick={handleCardClick}
       sx={{
-        height: '100%',
+        backgroundColor: 'transparent',
+        border: 0,
+        borderTop: '1px solid #2a2a2a',
+        borderRadius: 0,
+        padding: '22px 0',
+        cursor: 'pointer',
         display: 'flex',
         flexDirection: 'column',
-        bgcolor: '#ffffff',
-        border: '1px solid #e5e5e5',
-        borderRadius: 2,
-        cursor: 'pointer',
+        height: '100%',
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
-        transition: `transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, opacity 0.4s ease ${index * 0.05}s`,
+        transform: isVisible ? 'translateY(0)' : 'translateY(16px)',
+        transition: 'border-top-color 0.25s ease, opacity 0.35s ease',
         '&:hover': {
-          borderColor: '#cccccc',
-          transform: 'translateY(-5px)',
-          boxShadow: '0 12px 30px rgba(0, 0, 0, 0.06)',
+          borderTopColor: '#3b82f6',
         },
         '&:hover .arrow-icon': {
           transform: 'translate(3px, -3px)',
-          color: '#000000',
+          color: '#8ec5ff',
         },
       }}
     >
-      <CardContent
+      {/* Top Row: Title & Action Icons */}
+      <Box
         sx={{
-          p: 3.5,
           display: 'flex',
-          flexDirection: 'column',
-          height: '100%',
-          boxSizing: 'border-box',
+          justifyContent: 'space-between',
+          alignItems: 'baseline',
+          mb: 1,
+          gap: 1.5,
+          flexWrap: 'wrap',
         }}
       >
-        {/* Top Row: Title & Action Icons */}
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
-            mb: 2,
-            gap: 1.5,
-          }}
-        >
-          <Typography
-            variant="h5"
-            sx={{
-              fontWeight: 700,
-              color: '#000000',
-              fontSize: { xs: '1.2rem', md: '1.3rem' },
-              letterSpacing: '-0.5px',
-              flex: 1,
-            }}
-          >
-            {project.title}
-          </Typography>
-
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 0.8,
-            }}
-            onClick={handleIconClick}
-          >
-            {project.stars > 0 && (
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 0.4,
-                  bgcolor: '#f5f5f5',
-                  border: '1px solid #e5e5e5',
-                  borderRadius: 1,
-                  px: 0.8,
-                  py: 0.3,
-                }}
-              >
-                <StarIcon sx={{ fontSize: 13, color: '#f59e0b' }} />
-                <Typography
-                  variant="caption"
-                  sx={{ fontSize: '0.75rem', color: '#000000', fontWeight: 600 }}
-                >
-                  {project.stars}
-                </Typography>
-              </Box>
-            )}
-
-            {project.githubUrl && (
-              <Tooltip title="View GitHub" arrow>
-                <IconButton
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  size="small"
-                  sx={{
-                    bgcolor: '#f5f5f5',
-                    border: '1px solid #e5e5e5',
-                    color: '#000000',
-                    p: 0.6,
-                    '&:hover': {
-                      bgcolor: '#ebebeb',
-                      borderColor: '#000000',
-                    },
-                  }}
-                >
-                  <GitHubIcon sx={{ fontSize: 16 }} />
-                </IconButton>
-              </Tooltip>
-            )}
-
-            {project.liveUrl && (
-              <Tooltip title="Live Demo" arrow>
-                <IconButton
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  size="small"
-                  sx={{
-                    bgcolor: '#f5f5f5',
-                    border: '1px solid #e5e5e5',
-                    color: '#000000',
-                    p: 0.6,
-                    '&:hover': {
-                      bgcolor: '#ebebeb',
-                      borderColor: '#000000',
-                    },
-                  }}
-                >
-                  <LaunchIcon sx={{ fontSize: 16 }} />
-                </IconButton>
-              </Tooltip>
-            )}
-
-            <ArrowOutwardIcon
-              className="arrow-icon"
-              sx={{
-                fontSize: 20,
-                color: '#888888',
-                transition: 'all 0.2s ease',
-                ml: 0.5,
-              }}
-            />
-          </Box>
-        </Box>
-
-        {/* Description */}
         <Typography
+          component="h3"
           sx={{
-            color: '#555555',
-            lineHeight: 1.7,
-            fontSize: '0.95rem',
-            mb: 3,
-            flexGrow: 1,
-            display: '-webkit-box',
-            WebkitLineClamp: 3,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
+            fontWeight: 500,
+            fontSize: { xs: '19px', sm: '21px' },
+            color: '#ffffff',
+            letterSpacing: '-0.02em',
+            margin: '0 0 8px',
+            flex: '1 1 200px',
+            wordBreak: 'break-word',
           }}
         >
-          {project.description}
+          {project.title}
         </Typography>
 
-        {/* Tech Chips */}
         <Box
           sx={{
             display: 'flex',
-            flexWrap: 'wrap',
-            gap: 1,
-            mt: 'auto',
+            alignItems: 'center',
+            gap: 0.8,
           }}
+          onClick={handleIconClick}
         >
-          {technologies.map((tech) => (
-            <Chip
-              key={tech}
-              label={tech}
-              size="small"
+          {project.stars > 0 && (
+            <Box
               sx={{
-                bgcolor: '#f1f1f1',
-                color: '#000000',
-                border: '1px solid #e5e5e5',
-                borderRadius: 1,
-                fontWeight: 500,
-                fontSize: '0.8rem',
-                px: 0.5,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 0.4,
+                border: '1px solid #2a2a2a',
+                borderRadius: 999,
+                px: 1,
+                py: 0.2,
               }}
-            />
-          ))}
+            >
+              <StarIcon sx={{ fontSize: 13, color: '#f59e0b' }} />
+              <Typography
+                variant="caption"
+                sx={{ fontSize: '12px', color: '#dddddd', fontWeight: 500 }}
+              >
+                {project.stars}
+              </Typography>
+            </Box>
+          )}
+
+          {project.githubUrl && (
+            <Tooltip title="View GitHub" arrow>
+              <IconButton
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                size="small"
+                sx={{
+                  border: '1px solid #2a2a2a',
+                  color: '#9a9a9a',
+                  p: 0.6,
+                  '&:hover': {
+                    color: '#ffffff',
+                    borderColor: '#3b82f6',
+                  },
+                }}
+              >
+                <GitHubIcon sx={{ fontSize: 15 }} />
+              </IconButton>
+            </Tooltip>
+          )}
+
+          {project.liveUrl && (
+            <Tooltip title="Live Demo" arrow>
+              <IconButton
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                size="small"
+                sx={{
+                  border: '1px solid #2a2a2a',
+                  color: '#9a9a9a',
+                  p: 0.6,
+                  '&:hover': {
+                    color: '#ffffff',
+                    borderColor: '#3b82f6',
+                  },
+                }}
+              >
+                <LaunchIcon sx={{ fontSize: 15 }} />
+              </IconButton>
+            </Tooltip>
+          )}
+
+          <ArrowOutwardIcon
+            className="arrow-icon"
+            sx={{
+              fontSize: 18,
+              color: '#6a6a6a',
+              transition: 'all 0.2s ease',
+              ml: 0.5,
+            }}
+          />
         </Box>
-      </CardContent>
-    </Card>
+      </Box>
+
+      {/* Description */}
+      <Typography
+        sx={{
+          color: '#9a9a9a',
+          fontSize: '15px',
+          lineHeight: 1.55,
+          margin: '0 0 10px',
+          flexGrow: 1,
+        }}
+      >
+        {project.description}
+      </Typography>
+
+      {/* Tech Chips */}
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 1,
+          mt: 'auto',
+          pt: 1,
+        }}
+      >
+        {technologies.map((tech) => (
+          <Box
+            key={tech}
+            component="span"
+            sx={{
+              border: '1px solid #2a2a2a',
+              borderRadius: 999,
+              padding: '4px 12px',
+              fontSize: '13px',
+              color: '#dddddd',
+              display: 'inline-block',
+              transition: 'border-color 0.2s ease, color 0.2s ease',
+              '&:hover': {
+                borderColor: '#3b82f6',
+                color: '#ffffff',
+              },
+            }}
+          >
+            {tech}
+          </Box>
+        ))}
+      </Box>
+    </Box>
   );
 };
 
